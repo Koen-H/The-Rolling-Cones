@@ -167,7 +167,6 @@
     <Compile Include="PhysicsEngine\Colliders\CircleCollider.cs" />
     <Compile Include="PhysicsEngine\Colliders\Collider.cs" />
     <Compile Include="PhysicsEngine\Colliders\LineCollider.cs" />
-    <Compile Include="PhysicsEngine\Colliders\PlayerLineCollider.cs" />
     <Compile Include="PhysicsEngine\CollisionInfo.cs" />
     <Compile Include="PhysicsEngine\MyCollisionManager.cs" />
     <Compile Include="PhysicsEngine\Vec2.cs" />

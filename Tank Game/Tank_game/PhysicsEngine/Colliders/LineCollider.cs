@@ -90,7 +90,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
                 if (MyGame.collisionManager.FirstTime)
                 {
                     Vec2 velocity = ball.Velocity;
-                    velocity.Reflect(info.normal, 0.2F);
+                    velocity.Reflect(info.normal, 0.3F);
                     ball.Velocity = velocity;
                 }
             }
