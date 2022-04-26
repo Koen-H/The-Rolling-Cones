@@ -137,16 +137,8 @@ public class MyGame : Game
 	{
         collisionManager = new MyCollisionManager();
 
-        Pinball ball = new Pinball(30, new Vec2(400, 500), new Vec2(0, 0.5F), new Vec2(0, 0));
-        Circle circle = new Circle(60, new Vec2(500, 400));
-        Circle circle2 = new Circle(15, new Vec2(250, 500));
-        Circle circle3 = new Circle(10, new Vec2(300, 550));
-        Circle circle4 = new Circle(20, new Vec2(150, 400));
+        PlayerBall ball = new PlayerBall(30, new Vec2(400, 500), new Vec2(0, 0.5F), new Vec2(0, 0));
         this.AddChild(ball);
-        this.AddChild(circle);
-        this.AddChild(circle2);
-        this.AddChild(circle3);
-        this.AddChild(circle4);
         Line lineBottom = new Line(new Vec2(200, 1000), new Vec2(600, 1000));
         Line lineLeft1 = new Line(new Vec2(200, 1000), new Vec2(25, 550));
         Line lineLeft2 = new Line(new Vec2(25, 550), new Vec2(200, 100));
@@ -159,8 +151,6 @@ public class MyGame : Game
         this.AddChild(lineRight1);
         this.AddChild(lineRight2);
         this.AddChild(lineTop);
-        PlayerLine playerLine = new PlayerLine(new Vec2(300, 800), new Vec2(500, 800));
-        this.AddChild(playerLine);
         /*lineContainer = new Canvas(width, height);
         
         //AccelerationField()

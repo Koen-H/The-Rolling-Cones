@@ -42,8 +42,7 @@
     <Compile Include="Golgrath\Objects\Line.cs" />
     <Compile Include="Golgrath\Objects\Moveable.cs" />
     <Compile Include="Golgrath\Objects\MyGameObject.cs" />
-    <Compile Include="Golgrath\Objects\Pinball.cs" />
-    <Compile Include="Golgrath\Objects\PlayerLine.cs" />
+    <Compile Include="Golgrath\Objects\PlayerBall.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="..\..\GXPEngine2022\GXPEngine\AddOns\Gizmos.cs">
       <Link>GXPEngine\AddOns\Gizmos.cs</Link>
