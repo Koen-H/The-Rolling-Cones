@@ -3,9 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-Tank Game/Tank_game/.vs/GXPEngine/v15/.suo
-Tank Game/Tank_game/.vs/GXPEngine/v16/.suo
-
 # User-specific files
 *.rsuser
 *.suo

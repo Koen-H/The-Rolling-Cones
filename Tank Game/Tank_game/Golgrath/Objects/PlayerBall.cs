@@ -8,7 +8,7 @@ namespace GXPEngine.Golgrath.Objects
     public class PlayerBall : Ball
     {
         private float drag, acceleration, maxSpeed;
-        public PlayerBall(int radius, Vec2 position, Vec2 gravity, Vec2 velocity): base(radius, position, gravity, velocity)
+        public PlayerBall(int radius, Vec2 position, Vec2 gravity, Vec2 velocity) : base(radius, position, gravity, velocity)
         {
             this.DrawRect(0, 200, 0);
             this.drag = 0.03F;
@@ -37,7 +37,7 @@ namespace GXPEngine.Golgrath.Objects
             {
                 velocity.x -= drag;
             }
-            else if(velocity.x < -drag)
+            else if (velocity.x < -drag)
             {
                 velocity.x += drag;
             }
@@ -52,6 +52,7 @@ namespace GXPEngine.Golgrath.Objects
             Fill(red, green, blue);
             Stroke(red, green, blue);
             Rect(radius, radius * 2, radius / 2, radius / 2);
+            //Test
         }
 
         public new void Step()
