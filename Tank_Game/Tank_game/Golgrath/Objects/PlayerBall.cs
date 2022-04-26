@@ -52,7 +52,7 @@ namespace GXPEngine.Golgrath.Objects
             Fill(red, green, blue);
             Stroke(red, green, blue);
             Rect(radius, radius * 2, radius / 2, radius / 2);
-            //Testsss
+            //Tests
         }
 
         public new void Step()
