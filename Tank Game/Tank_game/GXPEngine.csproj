@@ -40,6 +40,11 @@
     <Compile Include="Barrel.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="Caps.cs" />
+    <Compile Include="Golgrath\Levels\Level.cs" />
+    <Compile Include="Golgrath\Levels\LevelBottom.cs" />
+    <Compile Include="Golgrath\Levels\LevelManager.cs" />
+    <Compile Include="Golgrath\Tiles\CollisionTile.cs" />
+    <Compile Include="Golgrath\Tiles\Tile.cs" />
     <Compile Include="PhysicsEngine\ColliderObject.cs" />
     <Compile Include="PhysicsEngine\CollisionInfo.cs" />
     <Compile Include="MyGame.cs" />

@@ -28,3 +28,9 @@ D:\Saxion\project_final_approach\Rolie_Polie\Tank Game\Tank_game\obj\x86\Debug\G
 D:\Saxion\project_final_approach\Rolie_Polie\Tank Game\Tank_game\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
 D:\Saxion\project_final_approach\Rolie_Polie\Tank Game\Tank_game\obj\x86\Debug\GXPEngine.exe
 D:\Saxion\project_final_approach\Rolie_Polie\Tank Game\Tank_game\obj\x86\Debug\GXPEngine.pdb
+C:\Users\wiebe\Desktop\SaxionCMGT\Project Week 4\RolyPoly\Rolie_Polie\Tank Game\Tank_game\obj\x86\Debug\GXPEngine.csproj.AssemblyReference.cache
+C:\Users\wiebe\Desktop\SaxionCMGT\Project Week 4\RolyPoly\Rolie_Polie\Tank Game\Tank_game\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
+C:\Users\wiebe\Desktop\SaxionCMGT\Project Week 4\RolyPoly\Rolie_Polie\Tank Game\Tank_game\obj\x86\Debug\GXPEngine.exe
+C:\Users\wiebe\Desktop\SaxionCMGT\Project Week 4\RolyPoly\Rolie_Polie\Tank Game\Tank_game\obj\x86\Debug\GXPEngine.pdb
+C:\Users\wiebe\Desktop\SaxionCMGT\Project Week 4\RolyPoly\Rolie_Polie\Tank Game\Tank_game\bin\Debug\GXPEngine.exe
+C:\Users\wiebe\Desktop\SaxionCMGT\Project Week 4\RolyPoly\Rolie_Polie\Tank Game\Tank_game\bin\Debug\GXPEngine.pdb
