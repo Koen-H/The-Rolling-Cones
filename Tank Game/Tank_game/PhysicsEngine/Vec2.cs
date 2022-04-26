@@ -1,176 +1,174 @@
 ﻿using System;
-using GXPEngine;	// For Mathf
+using GXPEngine; // Allows using Mathf functions
 
-public struct Vec2 
+public struct Vec2
 {
 	public float x;
 	public float y;
 
-	public Vec2 (float pX = 0, float pY = 0) 
+	public Vec2(float pX = 0, float pY = 0)
 	{
 		x = pX;
 		y = pY;
 	}
 
-	public override string ToString () 
+	public float Length()
 	{
-		return String.Format ("({0},{1})", x, y);
+		return Mathf.Sqrt(x * x + y * y);
 	}
 
-	public void SetXY(float pX, float pY) 
+	public void Normalize()
 	{
-		x = pX;
-		y = pY;
+		float length = this.Length();
+		this.x = this.x > 0 || this.x < 0 ? this.x / length : 0;
+		this.y = this.y > 0 || this.y < 0 ? this.y / length : 0;
 	}
 
-	public float Length() {
-		return Mathf.Sqrt (x * x + y * y);
+	public Vec2 Normalized()
+	{
+		Vec2 normalized = new Vec2(x, y);
+		normalized.Normalize();
+		return normalized;
 	}
 
-	public void Normalize() {
-		float len = Length ();
-		if (len > 0) {
-			x /= len;
-			y /= len;
-		}
+	public float Dot(Vec2 other)
+	{
+		return this.x * other.x + this.y * other.y;
 	}
 
-	public Vec2 Normalized() {
-		Vec2 result = new Vec2 (x, y);
-		result.Normalize ();
-		return result;
+	public Vec2 Normal()
+	{
+		Vec2 vector = new Vec2(this.x, this.y);
+		vector.Normalize();
+		vector.RotateDegrees(90);
+		return vector;
 	}
 
-	public static Vec2 operator +(Vec2 left, Vec2 right) {
-		return new Vec2 (left.x + right.x, left.y + right.y);
+	public void Reflect(Vec2 angleBounce, float bounciness)
+	{
+		this = this - (1 + bounciness) * this.Dot(angleBounce) * angleBounce;
 	}
 
-	public static Vec2 operator -(Vec2 left, Vec2 right) {
-		return new Vec2 (left.x - right.x, left.y - right.y);
+	public void SetXY(float x, float y)
+	{
+		this.x = x;
+		this.y = y;
 	}
 
-	public static Vec2 operator *(Vec2 v, float scalar) {
-		return new Vec2 (v.x * scalar, v.y * scalar);
+	public static Vec2 operator -(Vec2 left, Vec2 right)
+	{
+		return new Vec2(left.x - right.x, left.y - right.y);
 	}
 
-	public static Vec2 operator *(float scalar, Vec2 v) {
-		return new Vec2 (v.x * scalar, v.y * scalar);
+	public static Vec2 operator *(Vec2 vector, float scalar)
+	{
+		return new Vec2(vector.x * scalar, vector.y * scalar);
 	}
 
-    public static Vec2 operator *(Vec2 vec1, Vec2 vec2)
-    {
-        return new Vec2(vec1.x * vec2.x, vec1.y * vec2.y);
-    }
-
-    public static Vec2 operator /(Vec2 v, float scalar) {
-		return new Vec2 (v.x / scalar, v.y / scalar);
+	public static Vec2 operator *(float scalar, Vec2 vector)
+	{
+		return new Vec2(vector.x * scalar, vector.y * scalar);
 	}
 
-    public static Vec2 operator /(float other, Vec2 vec) //Scale
-    {
-        return new Vec2(vec.x / other, vec.y / other);
-    }
+	public static Vec2 operator /(Vec2 vector, float scalar)
+	{
+		return new Vec2(vector.x / scalar, vector.y / scalar);
+	}
 
+	public static Vec2 operator +(Vec2 left, Vec2 right)
+	{
+		return new Vec2(left.x + right.x, left.y + right.y);
+	}
 
+	public static float Deg2Rad(float degrees)
+	{
+		return degrees * Mathf.PI / 180.0F;
+	}
 
-    //Start week 2
-    public static float Deg2Rad(float deg) // Converts the given degrees to radians
-    {
-        return (float)((Math.PI / 180) * deg);
-    }
-    public static float Rad2Deg(float rad) // Converts the given radians to degrees
-    {
-        return (float)((180 / Math.PI) * rad);
-    }
+	public static float Rad2Deg(float radians)
+	{
+		return radians * 180.0F / Mathf.PI;
+	}
 
-    public static Vec2 GetUnitVectorDeg(float deg) // Returns a new vector pointing in the given direction in degrees
-    {
-        return GetUnitVectorRad(Deg2Rad(deg));
-    }
+	public static Vec2 GetUnitVectorDeg(float degrees)
+	{
+		float radians = Deg2Rad(degrees);
+		float x = Mathf.Cos(radians);
+		float y = Mathf.Sin(radians);
+		return new Vec2(x, y);
+	}
 
-    public static Vec2 GetUnitVectorRad(float rad) // Returns a new vector pointing in the given direction in radians
-    {
-        return new Vec2(Mathf.Cos(rad), Mathf.Sin(rad));
-    }
+	public static Vec2 GetUnitVectorRadians(float radians)
+	{
+		float x = Mathf.Cos(radians);
+		float y = Mathf.Sin(radians);
+		return new Vec2(x, y);
+	}
 
-    public static Vec2 RandomUnitVector()
-    {
-        float random = Utils.Random(0, 360);
-        return new Vec2(Mathf.Cos(random), Mathf.Sin(random));
-    }
+	public static Vec2 GetRandomUnitVector()
+	{
+		float degrees = Utils.Random(0, 360);
+		float radians = Deg2Rad(degrees);
+		float x = Mathf.Cos(radians);
+		float y = Mathf.Sin(radians);
+		return new Vec2(x, y);
+	}
 
-    public void SetAngleDegrees(float degrees)
-    {
-        SetAngleRadians(Deg2Rad(degrees));
-    }
+	public void RotateDegrees(float degrees)
+	{
+		float radians = Deg2Rad(degrees);
+		float x = this.x;
+		float y = this.y;
+		this.x = Mathf.Cos(radians) * x - Mathf.Sin(radians) * y;
+		this.y = Mathf.Cos(radians) * y + Mathf.Sin(radians) * x;
+	}
 
-    public void SetAngleRadians(float rad)
-    {
-        float currentLength = Length();
-        x = (float)Math.Cos(rad) * currentLength;
-        y = (float)Math.Sin(rad) * currentLength;
-    }
+	public void RotateRadians(float radians)
+	{
+		float x = this.x;
+		float y = this.y;
+		this.x = Mathf.Cos(radians) * x - Mathf.Sin(radians) * y;
+		this.y = Mathf.Cos(radians) * y + Mathf.Sin(radians) * x;
+	}
 
-    public float GetAngleRadians()
-    {
-        return Mathf.Atan2(y, x);
-    }
+	public void RotateAroundDegrees(Vec2 offset, float degrees)
+	{
+		this -= offset;
+		RotateDegrees(degrees);
+		this += offset;
+	}
 
-    public float GetAngleDegrees()
-    {
-        return Rad2Deg(Mathf.Atan2(y, x));
-    }
+	public void RotateAroundRadians(Vec2 offset, float radians)
+	{
+		this -= offset;
+		RotateRadians(radians);
+		this += offset;
+	}
 
-    public void RotateDegrees(float degrees)
-    {
-        RotateRadians(Deg2Rad(degrees));
-    }
+	public float GetAngleRadians()
+	{
+		return Mathf.Atan2(this.x, this.y);
+	}
 
-    public void RotateRadians(float rad)
-    {
+	public float GetAngleDegrees()
+	{
+		return Rad2Deg(Mathf.Atan2(this.x, this.y));
+	}
 
-        float sin = Mathf.Sin(rad);
-        float cos = Mathf.Cos(rad);
+	public void SetAngleDegrees(float degrees)
+	{
+		this = GetUnitVectorDeg(degrees) * Length();
+	}
 
-        float tx = x;
-        float ty = y;
-        x = (cos * tx) - (sin * ty);
-        y = (sin * tx) + (cos * ty);
-    }
+	public void SetAngleRadians(float radians)
+	{
+		this = GetUnitVectorRadians(radians) * Length();
+	}
 
-    public void RotateAroundDegrees(Vec2 rotationPoint, float deg)
-    {
-        RotateAroundRadians(rotationPoint, Deg2Rad(deg));
-    }
+	public override string ToString()
+	{
+		return String.Format("({0}, {1})", x, y);
+	}
 
-    public void RotateAroundRadians(Vec2 rotationPoint, float rad)
-    {
-        this -= rotationPoint;
-        RotateRadians(rad);
-        this += rotationPoint;
-    }
-
-
-    //Week 4
-
-    public float Dot(Vec2 v2)
-    {
-        return this.x * v2.x + this.y * v2.y;
-    }
-
-    public Vec2 Normal()
-    {
-        return new Vec2(-y, x).Normalized();
-    }
-
-    public void Reflect(Vec2 normalVector, float bounciness = 1)
-    {
-        this -= (1 + bounciness) * (Dot(normalVector) * normalVector);
-    }
-
-    //Extra
-    public float Distance(Vec2 otherVec)
-    {
-        return (otherVec - this).Length();
-    }
 }
+

@@ -36,23 +36,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccelerationField.cs" />
-    <Compile Include="Barrel.cs" />
-    <Compile Include="Bullet.cs" />
-    <Compile Include="Caps.cs" />
-    <Compile Include="Golgrath\Levels\Level.cs" />
-    <Compile Include="Golgrath\Levels\LevelBottom.cs" />
-    <Compile Include="Golgrath\Levels\LevelManager.cs" />
-    <Compile Include="Golgrath\Tiles\CollisionTile.cs" />
-    <Compile Include="Golgrath\Tiles\Tile.cs" />
-    <Compile Include="PhysicsEngine\ColliderObject.cs" />
-    <Compile Include="PhysicsEngine\CollisionInfo.cs" />
+    <Compile Include="Golgrath\Objects\Ball.cs" />
+    <Compile Include="Golgrath\Objects\Cap.cs" />
+    <Compile Include="Golgrath\Objects\Circle.cs" />
+    <Compile Include="Golgrath\Objects\Line.cs" />
+    <Compile Include="Golgrath\Objects\Moveable.cs" />
+    <Compile Include="Golgrath\Objects\MyGameObject.cs" />
+    <Compile Include="Golgrath\Objects\Pinball.cs" />
+    <Compile Include="Golgrath\Objects\PlayerLine.cs" />
     <Compile Include="MyGame.cs" />
-    <Compile Include="PhysicsEngine\ColliderManager.cs" />
-    <Compile Include="PhysicsEngine\LineSegment.cs" />
-    <Compile Include="PhysicsEngine\Vec2.cs" />
-    <Compile Include="EnemyTank.cs" />
-    <Compile Include="PlayerTank.cs" />
     <Compile Include="..\..\GXPEngine2022\GXPEngine\AddOns\Gizmos.cs">
       <Link>GXPEngine\AddOns\Gizmos.cs</Link>
     </Compile>
@@ -173,7 +165,14 @@
     <Compile Include="..\..\GXPEngine2022\GXPEngine\SoLoud\SoloudSoundSystem.cs">
       <Link>GXPEngine\SoLoud\SoloudSoundSystem.cs</Link>
     </Compile>
-    <Compile Include="Tank.cs" />
+    <Compile Include="PhysicsEngine\Colliders\CircleCollider.cs" />
+    <Compile Include="PhysicsEngine\Colliders\Collider.cs" />
+    <Compile Include="PhysicsEngine\Colliders\LineCollider.cs" />
+    <Compile Include="PhysicsEngine\Colliders\PlayerLineCollider.cs" />
+    <Compile Include="PhysicsEngine\CollisionInfo.cs" />
+    <Compile Include="PhysicsEngine\MyCollisionManager.cs" />
+    <Compile Include="PhysicsEngine\Vec2.cs" />
+    <Compile Include="TiledLoader\Level.cs" />
   </ItemGroup>
   <ItemGroup />
 </Project>

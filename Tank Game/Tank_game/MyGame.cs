@@ -3,19 +3,22 @@ using GXPEngine;
 using Physics;
 using System.Drawing;
 using System.Collections.Generic;
+using GXPEngine.Golgrath.Objects;
+using GXPEngine.PhysicsEngine;
 
 public class MyGame : Game
 {
-    List<Tank> tanks;
+    /*List<Tank> tanks;
     List<LineSegment> lines;
     List<Caps> caps;
     List<AccelerationField> accelerationFields;
-    public Tank playerTank;
+    public Tank playerTank;*/
 
     public bool drawDebugLine;
     Canvas lineContainer = null;
+    public static MyCollisionManager collisionManager;
 
-    static void DoTests()
+    /*static void DoTests()
     {
         //Start Week 1
         // - Operator
@@ -71,11 +74,11 @@ public class MyGame : Game
         vecOne.SetAngleDegrees(90);
         Console.WriteLine("And after SetAngle(90), Vector's length and degree: {0} and {1} . expected same length, degrees 90", vecOne.Length(), vecOne.GetAngleDegrees());
 
-        //Get and set Angle
-        /*Vec2 vecOne = new Vec2(13, 12);
+        *//*//Get and set Angle
+        Vec2 vecOne = new Vec2(13, 12);
         Console.WriteLine("Test Set angle and GetAngle Radians: Vector's length and degree was: {0} and {1}", vecOne.Length(), vecOne.GetAngleDegrees());
         vecOne.SetAngleDegrees(90);
-        Console.WriteLine("And after SetAngle(90), Vector's length and degree: {0} and {1} . expected same length, degrees 90", vecOne.Length(), vecOne.GetAngleDegrees());*/
+        Console.WriteLine("And after SetAngle(90), Vector's length and degree: {0} and {1} . expected same length, degrees 90", vecOne.Length(), vecOne.GetAngleDegrees());*//*
 
         //Rotate
         vecOne = new Vec2(-4, -1);
@@ -98,11 +101,11 @@ public class MyGame : Game
         //normal
         Vec2 normalVec = new Vec2(6, -8);
         normalVec = normalVec.Normal();
-        Console.WriteLine("Test Normal vector: {0}, expected: 0.8, 0.6",normalVec);
+        Console.WriteLine("Test Normal vector: {0}, expected: 0.8, 0.6", normalVec);
 
         //Dot product
-        Vec2 pos1 = new Vec2(5,12);
-        Vec2 pos2 = new Vec2(3,6);
+        Vec2 pos1 = new Vec2(5, 12);
+        Vec2 pos2 = new Vec2(3, 6);
         Console.WriteLine("Test dot product: {0}, expected: 87", pos1.Dot(pos2));
 
         //test for Vec2.Reflect() on straight and rotated lines;
@@ -125,14 +128,40 @@ public class MyGame : Game
 
 
         //Extra functionality
-        Vec2 point1 = new Vec2(10,12);
+        Vec2 point1 = new Vec2(10, 12);
         Vec2 point2 = new Vec2(1, 4);
         Console.WriteLine("Distance between two vectors, {0} Expected: 12,04159", point1.Distance(point2));
-    }
+    }*/
 
-    public MyGame() : base(800, 600, false,false)
+    public MyGame() : base(800, 1080, false,false)
 	{
-        lineContainer = new Canvas(width, height);
+        collisionManager = new MyCollisionManager();
+
+        Pinball ball = new Pinball(30, new Vec2(400, 500), new Vec2(0, 0.5F), new Vec2(0, 0));
+        Circle circle = new Circle(60, new Vec2(500, 400));
+        Circle circle2 = new Circle(15, new Vec2(250, 500));
+        Circle circle3 = new Circle(10, new Vec2(300, 550));
+        Circle circle4 = new Circle(20, new Vec2(150, 400));
+        this.AddChild(ball);
+        this.AddChild(circle);
+        this.AddChild(circle2);
+        this.AddChild(circle3);
+        this.AddChild(circle4);
+        Line lineBottom = new Line(new Vec2(200, 1000), new Vec2(600, 1000));
+        Line lineLeft1 = new Line(new Vec2(200, 1000), new Vec2(25, 550));
+        Line lineLeft2 = new Line(new Vec2(25, 550), new Vec2(200, 100));
+        Line lineRight1 = new Line(new Vec2(600, 1000), new Vec2(775, 550));
+        Line lineRight2 = new Line(new Vec2(775, 550), new Vec2(600, 100));
+        Line lineTop = new Line(new Vec2(200, 100), new Vec2(600, 100));
+        this.AddChild(lineBottom);
+        this.AddChild(lineLeft1);
+        this.AddChild(lineLeft2);
+        this.AddChild(lineRight1);
+        this.AddChild(lineRight2);
+        this.AddChild(lineTop);
+        PlayerLine playerLine = new PlayerLine(new Vec2(300, 800), new Vec2(500, 800));
+        this.AddChild(playerLine);
+        /*lineContainer = new Canvas(width, height);
         
         //AccelerationField()
         accelerationFields = new List<AccelerationField>();
@@ -165,12 +194,12 @@ public class MyGame : Game
 
 
         //Add the linecontainer as last
-        AddChild(lineContainer);
+        AddChild(lineContainer);*/
     }
 
 	static void Main()
 	{
-        DoTests();//Unit tests, mainly copied from previous assignments
+        //DoTests();//Unit tests, mainly copied from previous assignments
 		new MyGame().Start();
 	}
 
@@ -179,10 +208,11 @@ public class MyGame : Game
         if (Input.GetKeyDown(Key.D)) drawDebugLine ^= true;
         if (Input.GetKeyDown(Key.C)) lineContainer.graphics.Clear(Color.Black);
 
+        this.HandleInput();
         targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;//Lower the framerate.
     }
 
-    public int GetNumberOfTanks()
+    /*public int GetNumberOfTanks()
     {
         return tanks.Count;
     }
@@ -198,9 +228,9 @@ public class MyGame : Game
     {
         tanks.Remove(tank);//Remove the tank from the list
         tank.Destroy();//And the game.
-    }
+    }*/
 
-    void AddLine(Vec2 start, Vec2 end, Boolean dualSided = true)//Add a line with caps
+    /*void AddLine(Vec2 start, Vec2 end, Boolean dualSided = true)//Add a line with caps
     {
         LineSegment line = new LineSegment(start, end, 0xff00ff00, 4);
         Caps startCap = new Caps(start);
@@ -218,12 +248,12 @@ public class MyGame : Game
             lines.Add(line2);
             //This doesn't need any caps as they share the same coordinates as the one above.
         }
-    }
-    public int GetNumberOfLines()
+    }*/
+    /*public int GetNumberOfLines()
     {
         return lines.Count;
-    }
-    public LineSegment GetLine(int index)
+    }*/
+    /*public LineSegment GetLine(int index)
     {
         if (index >= 0 && index < lines.Count)
         {
@@ -242,9 +272,9 @@ public class MyGame : Game
             return caps[index];
         }
         return null;
-    }
+    }*/
 
-    void AddAccelerationField(int radius, Vec2 position)
+    /*void AddAccelerationField(int radius, Vec2 position)
     {
         AccelerationField accelerationField = new AccelerationField(radius,position);
         accelerationFields.Add(accelerationField);
@@ -262,11 +292,25 @@ public class MyGame : Game
             return accelerationFields[index];
         }
         return null;
-    }
+    }*/
 
 
     public void DrawLine(Vec2 start, Vec2 end)
     {
         lineContainer.graphics.DrawLine(Pens.White, start.x, start.y, end.x, end.y);
+    }
+    public static bool Approximate(Vec2 a, Vec2 b, float errorMargin = 0.01f)
+    {
+        return Approximate(a.x, b.x, errorMargin) && Approximate(a.y, b.y, errorMargin);
+    }
+
+    public static bool Approximate(float a, float b, float errorMargin = 0.01f)
+    {
+        return Math.Abs(a - b) < errorMargin;
+    }
+
+    private void HandleInput()
+    {
+        this.targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;
     }
 }
