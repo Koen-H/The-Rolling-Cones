@@ -19,7 +19,6 @@ namespace GXPEngine.Golgrath.Objects
         public MyGameObject(Vec2 position, int canvasWidth, int canvasHeight): base(canvasWidth, canvasHeight)
         {
             this.position = position;
-            this.UpdateScreenPosition();
         }
 
         public Vec2 Position
@@ -27,6 +26,8 @@ namespace GXPEngine.Golgrath.Objects
             set
             {
                 this.position = value;
+                this.x = value.x;
+                this.y = value.y;
             }
             get
             {
@@ -40,12 +41,6 @@ namespace GXPEngine.Golgrath.Objects
             {
                 return this.myCollider;
             }
-        }
-        
-        public void UpdateScreenPosition()
-        {
-            this.x = position.x;
-            this.y = position.y;
         }
     }
 }

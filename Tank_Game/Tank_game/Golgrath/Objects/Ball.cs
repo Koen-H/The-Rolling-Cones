@@ -12,7 +12,6 @@ namespace GXPEngine.Golgrath.Objects
             this.gravity = gravity;
             this.oldPosition = position;
 
-            this.UpdateScreenPosition();
             
         }
 
@@ -61,7 +60,6 @@ namespace GXPEngine.Golgrath.Objects
 
             MyGame.collisionManager.CollideWith(this.myCollider);
 
-            this.UpdateScreenPosition();
         }
     }
 }

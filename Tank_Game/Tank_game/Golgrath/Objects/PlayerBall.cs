@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GXPEngine.Coolgrath;
 
 namespace GXPEngine.Golgrath.Objects
 {
@@ -61,7 +62,18 @@ namespace GXPEngine.Golgrath.Objects
             this.velocity += MyGame.collisionManager.FirstTime == true ? gravity : new Vec2(-gravity.x, -gravity.y);
             this.Position += velocity;
             MyGame.collisionManager.CollideWith(this.myCollider);
-            this.UpdateScreenPosition();
+            OnGeyser();
+        }
+
+        private void OnGeyser()
+        {
+            MyGame myGame = (MyGame)Game.main;
+            foreach (Geyser geyser in myGame.geysers)
+            if (HitTest(geyser))
+            {
+                    Console.WriteLine("On Geyser!");
+                    velocity += Vec2.GetUnitVectorDeg(-90) * geyser.strength;
+            }
         }
     }
 }

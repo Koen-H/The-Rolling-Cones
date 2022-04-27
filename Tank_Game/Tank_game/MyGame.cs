@@ -4,6 +4,7 @@ using Physics;
 using System.Drawing;
 using System.Collections.Generic;
 using GXPEngine.Golgrath.Objects;
+using GXPEngine.Coolgrath;
 using GXPEngine.PhysicsEngine;
 
 public class MyGame : Game
@@ -13,6 +14,8 @@ public class MyGame : Game
     List<Caps> caps;
     List<AccelerationField> accelerationFields;
     public Tank playerTank;*/
+
+    public List<Geyser> geysers = new List<Geyser>();
 
     public bool drawDebugLine;
     Canvas lineContainer = null;
@@ -133,7 +136,7 @@ public class MyGame : Game
         Console.WriteLine("Distance between two vectors, {0} Expected: 12,04159", point1.Distance(point2));
     }*/
 
-    public MyGame() : base(800, 1080, false,false)
+    public MyGame() : base(1920, 1080, false,false, 800, 1080)
 	{
         collisionManager = new MyCollisionManager();
 
@@ -151,6 +154,10 @@ public class MyGame : Game
         this.AddChild(lineRight1);
         this.AddChild(lineRight2);
         this.AddChild(lineTop);
+
+        Geyser geyserTest = new Geyser(2, new Vec2(220,900), "cyan_block.png",1,1,1);
+        AddChild(geyserTest);
+
         /*lineContainer = new Canvas(width, height);
         
         //AccelerationField()
