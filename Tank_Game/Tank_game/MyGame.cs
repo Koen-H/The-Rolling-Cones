@@ -7,6 +7,7 @@ using GXPEngine.Golgrath.Objects;
 using GXPEngine.Coolgrath;
 using GXPEngine.PhysicsEngine;
 using GXPEngine.Golgrath.Cameras;
+using GXPEngine.TiledLoader;
 
 public class MyGame : Game
 {
@@ -156,11 +157,13 @@ public class MyGame : Game
         this.AddChild(lineRight1);
         this.AddChild(lineRight2);
         this.AddChild(lineTop);
-        Geyser geyserTest = new Geyser(2, new Vec2(220,900), "cyan_block.png",1,1,1);
-        AddChild(geyserTest);
+        //Geyser geyserTest = new Geyser(2, new Vec2(220,900), "cyan_block.png",1,1,1);
+        //AddChild(geyserTest);
         this.AddChild(ball);
         ball.SetPlayerCamera(playerCamera);
         this.AddChild(newBall);
+
+        Level level = new Level("MapTest.tmx");
         /*lineContainer = new Canvas(width, height);
         
         //AccelerationField()

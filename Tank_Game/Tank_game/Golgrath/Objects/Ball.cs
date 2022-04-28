@@ -11,8 +11,6 @@ namespace GXPEngine.Golgrath.Objects
             this.velocity = velocity;
             this.gravity = gravity;
             this.oldPosition = position;
-
-            
         }
 
         public Vec2 OldPosition

@@ -270,6 +270,12 @@ namespace TiledMapParser
 			return FileName + " (dim: "+Width+"x"+Height+")";
 		}
 	}
+	[XmlRootAttribute("polyline")]
+	public class PolyLine
+    {
+		[XmlAttribute("points")]
+		public string points;
+	}
 
 	[XmlRootAttribute("layer")]
 	public class Layer : PropertyContainer {
@@ -461,6 +467,8 @@ namespace TiledMapParser
 		public float Y;
 		[XmlElement("text")]
 		public Text textField;
+		[XmlElement("polyline")]
+		public PolyLine polyline;
 		
 		/// <summary>
 		/// Call this method to initialize the MirrorX, MirrorY and ImageID fields.
