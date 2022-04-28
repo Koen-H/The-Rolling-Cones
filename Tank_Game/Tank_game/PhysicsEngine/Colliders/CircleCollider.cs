@@ -32,13 +32,9 @@ namespace GXPEngine.PhysicsEngine.Colliders
                         Vec2 pullDirection = ownCircle.Position - incBall.Position; //Draws a line from the bullet position to the center of the acceleration field.
                         float oldLength = incBall.Velocity.Length();//Gets the old lenght (speed)
                         incBall.Velocity = incBall.Velocity + pullDirection * ownCircle.PullStrength;//Set the velocity to the direction of the center of the acceleration field based on the pullstrength.
-                        Console.WriteLine(incBall.Velocity);
                         incBall.Velocity = incBall.Velocity.Normalized();//Set speed to 1
-                        Console.WriteLine(incBall.Velocity);
                         //  incBall.Velocity = (incBall.Velocity * (float)((oldLength + gravity) * 1.09));//Set speed back to original.
                         incBall.Velocity = incBall.Velocity * (oldLength + gravity);
-                        Console.WriteLine(incBall.Velocity);
-                        Console.WriteLine("Veloicity: " + incBall.Velocity);
                         //incBall.Gravity = new Vec2(0, 0);
                     }
                     

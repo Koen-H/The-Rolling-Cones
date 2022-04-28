@@ -31,15 +31,14 @@ namespace GXPEngine.TiledLoader
             colliders = new Pivot();
             textures = new Pivot();
 
-            VerifyMap(mapData);
+            CreateLines(mapData);
         }
 
-        void VerifyMap(Map map)
+        void CreateLines(Map map)//This will make the lines/border from the lines layer of the tiled level.
         {
             var group = map.ObjectGroups[0];
             if (group.Name == "Lines")
             {
-
                 foreach (TiledObject obj in group.Objects)
                 {
                     if (obj.polyline != null)
@@ -47,7 +46,7 @@ namespace GXPEngine.TiledLoader
                         string data = obj.polyline.points;
                         Console.WriteLine("Found a polyline: " + data);
                         string[] subs = data.Split(' ', ',');
-                        Vec2 objPos = new Vec2(obj.X,obj.Y);
+                        Vec2 objPos = new Vec2(obj.X,obj.Y); //Each point is relative of the parent, therefore it must be applied to each point to get the gamespace coordinates.
                         int coords = subs.Length;
                         for (int i = 0; (coords - 2) != i; i += 2)
                         {
@@ -58,9 +57,7 @@ namespace GXPEngine.TiledLoader
                             Console.WriteLine(coords + " and " + "i =" +i);
                             Line line = new Line(pos1, pos2 );
                             AddChild(line);
-                           
                         }
-
                     }
                 }
             }
