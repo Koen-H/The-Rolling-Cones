@@ -140,8 +140,7 @@ public class MyGame : Game
 	{
         collisionManager = new MyCollisionManager();
 
-        PlayerBall ball = new PlayerBall(30, new Vec2(400, 500), new Vec2(0, 0.5F), new Vec2(0, 0));
-        this.AddChild(ball);
+        
         Line lineBottom = new Line(new Vec2(200, 1000), new Vec2(600, 1000));
         Line lineLeft1 = new Line(new Vec2(200, 1000), new Vec2(25, 550));
         Line lineLeft2 = new Line(new Vec2(25, 550), new Vec2(200, 100));
@@ -157,6 +156,16 @@ public class MyGame : Game
 
         Geyser geyserTest = new Geyser(2, new Vec2(220,900), "cyan_block.png",1,1,1);
         AddChild(geyserTest);
+
+        OrbitalField orbitalFieldTest = new OrbitalField(0.025F,44,new Vec2(400,720));
+        AddChild(orbitalFieldTest);
+        //OrbitalField orbitalFieldTest2 = new OrbitalField(0.025F, 50, new Vec2(590, 720));
+        //AddChild(orbitalFieldTest2);
+
+        //For now, Ball should be the last thing added to the scene/level
+        PlayerBall ball = new PlayerBall(30, new Vec2(400, 500), new Vec2(0, 0.5F), new Vec2(0, 0));
+        this.AddChild(ball);
+
 
         /*lineContainer = new Canvas(width, height);
         

@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coolgrath\Geyser.cs" />
+    <Compile Include="Coolgrath\OrbitalField.cs" />
     <Compile Include="Golgrath\Objects\Ball.cs" />
     <Compile Include="Golgrath\Objects\Cap.cs" />
     <Compile Include="Golgrath\Objects\Circle.cs" />

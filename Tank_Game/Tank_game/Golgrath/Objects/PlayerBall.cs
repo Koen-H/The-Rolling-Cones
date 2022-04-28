@@ -14,7 +14,7 @@ namespace GXPEngine.Golgrath.Objects
             this.DrawRect(0, 200, 0);
             this.drag = 0.03F;
             this.acceleration = 0.05F;
-            this.maxSpeed = 3F;
+            this.maxSpeed = 10F;
         }
 
         public new void Update()
@@ -34,7 +34,7 @@ namespace GXPEngine.Golgrath.Objects
             {
                 velocity.x += acceleration;
             }
-            if (velocity.x > drag)
+           /* if (velocity.x > drag)
             {
                 velocity.x -= drag;
             }
@@ -45,7 +45,7 @@ namespace GXPEngine.Golgrath.Objects
             else
             {
                 velocity.x = 0;
-            }
+            }*/
             this.Velocity = velocity;
         }
         private void DrawRect(byte red, byte green, byte blue)
