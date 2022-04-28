@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using GXPEngine;
 using TiledMapParser;
+using GXPEngine.Golgrath.Objects;
+using System.Globalization;
 
 namespace GXPEngine.TiledLoader
 {
@@ -29,18 +31,34 @@ namespace GXPEngine.TiledLoader
             colliders = new Pivot();
             textures = new Pivot();
 
-            VerifyMap(mapData);
+            CreateLines(mapData);
         }
 
-        void VerifyMap(Map map)
+        void CreateLines(Map map)//This will make the lines/border from the lines layer of the tiled level.
         {
             var group = map.ObjectGroups[0];
-            foreach (TiledObject obj in group.Objects)
+            if (group.Name == "Lines")
             {
-                if (obj.polyline !=null)
+                foreach (TiledObject obj in group.Objects)
                 {
-                    string data = obj.polyline.points;
-                    Console.WriteLine("Found a polyline: "+data);
+                    if (obj.polyline != null)
+                    {
+                        string data = obj.polyline.points;
+                        Console.WriteLine("Found a polyline: " + data);
+                        string[] subs = data.Split(' ', ',');
+                        Vec2 objPos = new Vec2(obj.X,obj.Y); //Each point is relative of the parent, therefore it must be applied to each point to get the gamespace coordinates.
+                        int coords = subs.Length;
+                        for (int i = 0; (coords - 2) != i; i += 2)
+                        {
+                            Console.WriteLine(float.Parse(subs[i], CultureInfo.InvariantCulture.NumberFormat));
+                            Vec2 pos1 = new Vec2(float.Parse(subs[i], CultureInfo.InvariantCulture.NumberFormat), float.Parse(subs[i + 1], CultureInfo.InvariantCulture.NumberFormat)) + objPos;
+                            Vec2 pos2 = new Vec2(float.Parse(subs[i + 2], CultureInfo.InvariantCulture.NumberFormat), float.Parse(subs[i + 3], CultureInfo.InvariantCulture.NumberFormat)) + objPos;
+                            Console.WriteLine(" pos1:" + pos1 + " pos2:" + pos2);
+                            Console.WriteLine(coords + " and " + "i =" +i);
+                            Line line = new Line(pos1, pos2 );
+                            AddChild(line);
+                        }
+                    }
                 }
             }
         }

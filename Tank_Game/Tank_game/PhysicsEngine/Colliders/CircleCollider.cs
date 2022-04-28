@@ -1,4 +1,5 @@
-﻿using GXPEngine.Golgrath.Objects;
+﻿using GXPEngine.Coolgrath;
+using GXPEngine.Golgrath.Objects;
 using Physics;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,25 @@ namespace GXPEngine.PhysicsEngine.Colliders
             CollisionInfo info = null;
             if (collideWith != this)
             {
-                if (collideWith.Owner is Ball && this.Owner is Circle)
+                if (collideWith.Owner is Ball && this.Owner is OrbitalField)
+                {
+                    OrbitalField ownCircle = (OrbitalField)this.Owner;
+                    Ball incBall = (Ball)collideWith.Owner;
+                    Vec2 relative = incBall.Position - ownCircle.Position;
+                    if (relative.Length() < ownCircle.Radius + incBall.Radius)
+                    {
+                        float gravity = incBall.Gravity.Length();
+                        Vec2 pullDirection = ownCircle.Position - incBall.Position; //Draws a line from the bullet position to the center of the acceleration field.
+                        float oldLength = incBall.Velocity.Length();//Gets the old lenght (speed)
+                        incBall.Velocity = incBall.Velocity + pullDirection * ownCircle.PullStrength;//Set the velocity to the direction of the center of the acceleration field based on the pullstrength.
+                        incBall.Velocity = incBall.Velocity.Normalized();//Set speed to 1
+                        //  incBall.Velocity = (incBall.Velocity * (float)((oldLength + gravity) * 1.09));//Set speed back to original.
+                        incBall.Velocity = incBall.Velocity * (oldLength + gravity);
+                        //incBall.Gravity = new Vec2(0, 0);
+                    }
+                    
+                }
+                else if (collideWith.Owner is Ball && this.Owner is Circle)
                 {
                     Circle ownCircle = (Circle)this.Owner;
                     Ball incBall = (Ball)collideWith.Owner;

@@ -26,8 +26,8 @@ public class MyGame : Game
     public MyGame() : base(1920, 1080, false,false, 1920, 1080)
 	{
         collisionManager = new MyCollisionManager();
-        PlayerBall ball = new PlayerBall(30, new Vec2(400, 500), new Vec2(0, 0.5F), new Vec2(0, 0));
-        Circle newBall = new Circle(50, new Vec2(0, 0), 100, 100);
+
+        
         Line lineBottom = new Line(new Vec2(200, 1000), new Vec2(600, 1000));
         /*Line lineLeft1 = new Line(new Vec2(200, 1000), new Vec2(25, 800));
         Line lineLeft2 = new Line(new Vec2(25, 550), new Vec2(200, 100));
@@ -44,11 +44,21 @@ public class MyGame : Game
         this.AddChild(lineTop);*/
         //Geyser geyserTest = new Geyser(2, new Vec2(220,900), "cyan_block.png",1,1,1);
         //AddChild(geyserTest);
+
+        Geyser geyserTest = new Geyser(2, new Vec2(220,900), "cyan_block.png",1,1,1);
+        AddChild(geyserTest);
+
+        OrbitalField orbitalFieldTest = new OrbitalField(0.025F,44,new Vec2(400,720));
+        AddChild(orbitalFieldTest);
+        //OrbitalField orbitalFieldTest2 = new OrbitalField(0.025F, 50, new Vec2(590, 720));
+        //AddChild(orbitalFieldTest2);
+
+        //For now, Ball should be the last thing added to the scene/level
+        PlayerBall ball = new PlayerBall(30, new Vec2(400, 500), new Vec2(0, 0.5F), new Vec2(0, 0));
         this.AddChild(ball);
         ball.SetPlayerCamera(playerCamera);
-        this.AddChild(newBall);
 
-        Level level = new Level("MapTest.tmx");
+
         /*lineContainer = new Canvas(width, height);
         
         //AccelerationField()
@@ -83,6 +93,9 @@ public class MyGame : Game
 
         //Add the linecontainer as last
         AddChild(lineContainer);*/
+
+
+        LoadLevel();
     }
 
 	static void Main()
@@ -199,5 +212,25 @@ public class MyGame : Game
     private void HandleInput()
     {
         this.targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;
+    }
+    private void LoadLevel(string fileName = "test.tmx")
+    {
+       // DestroyAll();
+        Level level = new Level(fileName);
+        List<GameObject> children = level.GetChildren();
+        foreach (GameObject child in children)
+        {
+            AddChild(child);
+        }
+
+    }
+    private void DestroyAll()
+    {
+        List<GameObject> children = GetChildren();
+        foreach (GameObject child in children)
+        {
+            child.Destroy();
+        }
+
     }
 }

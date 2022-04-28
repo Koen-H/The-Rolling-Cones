@@ -48,18 +48,6 @@ namespace GXPEngine.Golgrath.Objects
             {
                 velocity.x += acceleration;
             }
-            if (velocity.x > drag)
-            {
-                velocity.x -= drag;
-            }
-            else if (velocity.x < -drag)
-            {
-                velocity.x += drag;
-            }
-            else
-            {
-                velocity.x = 0;
-            }
             if (Input.GetKeyDown(Key.W))
             {
                 this.umbrella = !this.umbrella;
@@ -72,7 +60,24 @@ namespace GXPEngine.Golgrath.Objects
                     this.umbrellaSprite.alpha = 0.0F;
                 }
             }
+            /*if (velocity.x > drag)
+            {
+                velocity.x -= drag;
+            }
+            else if (velocity.x < -drag)
+            {
+                velocity.x += drag;
+            }
+            else
+            {
+                velocity.x = 0;
+            }*/
+
+
             this.Velocity = velocity;
+            //Rotate the sprite based on the direction of the velocity.
+            if (velocity.Normalized().x < 0) rotation -= velocity.Length();
+            else rotation += velocity.Length();
         }
         private void DrawRect(byte red, byte green, byte blue)
         {
