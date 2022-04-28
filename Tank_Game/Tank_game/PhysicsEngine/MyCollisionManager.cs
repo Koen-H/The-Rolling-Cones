@@ -61,11 +61,13 @@ namespace GXPEngine.PhysicsEngine
                 if (info.timeOfImpact <= 0.00001 && firstTime)
                 {
                     this.firstTime = false;
+                    Console.WriteLine("Ok");
                     if (collideWith.Owner is Moveable)
                     {
-                        if (collideWith.Owner is Ball)
+                        if (collideWith.Owner is PlayerBall)
                         {
-                            Ball move = (Ball)collideWith.Owner;
+                            Console.WriteLine("No way");
+                            PlayerBall move = (PlayerBall)collideWith.Owner;
                             move.Step();
                         }
                     }

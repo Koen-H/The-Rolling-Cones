@@ -10,13 +10,21 @@ namespace GXPEngine.Golgrath.Objects
     public class PlayerBall : Ball
     {
         private float drag, acceleration, maxSpeed;
+        private bool umbrella;
+        private AnimationSprite umbrellaSprite;
+        private Vec2 umbrellaGravity;
         private PlayerCamera camera;
         public PlayerBall(int radius, Vec2 position, Vec2 gravity, Vec2 velocity) : base(radius, position, gravity, velocity)
         {
             this.DrawRect(0, 200, 0);
-            this.drag = 0.03F;
-            this.acceleration = 0.05F;
-            this.maxSpeed = 10F;
+            this.drag = 0.06F;
+            this.acceleration = 0.4F;
+            this.maxSpeed = 3F;
+            this.umbrellaSprite = new AnimationSprite("Umbrella.png", 1, 1, -1, false, false);
+            this.umbrellaGravity = gravity / 4;
+            this.umbrellaSprite.alpha = 0.0F;
+            this.umbrellaSprite.SetOrigin(this.umbrellaSprite.width / 2, this.umbrellaSprite.height / 2);
+            this.AddChild(umbrellaSprite);
         }
 
         public new void Update()
@@ -40,22 +48,32 @@ namespace GXPEngine.Golgrath.Objects
             {
                 velocity.x += acceleration;
             }
+            if (Input.GetKeyDown(Key.W))
+            {
+                this.umbrella = !this.umbrella;
+                if (this.umbrella)
+                {
+                    this.umbrellaSprite.alpha = 1.0F;
+                }
+                else
+                {
+                    this.umbrellaSprite.alpha = 0.0F;
+                }
+            }
+            /*if (velocity.x > drag)
+            {
+                velocity.x -= drag;
+            }
+            else if (velocity.x < -drag)
+            {
+                velocity.x += drag;
+            }
+            else
+            {
+                velocity.x = 0;
+            }*/
 
-            
-            
-            
-            /* if (velocity.x > drag)
-             {
-                 velocity.x -= drag;
-             }
-             else if (velocity.x < -drag)
-             {
-                 velocity.x += drag;
-             }
-             else
-             {
-                 velocity.x = 0;
-             }*/
+
             this.Velocity = velocity;
             //Rotate the sprite based on the direction of the velocity.
             if (velocity.Normalized().x < 0) rotation -= velocity.Length();
@@ -71,7 +89,14 @@ namespace GXPEngine.Golgrath.Objects
         public new void Step()
         {
             this.oldPosition = this.position;
-            this.velocity += MyGame.collisionManager.FirstTime == true ? gravity : new Vec2(-gravity.x, -gravity.y);
+            this.velocity += MyGame.collisionManager.FirstTime == true ? (umbrella ? umbrellaGravity : gravity) : new Vec2(0, 0);
+            //new Vec2(-gravity.x, -gravity.y) I know i put this here, for a reason. KEEP THIS!
+            if (MyGame.collisionManager.FirstTime == false)
+            {
+                Console.WriteLine("In here");
+                this.umbrella = false;
+                this.umbrellaSprite.alpha = 0.0F;
+            }
             this.Position += velocity;
             MyGame.collisionManager.CollideWith(this.myCollider);
             OnGeyser();

@@ -138,7 +138,7 @@ public class MyGame : Game
         Console.WriteLine("Distance between two vectors, {0} Expected: 12,04159", point1.Distance(point2));
     }*/
 
-    public MyGame() : base(1920, 1080, false,false, 800, 1080)
+    public MyGame() : base(1920, 1080, false,false, 1920, 1080)
 	{
         collisionManager = new MyCollisionManager();
 

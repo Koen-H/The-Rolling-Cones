@@ -14,7 +14,6 @@
 *.userprefs
 
 # Build results
-[Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
@@ -331,7 +330,7 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
-Tank_Game/Tank_game/obj/x86/Debug/GXPEngine.exe
+Tank_Game/Tank_game/bin/Debug/lib
 Tank_Game/Tank_game/obj/x86/Debug/GXPEngine.pdb
 Tank_Game/Tank_game/.vs/GXPEngine/v16/.suo
 Tank_Game/Tank_game/.vs/GXPEngine/v15/.suo
