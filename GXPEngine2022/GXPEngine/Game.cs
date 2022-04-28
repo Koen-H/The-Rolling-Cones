@@ -53,7 +53,7 @@ namespace GXPEngine
 		/// Set this to false if you *only* want to render using your own cameras.
 		/// (Don't say we didn't warn you if you end up with a black screen...)
 		/// </summary>
-		public bool RenderMain = true;
+		public bool RenderMain = false;
 		public readonly bool PixelArt;
 
 		private Rectangle _renderRange;

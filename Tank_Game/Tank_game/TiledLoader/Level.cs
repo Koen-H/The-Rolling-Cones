@@ -25,9 +25,24 @@ namespace GXPEngine.TiledLoader
         void Construct()
         {
             Map mapData = MapParser.ReadMap(levelFileName);
-            CreateLevel(mapData);
+            //CreateLevel(mapData);
             colliders = new Pivot();
             textures = new Pivot();
+
+            VerifyMap(mapData);
+        }
+
+        void VerifyMap(Map map)
+        {
+            var group = map.ObjectGroups[0];
+            foreach (TiledObject obj in group.Objects)
+            {
+                if (obj.polyline !=null)
+                {
+                    string data = obj.polyline.points;
+                    Console.WriteLine("Found a polyline: "+data);
+                }
+            }
         }
 
         void CreateLevel(Map mapData)
@@ -72,5 +87,7 @@ namespace GXPEngine.TiledLoader
                 }*/
 
         }
+
+
     }
 }

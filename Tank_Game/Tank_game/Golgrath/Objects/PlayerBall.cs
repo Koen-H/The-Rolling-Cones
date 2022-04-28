@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GXPEngine.Golgrath.Cameras;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace GXPEngine.Golgrath.Objects
     public class PlayerBall : Ball
     {
         private float drag, acceleration, maxSpeed;
+        private PlayerCamera camera;
         public PlayerBall(int radius, Vec2 position, Vec2 gravity, Vec2 velocity) : base(radius, position, gravity, velocity)
         {
             this.DrawRect(0, 200, 0);
@@ -21,6 +23,10 @@ namespace GXPEngine.Golgrath.Objects
         {
             this.HandleInput();
             this.Step();
+            if (camera != null)
+            {
+                this.camera.SetXY(this.position.x, this.position.y);
+            }
         }
 
         private void HandleInput()
@@ -53,7 +59,6 @@ namespace GXPEngine.Golgrath.Objects
             Fill(red, green, blue);
             Stroke(red, green, blue);
             Rect(radius, radius * 2, radius / 2, radius / 2);
-            //Testssss
         }
 
         public new void Step()
@@ -74,6 +79,10 @@ namespace GXPEngine.Golgrath.Objects
                     Console.WriteLine("On Geyser!");
                     velocity += Vec2.GetUnitVectorDeg(-90) * geyser.strength;
             }
+        }
+        public void SetPlayerCamera(PlayerCamera camera)
+        {
+            this.camera = camera;
         }
     }
 }
