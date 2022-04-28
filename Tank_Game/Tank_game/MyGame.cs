@@ -23,140 +23,25 @@ public class MyGame : Game
     Canvas lineContainer = null;
     public static MyCollisionManager collisionManager;
 
-    /*static void DoTests()
-    {
-        //Start Week 1
-        // - Operator
-        Vec2 v = new Vec2(3, 8);
-        v = v - new Vec2(2, 3);
-        Console.WriteLine("Test - Operator: {0}, Expected: 1,5", v.ToString());
-
-        // * Operator
-        v = new Vec2(-6, 8);
-        v = v * 3;
-        Console.WriteLine("Test * Operator: {0}, Expected: 30", v.Length());
-
-        //Normalize
-        v = new Vec2(3, 4);
-        v.Normalize();
-        Console.WriteLine("Test Normalize: {0}, Expected: 0.6, 0.8", v.ToString());
-
-        //Normalized
-        v = new Vec2(3, 4);
-        Vec2 w = v.Normalized();
-        Console.WriteLine("Test Normalized: {0}, Expected: 0.6, 0.8. Original: {1} (should be 3,4) ", w, v);
-
-        //Length
-        v = new Vec2(-6, 8);
-        Console.WriteLine("Test Length: {0}, Expected: 10", v.Length());
-
-        //SetXY
-        v = new Vec2(-6, 8);
-        v.SetXY(3, 5);
-        Console.WriteLine("Test SetXY: {0}, Expected: 3,5", v.ToString());
-
-
-        //Start Week 2
-
-        //Deg to Rad
-        float deg = 180;
-        Console.WriteLine("Test Deg2Rad: {0}, expected: 3.141593f", Vec2.Deg2Rad(deg));
-
-        //Rad to Deg
-        float rad = 3.141593f;
-        Console.WriteLine("Test Rad2Deg: {0}, expected: 180", Vec2.Rad2Deg(rad));
-
-        //Get Random Vector
-        for (int i = 0; i < 5; i++)
-        {
-            Vec2 r = Vec2.RandomUnitVector();
-            Console.WriteLine("Random unit vector: {0} length: {1}", r, r.Length());
-        }
-
-        //Get and set Angle Degrees
-        Vec2 vecOne = new Vec2(13, 12);
-        Console.WriteLine("Test Set angle and GetAngle Degrees: Vector's length and degree was: {0} and {1}", vecOne.Length(), vecOne.GetAngleDegrees());
-        vecOne.SetAngleDegrees(90);
-        Console.WriteLine("And after SetAngle(90), Vector's length and degree: {0} and {1} . expected same length, degrees 90", vecOne.Length(), vecOne.GetAngleDegrees());
-
-        *//*//Get and set Angle
-        Vec2 vecOne = new Vec2(13, 12);
-        Console.WriteLine("Test Set angle and GetAngle Radians: Vector's length and degree was: {0} and {1}", vecOne.Length(), vecOne.GetAngleDegrees());
-        vecOne.SetAngleDegrees(90);
-        Console.WriteLine("And after SetAngle(90), Vector's length and degree: {0} and {1} . expected same length, degrees 90", vecOne.Length(), vecOne.GetAngleDegrees());*//*
-
-        //Rotate
-        vecOne = new Vec2(-4, -1);
-        vecOne.RotateDegrees(90);
-        Console.WriteLine("Test RotateDegrees: {0}, expected: 1,-4", vecOne);
-        vecOne.RotateRadians(Vec2.Deg2Rad(-90));
-        Console.WriteLine("Test RotateRadians: {0}, expected: -4,-1", vecOne);
-
-        //Rotate Around a point
-        vecOne = new Vec2(-4, -1);
-        Vec2 vecRot = new Vec2(2, 1);
-        vecOne.RotateAroundDegrees(vecRot, 90);
-        Console.WriteLine("Test RotateAroundDegrees: {0}, expected: 4,-5", vecOne);
-        vecOne.RotateAroundRadians(vecRot, Vec2.Deg2Rad(-90));
-        Console.WriteLine("Test RotateAroundRadians: {0}, expected: -4, -1", vecOne);
-
-
-        //Start week 4
-
-        //normal
-        Vec2 normalVec = new Vec2(6, -8);
-        normalVec = normalVec.Normal();
-        Console.WriteLine("Test Normal vector: {0}, expected: 0.8, 0.6", normalVec);
-
-        //Dot product
-        Vec2 pos1 = new Vec2(5, 12);
-        Vec2 pos2 = new Vec2(3, 6);
-        Console.WriteLine("Test dot product: {0}, expected: 87", pos1.Dot(pos2));
-
-        //test for Vec2.Reflect() on straight and rotated lines;
-        Vec2 pointA = new Vec2(1, 1);
-        Vec2 pointB = new Vec2(5, 5);
-        Vec2 lineLength = pointA - pointB;
-        Vec2 vecNormal = lineLength.Normal();
-        vecNormal.Normalize();
-        Vec2 beforeReflect = new Vec2(5, 6);
-        Vec2 afterReflect = beforeReflect;
-        afterReflect.Reflect(vecNormal);
-        Console.WriteLine("Reflect test: Before: {0}  After: {1}    Expected: 5,6 and 6,5 ", beforeReflect, afterReflect); //On a straight line
-        Vec2 pointC = new Vec2(3, 1);
-        Vec2 pointD = new Vec2(6, 9);
-        Vec2 lineLength2 = pointC - pointD;
-        Vec2 vecNormal2 = lineLength2.Normal();
-        vecNormal2.Normalize();
-        afterReflect.Reflect(vecNormal2);
-        Console.WriteLine("Reflect test: Before: {0}  After: {1}    Expected: 6,5 and -1.232877,7.712329 ", beforeReflect, afterReflect); //On different line
-
-
-        //Extra functionality
-        Vec2 point1 = new Vec2(10, 12);
-        Vec2 point2 = new Vec2(1, 4);
-        Console.WriteLine("Distance between two vectors, {0} Expected: 12,04159", point1.Distance(point2));
-    }*/
-
     public MyGame() : base(1920, 1080, false,false, 1920, 1080)
 	{
         collisionManager = new MyCollisionManager();
         PlayerBall ball = new PlayerBall(30, new Vec2(400, 500), new Vec2(0, 0.5F), new Vec2(0, 0));
         Circle newBall = new Circle(50, new Vec2(0, 0), 100, 100);
         Line lineBottom = new Line(new Vec2(200, 1000), new Vec2(600, 1000));
-        Line lineLeft1 = new Line(new Vec2(200, 1000), new Vec2(25, 800));
+        /*Line lineLeft1 = new Line(new Vec2(200, 1000), new Vec2(25, 800));
         Line lineLeft2 = new Line(new Vec2(25, 550), new Vec2(200, 100));
         Line lineRight1 = new Line(new Vec2(600, 1000), new Vec2(775, 550));
         Line lineRight2 = new Line(new Vec2(775, 550), new Vec2(600, 100));
-        Line lineTop = new Line(new Vec2(200, 100), new Vec2(600, 100));
+        Line lineTop = new Line(new Vec2(200, 100), new Vec2(600, 100));*/
         PlayerCamera playerCamera = new PlayerCamera(0, 0, this.width, this.height);
         this.AddChild(playerCamera);
         this.AddChild(lineBottom);
-        this.AddChild(lineLeft1);
+        /*this.AddChild(lineLeft1);
         this.AddChild(lineLeft2);
         this.AddChild(lineRight1);
         this.AddChild(lineRight2);
-        this.AddChild(lineTop);
+        this.AddChild(lineTop);*/
         //Geyser geyserTest = new Geyser(2, new Vec2(220,900), "cyan_block.png",1,1,1);
         //AddChild(geyserTest);
         this.AddChild(ball);
