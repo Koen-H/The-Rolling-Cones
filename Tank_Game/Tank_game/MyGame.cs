@@ -159,9 +159,6 @@ public class MyGame : Game
         this.AddChild(lineTop);
         //Geyser geyserTest = new Geyser(2, new Vec2(220,900), "cyan_block.png",1,1,1);
         //AddChild(geyserTest);
-        this.AddChild(ball);
-        ball.SetPlayerCamera(playerCamera);
-        this.AddChild(newBall);
 
         Geyser geyserTest = new Geyser(2, new Vec2(220,900), "cyan_block.png",1,1,1);
         AddChild(geyserTest);
@@ -174,9 +171,9 @@ public class MyGame : Game
         //For now, Ball should be the last thing added to the scene/level
         PlayerBall ball = new PlayerBall(30, new Vec2(400, 500), new Vec2(0, 0.5F), new Vec2(0, 0));
         this.AddChild(ball);
+        ball.SetPlayerCamera(playerCamera);
 
 
-        Level level = new Level("MapTest.tmx");
         /*lineContainer = new Canvas(width, height);
         
         //AccelerationField()
@@ -211,6 +208,9 @@ public class MyGame : Game
 
         //Add the linecontainer as last
         AddChild(lineContainer);*/
+
+
+        LoadLevel();
     }
 
 	static void Main()
@@ -327,5 +327,25 @@ public class MyGame : Game
     private void HandleInput()
     {
         this.targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;
+    }
+    private void LoadLevel(string fileName = "test.tmx")
+    {
+       // DestroyAll();
+        Level level = new Level(fileName);
+        List<GameObject> children = level.GetChildren();
+        foreach (GameObject child in children)
+        {
+            AddChild(child);
+        }
+
+    }
+    private void DestroyAll()
+    {
+        List<GameObject> children = GetChildren();
+        foreach (GameObject child in children)
+        {
+            child.Destroy();
+        }
+
     }
 }
