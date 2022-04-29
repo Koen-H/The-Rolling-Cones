@@ -29,23 +29,25 @@ public class MyGame : Game
 
       /* The very simple basic level we had at the start  
         Line lineBottom = new Line(new Vec2(200, 1000), new Vec2(600, 1000));
-        /*Line lineLeft1 = new Line(new Vec2(200, 1000), new Vec2(25, 800));
+        Line lineLeft1 = new Line(new Vec2(200, 1000), new Vec2(25, 800));
         Line lineLeft2 = new Line(new Vec2(25, 550), new Vec2(200, 100));
         Line lineRight1 = new Line(new Vec2(600, 1000), new Vec2(775, 550));
         Line lineRight2 = new Line(new Vec2(775, 550), new Vec2(600, 100));
-        Line lineTop = new Line(new Vec2(200, 100), new Vec2(600, 100));*/
+
         
-        //this.AddChild(lineBottom);
-        /*this.AddChild(lineLeft1);
+        this.AddChild(lineBottom);
+        this.AddChild(lineLeft1);
         this.AddChild(lineLeft2);
         this.AddChild(lineRight1);
         this.AddChild(lineRight2);
         this.AddChild(lineTop);
         
+        */
+
         //Geyser geyserTest = new Geyser(2, new Vec2(220,900), "cyan_block.png",1,1,1);
         //AddChild(geyserTest);
 
-        Geyser geyserTest = new Geyser(2, new Vec2(720,970), "cyan_block.png",1,1,1);
+        Geyser geyserTest = new Geyser(2, new Vec2(620,970), "cyan_block.png",1,1);
         AddChild(geyserTest);
 
         OrbitalField orbitalFieldTest = new OrbitalField(0.025F,44,new Vec2(400,720));
@@ -113,89 +115,6 @@ public class MyGame : Game
         this.HandleInput();
         targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;//Lower the framerate.
     }
-
-    /*public int GetNumberOfTanks()
-    {
-        return tanks.Count;
-    }
-    public Tank GetTank(int index)
-    {
-        if (index >= 0 && index < tanks.Count)
-        {
-            return tanks[index];
-        }
-        return null;
-    }
-    public void RemoveTank(Tank tank)
-    {
-        tanks.Remove(tank);//Remove the tank from the list
-        tank.Destroy();//And the game.
-    }*/
-
-    /*void AddLine(Vec2 start, Vec2 end, Boolean dualSided = true)//Add a line with caps
-    {
-        LineSegment line = new LineSegment(start, end, 0xff00ff00, 4);
-        Caps startCap = new Caps(start);
-        Caps endCap = new Caps(end);
-        caps.Add(startCap);
-        caps.Add(endCap);
-        line.AddChild(startCap);
-        line.AddChild(endCap);
-        AddChild(line);
-        lines.Add(line);
-        if (dualSided)//If true, there should be a second line, but with the opposite normal. 
-        {
-            LineSegment line2 = new LineSegment(end, start, 0xff00ff00, 4);
-            AddChild(line2);
-            lines.Add(line2);
-            //This doesn't need any caps as they share the same coordinates as the one above.
-        }
-    }*/
-    /*public int GetNumberOfLines()
-    {
-        return lines.Count;
-    }*/
-    /*public LineSegment GetLine(int index)
-    {
-        if (index >= 0 && index < lines.Count)
-        {
-            return lines[index];
-        }
-        return null;
-    }
-    public int GetNumberOfCaps()
-    {
-        return caps.Count;
-    }
-    public Caps GetCap(int index)
-    {
-        if (index >= 0 && index < caps.Count)
-        {
-            return caps[index];
-        }
-        return null;
-    }*/
-
-    /*void AddAccelerationField(int radius, Vec2 position)
-    {
-        AccelerationField accelerationField = new AccelerationField(radius,position);
-        accelerationFields.Add(accelerationField);
-        AddChild(accelerationField);
-    }
-    public int GetNumberOfAccelerationFields()
-    {
-        return accelerationFields.Count;
-    }
-    public AccelerationField GetAccelerationField(int index)
-    {
-
-        if (index >= 0 && index < accelerationFields.Count)
-        {
-            return accelerationFields[index];
-        }
-        return null;
-    }*/
-
 
     public void DrawLine(Vec2 start, Vec2 end)
     {

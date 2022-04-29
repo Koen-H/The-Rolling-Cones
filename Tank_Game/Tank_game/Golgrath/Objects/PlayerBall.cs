@@ -100,16 +100,20 @@ namespace GXPEngine.Golgrath.Objects
             this.Position += velocity;
             MyGame.collisionManager.CollideWith(this.myCollider);
             OnGeyser();
+            
         }
 
         private void OnGeyser()
         {
             MyGame myGame = (MyGame)Game.main;
             foreach (Geyser geyser in myGame.geysers)
-            if (HitTest(geyser))
             {
+                Console.WriteLine("x: " + x + ", y:" + y);
+                if (HitTest(geyser))
+                {
                     Console.WriteLine("On Geyser!");
                     velocity += Vec2.GetUnitVectorDeg(-90) * geyser.strength;
+                }
             }
         }
         public void SetPlayerCamera(PlayerCamera camera)
