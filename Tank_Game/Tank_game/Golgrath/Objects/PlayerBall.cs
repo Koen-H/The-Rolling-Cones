@@ -35,6 +35,7 @@ namespace GXPEngine.Golgrath.Objects
             {
                 this.camera.SetXY(this.position.x, this.position.y - 200);
             }
+            umbrellaSprite.rotation = -rotation;
         }
 
         private void HandleInput()
