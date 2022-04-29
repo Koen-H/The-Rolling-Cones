@@ -13,15 +13,15 @@ namespace GXPEngine.Golgrath.Objects
         protected uint color;
         protected LineCollider lineCollider;
         protected Cap cap1, cap2;
-        public Line(Vec2 start, Vec2 end, uint pColor = 0xffffffff): base(new Vec2(0, 0), 800, 1080)
+        public Line(Vec2 start, Vec2 end, uint pColor = 0xffffffff): base(new Vec2(0, 0), 3000, 3000)
         {
             this.start = start;
             this.end = end;
             this.lineCollider = new LineCollider(this);
             this.cap1 = new Cap(0, start);
             this.cap2 = new Cap(0, end);
-            this.Stroke(System.Drawing.Color.Aqua);
-            this.Line(this.start.x, this.start.y, this.end.x, this.end.y);
+            this.Stroke(System.Drawing.Color.Red);
+            this.Line(start.x, start.y, end.x, end.y);
             MyGame.collisionManager.AddCollider(this.lineCollider);
             MyGame.collisionManager.AddCollider(this.cap1.MyCollider);
             MyGame.collisionManager.AddCollider(this.cap2.MyCollider);

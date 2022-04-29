@@ -17,11 +17,11 @@ namespace GXPEngine.Golgrath.Objects
         public PlayerBall(int radius, Vec2 position, Vec2 gravity, Vec2 velocity) : base(radius, position, gravity, velocity)
         {
             this.DrawRect(0, 200, 0);
-            this.drag = 0.06F;
+            this.drag = 0.08F;
             this.acceleration = 0.4F;
-            this.maxSpeed = 3F;
+            this.maxSpeed = 5F;
             this.umbrellaSprite = new AnimationSprite("Umbrella.png", 1, 1, -1, false, false);
-            this.umbrellaGravity = gravity / 4;
+            this.umbrellaGravity = gravity / 8;
             this.umbrellaSprite.alpha = 0.0F;
             this.umbrellaSprite.SetOrigin(this.umbrellaSprite.width / 2, this.umbrellaSprite.height / 2);
             this.AddChild(umbrellaSprite);
@@ -33,7 +33,7 @@ namespace GXPEngine.Golgrath.Objects
             this.Step();
             if (camera != null)
             {
-                this.camera.SetXY(this.position.x, this.position.y);
+                this.camera.SetXY(this.position.x, this.position.y - 200);
             }
             umbrellaSprite.rotation = -rotation;
         }
@@ -94,7 +94,6 @@ namespace GXPEngine.Golgrath.Objects
             //new Vec2(-gravity.x, -gravity.y) I know i put this here, for a reason. KEEP THIS!
             if (MyGame.collisionManager.FirstTime == false)
             {
-                Console.WriteLine("In here");
                 this.umbrella = false;
                 this.umbrellaSprite.alpha = 0.0F;
             }
