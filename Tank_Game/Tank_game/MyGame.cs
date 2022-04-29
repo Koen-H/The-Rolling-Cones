@@ -157,13 +157,13 @@ public class MyGame : Game
         this.AddChild(lineRight2);
         this.AddChild(lineTop);
 
-
+        
         */
 
         //Geyser geyserTest = new Geyser(2, new Vec2(220,900), "cyan_block.png",1,1,1);
         //AddChild(geyserTest);
 
-        Geyser geyserTest = new Geyser(2, new Vec2(220,900), "cyan_block.png",1,1,1);
+        Geyser geyserTest = new Geyser(2, new Vec2(720,970), "cyan_block.png",1,1,1);
         AddChild(geyserTest);
 
         OrbitalField orbitalFieldTest = new OrbitalField(0.025F,44,new Vec2(400,720));
@@ -172,7 +172,6 @@ public class MyGame : Game
         //AddChild(orbitalFieldTest2);
 
         //For now, Ball should be the last thing added to the scene/level
-        Line lineTop = new Line(new Vec2(200, 100), new Vec2(600, 100));
         PlayerCamera playerCamera = new PlayerCamera(0, 0, this.width, this.height);
         this.AddChild(playerCamera);
         PlayerBall ball = new PlayerBall(30, new Vec2(400, 500), new Vec2(0, 0.5F), new Vec2(0, 0));
@@ -334,6 +333,7 @@ public class MyGame : Game
     {
         this.targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;
     }
+
     private void LoadLevel(string fileName = "test.tmx")
     {
        // DestroyAll();
