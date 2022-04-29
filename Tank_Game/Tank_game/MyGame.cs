@@ -35,7 +35,7 @@ public class MyGame : Game
         Line lineRight2 = new Line(new Vec2(775, 550), new Vec2(600, 100));
         Line lineTop = new Line(new Vec2(200, 100), new Vec2(600, 100));*/
         
-        this.AddChild(lineBottom);
+        //this.AddChild(lineBottom);
         /*this.AddChild(lineLeft1);
         this.AddChild(lineLeft2);
         this.AddChild(lineRight1);
