@@ -39,13 +39,17 @@
     <Compile Include="Coolgrath\Geyser.cs" />
     <Compile Include="Coolgrath\OrbitalField.cs" />
     <Compile Include="Golgrath\Cameras\PlayerCamera.cs" />
-    <Compile Include="Golgrath\Objects\Ball.cs" />
-    <Compile Include="Golgrath\Objects\Cap.cs" />
-    <Compile Include="Golgrath\Objects\Circle.cs" />
-    <Compile Include="Golgrath\Objects\Line.cs" />
-    <Compile Include="Golgrath\Objects\Moveable.cs" />
-    <Compile Include="Golgrath\Objects\MyGameObject.cs" />
-    <Compile Include="Golgrath\Objects\PlayerBall.cs" />
+    <Compile Include="Golgrath\Objects\AnimationObjects\Circle.cs" />
+    <Compile Include="Golgrath\Objects\CanvasObjects\CanvasBall.cs" />
+    <Compile Include="Golgrath\Objects\CanvasObjects\CanvasCap.cs" />
+    <Compile Include="Golgrath\Objects\CanvasObjects\CanvasCircle.cs" />
+    <Compile Include="Golgrath\Objects\CanvasObjects\CanvasLine.cs" />
+    <Compile Include="Golgrath\Objects\Base\Moveable.cs" />
+    <Compile Include="Golgrath\Objects\Base\MyAnimationSprite.cs" />
+    <Compile Include="Golgrath\Objects\Base\MyCanvas.cs" />
+    <Compile Include="Golgrath\Objects\CanvasObjects\CanvasPlayerBall.cs" />
+    <Compile Include="Golgrath\Objects\CanvasObjects\CanvasRectangle.cs" />
+    <Compile Include="Golgrath\Objects\CanvasObjects\CanvasSquare.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="..\..\GXPEngine2022\GXPEngine\AddOns\Gizmos.cs">
       <Link>GXPEngine\AddOns\Gizmos.cs</Link>
@@ -170,6 +174,7 @@
     <Compile Include="PhysicsEngine\Colliders\CircleCollider.cs" />
     <Compile Include="PhysicsEngine\Colliders\Collider.cs" />
     <Compile Include="PhysicsEngine\Colliders\LineCollider.cs" />
+    <Compile Include="PhysicsEngine\Colliders\SquareCollider.cs" />
     <Compile Include="PhysicsEngine\CollisionInfo.cs" />
     <Compile Include="PhysicsEngine\MyCollisionManager.cs" />
     <Compile Include="PhysicsEngine\Vec2.cs" />

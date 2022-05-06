@@ -63,9 +63,9 @@ namespace GXPEngine.PhysicsEngine
                     this.firstTime = false;
                     if (collideWith.Owner is Moveable)
                     {
-                        if (collideWith.Owner is PlayerBall)
+                        if (collideWith.Owner is CanvasPlayerBall)
                         {
-                            PlayerBall move = (PlayerBall)collideWith.Owner;
+                            CanvasPlayerBall move = (CanvasPlayerBall)collideWith.Owner;
                             move.Step();
                         }
                     }

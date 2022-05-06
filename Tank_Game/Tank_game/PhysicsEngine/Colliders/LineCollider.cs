@@ -10,7 +10,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
     public class LineCollider : Collider
     {
 
-        public LineCollider(Line line) : base(line)
+        public LineCollider(CanvasLine line) : base(line)
         {
             
         }
@@ -18,10 +18,10 @@ namespace GXPEngine.PhysicsEngine.Colliders
         public override CollisionInfo Collision(Collider collideWith)
         {
 			CollisionInfo info = null;
-            if (collideWith is CircleCollider && collideWith.Owner is Ball)
+            if (collideWith is CircleCollider && collideWith.Owner is CanvasBall)
             {
-                Line line = (Line)this.Owner;
-                Ball ball = (Ball)collideWith.Owner;
+                CanvasLine line = (CanvasLine)this.Owner;
+                CanvasBall ball = (CanvasBall)collideWith.Owner;
                 Vec2 totalLine1 = line.End - line.Start;
                 Vec2 totalLine2 = line.Start - line.End;
                 Vec2 ballPosition = ball.Position;
@@ -85,7 +85,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
         {
             if (info != null)
             {
-                Ball ball = (Ball)info.other;
+                CanvasBall ball = (CanvasBall)info.other;
                 ball.Position = ball.OldPosition + ball.Velocity * info.timeOfImpact;
                 if (MyGame.collisionManager.FirstTime)
                 {

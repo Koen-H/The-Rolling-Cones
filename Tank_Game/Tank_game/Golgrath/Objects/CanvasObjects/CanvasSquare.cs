@@ -1,16 +1,22 @@
 ﻿using GXPEngine.PhysicsEngine.Colliders;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace GXPEngine.Golgrath.Objects
 {
-    public class Ball : Circle, Moveable
+    public class CanvasSquare : CanvasRectangle, Moveable
     {
         protected Vec2 oldPosition, gravity, velocity;
-        public Ball(int radius, Vec2 position, Vec2 gravity, Vec2 velocity): base(radius, position)
+        protected SquareCollider squareCollider;
+        public CanvasSquare(Vec2 position, Vec2 velocity, Vec2 gravity, int width, int height): base(position, width, height)
         {
-            this.radius = radius;
             this.velocity = velocity;
             this.gravity = gravity;
             this.oldPosition = position;
+            this.myCollider = new SquareCollider(this);
+            
         }
 
         public Vec2 OldPosition
@@ -18,18 +24,6 @@ namespace GXPEngine.Golgrath.Objects
             get
             {
                 return this.oldPosition;
-            }
-        }
-
-        public Vec2 Velocity
-        {
-            set
-            {
-                this.velocity = value;
-            }
-            get
-            {
-                return this.velocity;
             }
         }
 
@@ -45,6 +39,18 @@ namespace GXPEngine.Golgrath.Objects
             }
         }
 
+        public Vec2 Velocity
+        {
+            set
+            {
+                this.velocity = value;
+            }
+            get
+            {
+                return this.velocity;
+            }
+        }
+
         public void Update()
         {
             this.Step();
@@ -57,7 +63,6 @@ namespace GXPEngine.Golgrath.Objects
             this.Position += velocity;
 
             MyGame.collisionManager.CollideWith(this.myCollider);
-
         }
     }
 }

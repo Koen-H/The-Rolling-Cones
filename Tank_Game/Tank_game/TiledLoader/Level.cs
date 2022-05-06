@@ -55,7 +55,7 @@ namespace GXPEngine.TiledLoader
                             Vec2 pos2 = new Vec2(float.Parse(subs[i + 2], CultureInfo.InvariantCulture.NumberFormat), float.Parse(subs[i + 3], CultureInfo.InvariantCulture.NumberFormat)) + objPos;
                             Console.WriteLine(" pos1:" + pos1 + " pos2:" + pos2);
                             Console.WriteLine(coords + " and " + "i =" +i);
-                            Line line = new Line(pos1, pos2 );
+                            CanvasLine line = new CanvasLine(pos1, pos2 );
                             AddChild(line);
                         }
                     }

@@ -8,7 +8,7 @@ using GXPEngine;
 
 namespace GXPEngine.Coolgrath
 {
-    class OrbitalField : Circle
+    class OrbitalField : CanvasCircle
     {
         public float PullStrength {get;set;}
         public OrbitalField(float pPullStrength, int pRadius, Vec2 pPosition) : base(pRadius * 2 + 1, pPosition)
