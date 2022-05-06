@@ -18,7 +18,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
         public override CollisionInfo Collision(Collider collideWith)
         {
 			CollisionInfo info = null;
-            if (collideWith is CircleCollider && collideWith.Owner is CanvasBall)
+            if (collideWith.Owner is CanvasBall && collideWith.Owner is CanvasBall)
             {
                 CanvasLine line = (CanvasLine)this.Owner;
                 CanvasBall ball = (CanvasBall)collideWith.Owner;
@@ -85,13 +85,17 @@ namespace GXPEngine.PhysicsEngine.Colliders
         {
             if (info != null)
             {
-                CanvasBall ball = (CanvasBall)info.other;
-                ball.Position = ball.OldPosition + ball.Velocity * info.timeOfImpact;
-                if (MyGame.collisionManager.FirstTime)
+                if (info.other is Moveable && info.other is MyCanvas)
                 {
-                    Vec2 velocity = ball.Velocity;
-                    velocity.Reflect(info.normal, 0.7F);
-                    ball.Velocity = velocity;
+                    Moveable moveable = (Moveable)info.other;
+                    MyCanvas myCanvas = (MyCanvas)info.other;
+                    myCanvas.Position = moveable.OldPosition + moveable.Velocity * info.timeOfImpact;
+                    if (MyGame.collisionManager.FirstTime)
+                    {
+                        Vec2 velocity = moveable.Velocity;
+                        velocity.Reflect(info.normal, 0.7F);
+                        moveable.Velocity = velocity;
+                    }
                 }
             }
         }
