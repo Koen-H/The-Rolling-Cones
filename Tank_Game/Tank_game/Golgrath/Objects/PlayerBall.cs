@@ -21,7 +21,7 @@ namespace GXPEngine.Golgrath.Objects
             this.acceleration = 0.4F;
             this.maxSpeed = 5F;
             this.umbrellaSprite = new AnimationSprite("Umbrella.png", 1, 1, -1, false, false);
-            this.umbrellaGravity = gravity / 8;
+           // this.umbrellaGravity = gravity / 8;
             this.umbrellaSprite.alpha = 0.0F;
             this.umbrellaSprite.SetOrigin(this.umbrellaSprite.width / 2, this.umbrellaSprite.height / 2);
             this.AddChild(umbrellaSprite);
@@ -90,7 +90,9 @@ namespace GXPEngine.Golgrath.Objects
         public new void Step()
         {
             this.oldPosition = this.position;
-            this.velocity += MyGame.collisionManager.FirstTime == true ? (umbrella ? umbrellaGravity : gravity) : new Vec2(-gravity.x, -gravity.y);
+            ApplyGravity();
+            // this.velocity += MyGame.collisionManager.FirstTime == true ? (umbrella ? umbrellaGravity : gravity) : new Vec2(-gravity.x, -gravity.y);
+
             //new Vec2(-gravity.x, -gravity.y) I know i put this here, for a reason. KEEP THIS!
             if (MyGame.collisionManager.FirstTime == false)
             {
@@ -102,13 +104,20 @@ namespace GXPEngine.Golgrath.Objects
             OnGeyser();
             
         }
-
+        private void ApplyGravity()
+        {
+            velocity += gravity;
+            if (umbrella && velocity.Normalized().y < 0)
+            {
+                //Do umbrella stuff
+                Console.WriteLine("TEST");
+            }
+        }
         private void OnGeyser()
         {
             MyGame myGame = (MyGame)Game.main;
             foreach (Geyser geyser in myGame.geysers)
             {
-                Console.WriteLine("x: " + x + ", y:" + y);
                 if (HitTest(geyser))
                 {
                     Console.WriteLine("On Geyser!");
