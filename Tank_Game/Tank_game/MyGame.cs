@@ -18,7 +18,7 @@ public class MyGame : Game
     public Tank playerTank;*/
 
     public List<Geyser> geysers = new List<Geyser>();
-
+    public PlayerCamera playerCamera;
     public bool drawDebugLine;
     Canvas lineContainer = null;
     public static MyCollisionManager collisionManager;
@@ -27,6 +27,7 @@ public class MyGame : Game
 	{
         collisionManager = new MyCollisionManager();
 
+        playerCamera = new PlayerCamera(0, 0, this.width, this.height);
         //The very simple basic level we had at the start  
         /*Line lineBottom = new Line(new Vec2(200, 1000), new Vec2(600, 1000));
         Line lineLeft1 = new Line(new Vec2(200, 1000), new Vec2(25, 800));
@@ -50,7 +51,7 @@ public class MyGame : Game
         CanvasSquare square2 = new CanvasSquare(new Vec2(400, 500), new Vec2(0, 0), new Vec2(0, 0), 100, 100);
         AddChild(square2);
 
-        Geyser geyserTest = new Geyser(2, new Vec2(620,970), "cyan_block.png",1,1);
+        Geyser geyserTest = new Geyser(2, new Vec2(620,970), 1,1);
         AddChild(geyserTest);
 
         OrbitalField orbitalFieldTest = new OrbitalField(0.025F,44,new Vec2(400,720));
@@ -58,15 +59,20 @@ public class MyGame : Game
         //OrbitalField orbitalFieldTest2 = new OrbitalField(0.025F, 50, new Vec2(590, 720));
         //AddChild(orbitalFieldTest2);
 
+        QuestionShop questionShop = new QuestionShop(new Vec2(150,800), "QuestionShop.png",1,1);
+        AddChild(questionShop);
+
+
         //For now, Ball should be the last thing added to the scene/level
-        //PlayerCamera playerCamera = new PlayerCamera(0, 0, this.width, this.height);
-        //this.AddChild(playerCamera);
+       
+        
         Circle ballTest = new Circle(40, new Vec2(200, 100), "BallTest.png", 1, 1);
         this.AddChild(ballTest);
 
         CanvasPlayerBall ball = new CanvasPlayerBall(30, new Vec2(400, 500), new Vec2(0, 0.5F), new Vec2(0, 0));
         this.AddChild(ball);
-        //ball.SetPlayerCamera(playerCamera);
+        this.AddChild(playerCamera);
+        ball.SetPlayerCamera(playerCamera);
 
 
         /*lineContainer = new Canvas(width, height);
