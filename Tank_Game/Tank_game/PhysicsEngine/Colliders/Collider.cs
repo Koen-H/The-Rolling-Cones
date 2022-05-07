@@ -14,7 +14,15 @@ namespace GXPEngine.PhysicsEngine.Colliders
         /// Constructor for the Collider class, requires an owner to be attatched to.
         /// </summary>
         /// <param name="owner">MyGameObject, a custom variation of GameObject.</param>
-        public Collider(MyGameObject owner)
+        public Collider(MyCanvas owner)
+        {
+            this.owner = owner;
+        }
+        /// <summary>
+        /// Constructor for the Collider class, requires an owner to be attatched to.
+        /// </summary>
+        /// <param name="owner">MyAnimationSprite</param>
+        public Collider(MyAnimationSprite owner)
         {
             this.owner = owner;
         }

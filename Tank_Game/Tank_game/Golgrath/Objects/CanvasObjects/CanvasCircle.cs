@@ -6,10 +6,10 @@ using System.Text;
 
 namespace GXPEngine.Golgrath.Objects
 {
-    public class Circle : MyGameObject
+    public class CanvasCircle : MyCanvas
     {
         protected float radius;
-        public Circle(int radius, Vec2 position, int canvasWidth, int canvasHeight): base(position, canvasWidth, canvasHeight)
+        public CanvasCircle(int radius, Vec2 position, int canvasWidth, int canvasHeight): base(position, canvasWidth, canvasHeight)
         {
             this.radius = radius;
             this.SetOrigin(radius, radius);
@@ -18,7 +18,7 @@ namespace GXPEngine.Golgrath.Objects
             MyGame.collisionManager.AddCollider(this.myCollider);
         }
 
-        public Circle(int radius, Vec2 position) : base(position, radius * 2 + 1, radius * 2 + 1)
+        public CanvasCircle(int radius, Vec2 position) : base(position, radius * 2 + 1, radius * 2 + 1)
         {
             this.radius = radius;
             this.SetOrigin(radius, radius);

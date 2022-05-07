@@ -7,19 +7,20 @@ using GXPEngine.Coolgrath;
 
 namespace GXPEngine.Golgrath.Objects
 {
-    public class PlayerBall : Ball
+    public class CanvasPlayerBall : CanvasBall
     {
         private float drag, acceleration, maxSpeed;
         private bool umbrella;
         private AnimationSprite umbrellaSprite;
         private Vec2 umbrellaGravity;
         private PlayerCamera camera;
-        public PlayerBall(int radius, Vec2 position, Vec2 gravity, Vec2 velocity) : base(radius, position, gravity, velocity)
+        public CanvasPlayerBall(int radius, Vec2 position, Vec2 gravity, Vec2 velocity) : base(radius, position, gravity, velocity)
         {
             this.DrawRect(0, 200, 0);
             this.drag = 0.08F;
             this.acceleration = 0.4F;
             this.maxSpeed = 5F;
+            this.SetOrigin(this.radius, this.radius);
             this.umbrellaSprite = new AnimationSprite("Umbrella.png", 1, 1, -1, false, false);
            // this.umbrellaGravity = gravity / 8;
             this.umbrellaSprite.alpha = 0.0F;
@@ -31,6 +32,10 @@ namespace GXPEngine.Golgrath.Objects
         {
             this.HandleInput();
             this.Step();
+            Gizmos.DrawRectangle(this.x + _bounds.x, this.y + _bounds.y, 20, 20);
+            Gizmos.DrawRectangle(this.x + width + _bounds.x, this.y + _bounds.y, 20, 20);
+            Gizmos.DrawRectangle(this.x + _bounds.x, this.y + height + _bounds.y, 20, 20);
+            Gizmos.DrawRectangle(this.x + width + _bounds.x, this.y + height + _bounds.y, 20, 20);
             if (camera != null)
             {
                 this.camera.SetXY(this.position.x, this.position.y - 200);
