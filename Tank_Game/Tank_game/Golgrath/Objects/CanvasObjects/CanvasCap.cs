@@ -6,10 +6,10 @@ using System.Text;
 
 namespace GXPEngine.Golgrath.Objects
 {
-    public class Cap : Circle
+    public class CanvasCap : CanvasCircle
     {
 
-        public Cap(int radius, Vec2 position): base(radius, position, radius * 2 + 1, radius * 2 + 1)
+        public CanvasCap(int radius, Vec2 position): base(radius, position, radius * 2 + 1, radius * 2 + 1)
         {
             
         }

@@ -7,21 +7,22 @@ using GXPEngine.Coolgrath;
 
 namespace GXPEngine.Golgrath.Objects
 {
-    public class PlayerBall : Ball
+    public class CanvasPlayerBall : CanvasBall
     {
         private float drag, acceleration, maxSpeed;
         private bool umbrella;
         private AnimationSprite umbrellaSprite;
         private Vec2 umbrellaGravity;
         private PlayerCamera camera;
-        public PlayerBall(int radius, Vec2 position, Vec2 gravity, Vec2 velocity) : base(radius, position, gravity, velocity)
+        public CanvasPlayerBall(int radius, Vec2 position, Vec2 gravity, Vec2 velocity) : base(radius, position, gravity, velocity)
         {
             this.DrawRect(0, 200, 0);
             this.drag = 0.08F;
             this.acceleration = 0.4F;
             this.maxSpeed = 5F;
+            this.SetOrigin(this.radius, this.radius);
             this.umbrellaSprite = new AnimationSprite("Umbrella.png", 1, 1, -1, false, false);
-            this.umbrellaGravity = gravity / 8;
+           // this.umbrellaGravity = gravity / 8;
             this.umbrellaSprite.alpha = 0.0F;
             this.umbrellaSprite.SetOrigin(this.umbrellaSprite.width / 2, this.umbrellaSprite.height / 2);
             this.AddChild(umbrellaSprite);
@@ -31,6 +32,10 @@ namespace GXPEngine.Golgrath.Objects
         {
             this.HandleInput();
             this.Step();
+            Gizmos.DrawRectangle(this.x + _bounds.x, this.y + _bounds.y, 20, 20);
+            Gizmos.DrawRectangle(this.x + width + _bounds.x, this.y + _bounds.y, 20, 20);
+            Gizmos.DrawRectangle(this.x + _bounds.x, this.y + height + _bounds.y, 20, 20);
+            Gizmos.DrawRectangle(this.x + width + _bounds.x, this.y + height + _bounds.y, 20, 20);
             if (camera != null)
             {
                 this.camera.SetXY(this.position.x, this.position.y - 200);
@@ -90,7 +95,9 @@ namespace GXPEngine.Golgrath.Objects
         public new void Step()
         {
             this.oldPosition = this.position;
-            this.velocity += MyGame.collisionManager.FirstTime == true ? (umbrella ? umbrellaGravity : gravity) : new Vec2(-gravity.x, -gravity.y);
+            ApplyGravity();
+            // this.velocity += MyGame.collisionManager.FirstTime == true ? (umbrella ? umbrellaGravity : gravity) : new Vec2(-gravity.x, -gravity.y);
+
             //new Vec2(-gravity.x, -gravity.y) I know i put this here, for a reason. KEEP THIS!
             if (MyGame.collisionManager.FirstTime == false)
             {
@@ -100,16 +107,27 @@ namespace GXPEngine.Golgrath.Objects
             this.Position += velocity;
             MyGame.collisionManager.CollideWith(this.myCollider);
             OnGeyser();
+            
         }
-
+        private void ApplyGravity()
+        {
+            velocity += gravity;
+            if (umbrella && velocity.Normalized().y < 0)
+            {
+                //Do umbrella stuff
+                Console.WriteLine("TEST");
+            }
+        }
         private void OnGeyser()
         {
             MyGame myGame = (MyGame)Game.main;
             foreach (Geyser geyser in myGame.geysers)
-            if (HitTest(geyser))
             {
+                if (HitTest(geyser))
+                {
                     Console.WriteLine("On Geyser!");
                     velocity += Vec2.GetUnitVectorDeg(-90) * geyser.strength;
+                }
             }
         }
         public void SetPlayerCamera(PlayerCamera camera)

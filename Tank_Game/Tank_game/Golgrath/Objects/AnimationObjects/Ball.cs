@@ -5,7 +5,7 @@ namespace GXPEngine.Golgrath.Objects
     public class Ball : Circle, Moveable
     {
         protected Vec2 oldPosition, gravity, velocity;
-        public Ball(int radius, Vec2 position, Vec2 gravity, Vec2 velocity): base(radius, position)
+        public Ball(int radius, Vec2 position, Vec2 gravity, Vec2 velocity, string filename, int columns, int rows) : base(radius, position, filename, columns, rows)
         {
             this.radius = radius;
             this.velocity = velocity;
@@ -57,7 +57,6 @@ namespace GXPEngine.Golgrath.Objects
             this.Position += velocity;
 
             MyGame.collisionManager.CollideWith(this.myCollider);
-
         }
     }
 }

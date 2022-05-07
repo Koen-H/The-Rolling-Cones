@@ -10,9 +10,14 @@ namespace GXPEngine.PhysicsEngine.Colliders
 {
     public class CircleCollider : Collider
     {
-        public CircleCollider(Circle circle): base(circle)
+        public CircleCollider(CanvasCircle circle): base(circle)
         {
             
+        }
+
+        public CircleCollider(Circle circle) : base(circle)
+        {
+
         }
 
         //Handle Circle to Circle collision.
@@ -21,10 +26,10 @@ namespace GXPEngine.PhysicsEngine.Colliders
             CollisionInfo info = null;
             if (collideWith != this)
             {
-                if (collideWith.Owner is Ball && this.Owner is OrbitalField)
+                if (collideWith.Owner is CanvasBall && this.Owner is OrbitalField)
                 {
                     OrbitalField ownCircle = (OrbitalField)this.Owner;
-                    Ball incBall = (Ball)collideWith.Owner;
+                    CanvasBall incBall = (CanvasBall)collideWith.Owner;
                     Vec2 relative = incBall.Position - ownCircle.Position;
                     if (relative.Length() < ownCircle.Radius + incBall.Radius)
                     {
@@ -39,10 +44,10 @@ namespace GXPEngine.PhysicsEngine.Colliders
                     }
                     
                 }
-                else if (collideWith.Owner is Ball && this.Owner is Circle)
+                else if (collideWith.Owner is CanvasBall && this.Owner is CanvasCircle)
                 {
-                    Circle ownCircle = (Circle)this.Owner;
-                    Ball incBall = (Ball)collideWith.Owner;
+                    CanvasCircle ownCircle = (CanvasCircle)this.Owner;
+                    CanvasBall incBall = (CanvasBall)collideWith.Owner;
                     Vec2 relative = incBall.Position - ownCircle.Position;
                     if (relative.Length() < ownCircle.Radius + incBall.Radius)
                     {
@@ -72,6 +77,39 @@ namespace GXPEngine.PhysicsEngine.Colliders
                         }
                     }
                 }
+                /*else if (collideWith.Owner is CanvasBall && this.Owner is CanvasCircle)
+                {
+                    CanvasCircle ownCircle = (CanvasCircle)this.Owner;
+                    CanvasBall incBall = (CanvasBall)collideWith.Owner;
+                    Vec2 relative = incBall.Position - ownCircle.Position;
+                    if (relative.Length() < ownCircle.Radius + incBall.Radius)
+                    {
+                        Vec2 u = incBall.OldPosition - ownCircle.Position;
+                        float a = Mathf.Pow(incBall.Velocity.Length(), 2);
+                        float b = (u * 2).Dot(incBall.Velocity);
+                        float c = Mathf.Pow(u.Length(), 2.0F) - Mathf.Pow(ownCircle.Radius + incBall.Radius, 2.0F);
+                        float discrete = Mathf.Pow(b, 2) - (4 * a * c);
+                        if (c >= 0)
+                        {
+                            if (a > 0.1F && discrete >= 0)
+                            {
+                                float toi = (-b - Mathf.Sqrt(discrete)) / (a * 2);
+                                if (toi >= 0.0F && toi <= 1.0F)
+                                {
+                                    if (info != null && toi < info.timeOfImpact)
+                                        info = new CollisionInfo(u.Normalized(), incBall, toi);
+                                    else if (info == null)
+                                        info = new CollisionInfo(u.Normalized(), incBall, toi);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (b < 0)
+                                return new CollisionInfo(u.Normalized(), incBall, 0.0F);
+                        }
+                    }
+                }*/
             }
             return info;
         }
@@ -81,7 +119,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
         {
             if (info != null)
             {
-                Ball ball = (Ball)info.other;
+                CanvasBall ball = (CanvasBall)info.other;
                 ball.Position = ball.OldPosition + ball.Velocity * info.timeOfImpact;
                 if (MyGame.collisionManager.FirstTime)
                 {

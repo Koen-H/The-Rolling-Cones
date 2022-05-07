@@ -10,7 +10,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
     public class LineCollider : Collider
     {
 
-        public LineCollider(Line line) : base(line)
+        public LineCollider(CanvasLine line) : base(line)
         {
             
         }
@@ -18,10 +18,10 @@ namespace GXPEngine.PhysicsEngine.Colliders
         public override CollisionInfo Collision(Collider collideWith)
         {
 			CollisionInfo info = null;
-            if (collideWith is CircleCollider && collideWith.Owner is Ball)
+            if (collideWith.Owner is CanvasBall && collideWith.Owner is CanvasBall)
             {
-                Line line = (Line)this.Owner;
-                Ball ball = (Ball)collideWith.Owner;
+                CanvasLine line = (CanvasLine)this.Owner;
+                CanvasBall ball = (CanvasBall)collideWith.Owner;
                 Vec2 totalLine1 = line.End - line.Start;
                 Vec2 totalLine2 = line.Start - line.End;
                 Vec2 ballPosition = ball.Position;
@@ -85,13 +85,17 @@ namespace GXPEngine.PhysicsEngine.Colliders
         {
             if (info != null)
             {
-                Ball ball = (Ball)info.other;
-                ball.Position = ball.OldPosition + ball.Velocity * info.timeOfImpact;
-                if (MyGame.collisionManager.FirstTime)
+                if (info.other is Moveable && info.other is MyCanvas)
                 {
-                    Vec2 velocity = ball.Velocity;
-                    velocity.Reflect(info.normal, 0.7F);
-                    ball.Velocity = velocity;
+                    Moveable moveable = (Moveable)info.other;
+                    MyCanvas myCanvas = (MyCanvas)info.other;
+                    myCanvas.Position = moveable.OldPosition + moveable.Velocity * info.timeOfImpact;
+                    if (MyGame.collisionManager.FirstTime)
+                    {
+                        Vec2 velocity = moveable.Velocity;
+                        velocity.Reflect(info.normal, 0.7F);
+                        moveable.Velocity = velocity;
+                    }
                 }
             }
         }
