@@ -11,7 +11,6 @@ namespace GXPEngine.Golgrath.Objects
     {
         protected Vec2 start, end;
         protected uint color;
-        protected LineCollider lineCollider;
         protected CanvasCap cap1, cap2;
         protected bool render;
         public CanvasLine(Vec2 start, Vec2 end, uint pColor = 0xffffffff, bool render = true, bool disableStartCap = false, bool disableEndCap = false): base(new Vec2(0, 0), 3000, 3000)
@@ -19,13 +18,13 @@ namespace GXPEngine.Golgrath.Objects
             this.start = start;
             this.end = end;
             this.render = render;
-            this.lineCollider = new LineCollider(this);
-            if (disableStartCap)
+            this.myCollider = new LineCollider(this);
+            if (!disableStartCap)
             {
                 this.cap1 = new CanvasCap(0, start);
                 MyGame.collisionManager.AddCollider(this.cap1.MyCollider);
             }
-            if (disableEndCap)
+            if (!disableEndCap)
             {
                 this.cap2 = new CanvasCap(0, end);
                 MyGame.collisionManager.AddCollider(this.cap2.MyCollider);
@@ -35,7 +34,7 @@ namespace GXPEngine.Golgrath.Objects
             {
                 this.Line(start.x, start.y, end.x, end.y);
             }
-            MyGame.collisionManager.AddCollider(this.lineCollider);
+            MyGame.collisionManager.AddCollider(this.myCollider);
         }
         public Vec2 Start
         {
@@ -82,6 +81,22 @@ namespace GXPEngine.Golgrath.Objects
         {
             Vec2 length = this.start - this.end;
             return length.Length();
+        }
+
+        public CanvasCap StartCap
+        {
+            get
+            {
+                return this.cap1;
+            }
+        }
+
+        public CanvasCap EndCap
+        {
+            get
+            {
+                return this.cap2;
+            }
         }
 
         /*override protected void RenderSelf(GLContext glContext)

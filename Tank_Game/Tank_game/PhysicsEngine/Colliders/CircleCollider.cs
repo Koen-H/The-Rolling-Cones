@@ -120,12 +120,19 @@ namespace GXPEngine.PhysicsEngine.Colliders
             if (info != null)
             {
                 CanvasBall ball = (CanvasBall)info.other;
-                ball.Position = ball.OldPosition + ball.Velocity * info.timeOfImpact;
-                if (MyGame.collisionManager.FirstTime)
+                if (this.trigger)
                 {
-                    Vec2 velocity = ball.Velocity;
-                    velocity.Reflect(info.normal, 1.0F);
-                    ball.Velocity = velocity;
+                    ball.Trigger(this.Owner);
+                }
+                else
+                {
+                    ball.Position = ball.OldPosition + ball.Velocity * info.timeOfImpact;
+                    if (MyGame.collisionManager.FirstTime)
+                    {
+                        Vec2 velocity = ball.Velocity;
+                        velocity.Reflect(info.normal, 1.0F);
+                        ball.Velocity = velocity;
+                    }
                 }
             }
         }

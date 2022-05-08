@@ -9,6 +9,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
 {
     public abstract class Collider
     {
+        public bool trigger;
         protected GameObject owner;
         /// <summary>
         /// Constructor for the Collider class, requires an owner to be attatched to.
@@ -18,6 +19,11 @@ namespace GXPEngine.PhysicsEngine.Colliders
         {
             this.owner = owner;
         }
+        public Collider(MyCanvas owner, bool trigger)
+        {
+            this.owner = owner;
+            this.trigger = trigger;
+        }
         /// <summary>
         /// Constructor for the Collider class, requires an owner to be attatched to.
         /// </summary>
@@ -26,6 +32,11 @@ namespace GXPEngine.PhysicsEngine.Colliders
         {
             this.owner = owner;
         }
+        public Collider(MyAnimationSprite owner, bool trigger)
+        {
+            this.owner = owner;
+            this.trigger = trigger;
+        }
         /// <summary>
         /// Constructor for the Collider class, requires an owner to be attatched to.
         /// </summary>
@@ -33,6 +44,11 @@ namespace GXPEngine.PhysicsEngine.Colliders
         public Collider(GameObject owner)
         {
             this.owner = owner;
+        }
+        public Collider(GameObject owner, bool trigger)
+        {
+            this.owner = owner;
+            this.trigger = trigger;
         }
         /// <summary>
         /// Gets the collision info if a collision happens with the collider that is given.
