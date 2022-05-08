@@ -41,6 +41,7 @@
     <Compile Include="Golgrath\Cameras\PlayerCamera.cs" />
     <Compile Include="Golgrath\Objects\AnimationObjects\Ball.cs" />
     <Compile Include="Golgrath\Objects\AnimationObjects\Circle.cs" />
+    <Compile Include="Golgrath\Objects\AnimationObjects\Rectangle.cs" />
     <Compile Include="Golgrath\Objects\CanvasObjects\CanvasBall.cs" />
     <Compile Include="Golgrath\Objects\CanvasObjects\CanvasCap.cs" />
     <Compile Include="Golgrath\Objects\CanvasObjects\CanvasCircle.cs" />

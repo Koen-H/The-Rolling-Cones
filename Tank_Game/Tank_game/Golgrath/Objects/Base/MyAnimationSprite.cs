@@ -49,5 +49,10 @@ namespace GXPEngine.Golgrath.Objects
                 return this.myCollider;
             }
         }
+
+        public virtual void Trigger(GameObject other)
+        {
+
+        }
     }
 }

@@ -87,15 +87,23 @@ namespace GXPEngine.PhysicsEngine.Colliders
             {
                 if (info.other is Moveable && info.other is MyCanvas)
                 {
-                    Moveable moveable = (Moveable)info.other;
                     MyCanvas myCanvas = (MyCanvas)info.other;
-                    myCanvas.Position = moveable.OldPosition + moveable.Velocity * info.timeOfImpact;
-                    if (MyGame.collisionManager.FirstTime)
+                    if (this.trigger)
                     {
-                        Vec2 velocity = moveable.Velocity;
-                        velocity.Reflect(info.normal, 0.7F);
-                        moveable.Velocity = velocity;
+                        myCanvas.Trigger(this.owner);
                     }
+                    else
+                    {
+                        Moveable moveable = (Moveable)info.other;
+                        myCanvas.Position = moveable.OldPosition + moveable.Velocity * info.timeOfImpact;
+                        if (MyGame.collisionManager.FirstTime)
+                        {
+                            Vec2 velocity = moveable.Velocity;
+                            velocity.Reflect(info.normal, 0.7F);
+                            moveable.Velocity = velocity;
+                        }
+                    }
+                    
                 }
             }
         }
