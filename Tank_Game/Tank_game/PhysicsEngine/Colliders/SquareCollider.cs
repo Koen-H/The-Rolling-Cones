@@ -4,12 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Physics;
+using GXPEngine.Golgrath.Objects.AnimationObjects;
 
 namespace GXPEngine.PhysicsEngine.Colliders
 {
 	public class SquareCollider : Collider
 	{
 		public SquareCollider(CanvasRectangle rect) : base(rect)
+		{
+
+		}
+		public SquareCollider(Rectangle rect) : base(rect)
 		{
 
 		}
@@ -123,14 +128,21 @@ namespace GXPEngine.PhysicsEngine.Colliders
 			{
                 if (info.other is Moveable && info.other is MyCanvas)
                 {
-					Moveable moveable = (Moveable)info.other;
-					MyCanvas myGameObject = (MyCanvas)info.other;
-					myGameObject.Position = moveable.OldPosition + moveable.Velocity * info.timeOfImpact;
-					if (MyGame.collisionManager.FirstTime)
+					MyCanvas myCanvas = (MyCanvas)info.other;
+                    if (this.trigger)
+                    {
+						myCanvas.Trigger(this.Owner);
+                    }
+                    else
 					{
-						Vec2 velocity = moveable.Velocity;
-						velocity.Reflect(info.normal, 1.0F);
-						moveable.Velocity = velocity;
+						Moveable moveable = (Moveable)info.other;
+						myCanvas.Position = moveable.OldPosition + moveable.Velocity * info.timeOfImpact;
+						if (MyGame.collisionManager.FirstTime)
+						{
+							Vec2 velocity = moveable.Velocity;
+							velocity.Reflect(info.normal, 1.0F);
+							moveable.Velocity = velocity;
+						}
 					}
 				}
 			}

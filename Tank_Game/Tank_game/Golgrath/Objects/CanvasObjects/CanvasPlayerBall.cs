@@ -30,12 +30,11 @@ namespace GXPEngine.Golgrath.Objects
 
         public new void Update()
         {
-            this.HandleInput();
             this.Step();
-            Gizmos.DrawRectangle(this.x + _bounds.x, this.y + _bounds.y, 20, 20);
+            /*Gizmos.DrawRectangle(this.x + _bounds.x, this.y + _bounds.y, 20, 20);
             Gizmos.DrawRectangle(this.x + width + _bounds.x, this.y + _bounds.y, 20, 20);
             Gizmos.DrawRectangle(this.x + _bounds.x, this.y + height + _bounds.y, 20, 20);
-            Gizmos.DrawRectangle(this.x + width + _bounds.x, this.y + height + _bounds.y, 20, 20);
+            Gizmos.DrawRectangle(this.x + width + _bounds.x, this.y + height + _bounds.y, 20, 20);*/
             if (camera != null)
             {
                 this.camera.SetXY(this.position.x, this.position.y - 200);
@@ -95,6 +94,10 @@ namespace GXPEngine.Golgrath.Objects
 
         public new void Step()
         {
+            if (MyGame.collisionManager.FirstTime)
+            {
+                this.HandleInput();
+            }
             this.oldPosition = this.position;
             ApplyGravity();
             // this.velocity += MyGame.collisionManager.FirstTime == true ? (umbrella ? umbrellaGravity : gravity) : new Vec2(-gravity.x, -gravity.y);
@@ -150,7 +153,7 @@ namespace GXPEngine.Golgrath.Objects
         }
         private void OnGeyser()
         {
-            MyGame myGame = (MyGame)Game.main;
+            /*MyGame myGame = (MyGame)Game.main;
             foreach (Geyser geyser in myGame.geysers)
             {
                 if (HitTest(geyser))
@@ -158,7 +161,7 @@ namespace GXPEngine.Golgrath.Objects
                     Console.WriteLine("On Geyser!");
                     velocity += Vec2.GetUnitVectorDeg(-90) * geyser.strength;
                 }
-            }
+            }*/
         }
         public void SetPlayerCamera(PlayerCamera camera)
         {
@@ -170,6 +173,22 @@ namespace GXPEngine.Golgrath.Objects
             return Mathf.Sin(Mathf.PI * 4 * t) * (1-t);
         }
 
+        public override void Trigger(GameObject other)
+        {
+            Console.WriteLine("Ok");
+            if (other is CanvasLine)
+            {
+                Console.WriteLine("Hey2");
+                CanvasLine geyser = (CanvasLine)other;
+                //velocity += Vec2.GetUnitVectorDeg(-90) * 2;
+            }
+            if (other is CanvasCap)
+            {
+                Console.WriteLine("Hey1");
+                CanvasCap geyser = (CanvasCap)other;
+                //velocity += Vec2.GetUnitVectorDeg(-90) * 2;
+            }
+        }
     }
 
 

@@ -45,13 +45,13 @@ public class MyGame : Game
 
         //Geyser geyserTest = new Geyser(2, new Vec2(220,900), "cyan_block.png",1,1,1);
         //AddChild(geyserTest);
-        CanvasSquare square1 = new CanvasSquare(new Vec2(400, 350), new Vec2(0, 4), new Vec2(0, 0), 50, 50);
-        AddChild(square1);
+        //CanvasSquare square1 = new CanvasSquare(new Vec2(400, 350), new Vec2(0, 4), new Vec2(0, 0), 50, 50);
+        //AddChild(square1);
 
-        CanvasSquare square2 = new CanvasSquare(new Vec2(400, 500), new Vec2(0, 0), new Vec2(0, 0), 100, 100);
-        AddChild(square2);
+        //CanvasSquare square2 = new CanvasSquare(new Vec2(400, 500), new Vec2(0, 0), new Vec2(0, 0), 100, 100);
+        //AddChild(square2);
 
-        Geyser geyserTest = new Geyser(2, new Vec2(620,970), 1,1);
+        Geyser geyserTest = new Geyser(2, new Vec2(650,970), "cyan_block.png", 64, 128, 1, 1);
         AddChild(geyserTest);
 
         OrbitalField orbitalFieldTest = new OrbitalField(0.025F,44,new Vec2(400,720));

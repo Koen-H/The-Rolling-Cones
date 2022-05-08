@@ -47,7 +47,7 @@ namespace GXPEngine.Coolgrath
 
                         Console.WriteLine("Geyser sellected and placed!");
                         Vec2 objectPos = new Vec2(questionShopObject.Position.x + (questionShopObject.width/2), questionShopObject.Position.y + (questionShopObject.height / 2));
-                        myGame.AddChild(new Geyser(10, objectPos, 1,1));
+                        myGame.AddChild(new Geyser(10, objectPos, "cyan_block.png", 1,1));
                         RemoveCoins(10);
                         KillShop();
                         //} else {  YOU ARE BROKE LOL 

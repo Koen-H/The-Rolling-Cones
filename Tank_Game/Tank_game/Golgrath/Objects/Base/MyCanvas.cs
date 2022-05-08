@@ -16,7 +16,7 @@ namespace GXPEngine.Golgrath.Objects
         /// <param name="position">Vec2, a point in a 2 dimensional space.</param>
         /// <param name="canvasWidth">Canvas width</param>
         /// <param name="canvasHeight">Canvas height</param>
-        public MyCanvas(Vec2 position, int canvasWidth, int canvasHeight): base(canvasWidth, canvasHeight, false)
+        public MyCanvas(Vec2 position, int canvasWidth, int canvasHeight): base(canvasWidth, canvasHeight, true)
         {
             this.Position = position;
         }
@@ -41,6 +41,11 @@ namespace GXPEngine.Golgrath.Objects
             {
                 return this.myCollider;
             }
+        }
+
+        public virtual void Trigger(GameObject other)
+        {
+
         }
     }
 }
