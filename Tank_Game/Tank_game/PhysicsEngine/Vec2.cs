@@ -44,7 +44,7 @@ public struct Vec2
 		return vector;
 	}
 
-	public void Reflect(Vec2 angleBounce, float bounciness)
+	public void Reflect(Vec2 angleBounce, float bounciness = 1)
 	{
 		this = this - (1 + bounciness) * this.Dot(angleBounce) * angleBounce;
 	}

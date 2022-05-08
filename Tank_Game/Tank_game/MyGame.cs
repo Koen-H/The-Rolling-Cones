@@ -18,7 +18,7 @@ public class MyGame : Game
     public Tank playerTank;*/
 
     public List<Geyser> geysers = new List<Geyser>();
-
+    public PlayerCamera playerCamera;
     public bool drawDebugLine;
     Canvas lineContainer = null;
     public static MyCollisionManager collisionManager;
@@ -27,6 +27,7 @@ public class MyGame : Game
 	{
         collisionManager = new MyCollisionManager();
 
+        playerCamera = new PlayerCamera(0, 0, this.width, this.height);
         //The very simple basic level we had at the start  
         /*Line lineBottom = new Line(new Vec2(200, 1000), new Vec2(600, 1000));
         Line lineLeft1 = new Line(new Vec2(200, 1000), new Vec2(25, 800));
@@ -58,15 +59,20 @@ public class MyGame : Game
         //OrbitalField orbitalFieldTest2 = new OrbitalField(0.025F, 50, new Vec2(590, 720));
         //AddChild(orbitalFieldTest2);
 
+        QuestionShop questionShop = new QuestionShop(new Vec2(150,800), "QuestionShop.png",1,1);
+        AddChild(questionShop);
+
+
         //For now, Ball should be the last thing added to the scene/level
-        //PlayerCamera playerCamera = new PlayerCamera(0, 0, this.width, this.height);
-        //this.AddChild(playerCamera);
+       
+        
         Circle ballTest = new Circle(40, new Vec2(200, 100), "BallTest.png", 1, 1);
         this.AddChild(ballTest);
 
         CanvasPlayerBall ball = new CanvasPlayerBall(30, new Vec2(400, 500), new Vec2(0, 0.5F), new Vec2(0, 0));
         this.AddChild(ball);
-        //ball.SetPlayerCamera(playerCamera);
+        this.AddChild(playerCamera);
+        ball.SetPlayerCamera(playerCamera);
 
 
         /*lineContainer = new Canvas(width, height);
@@ -121,89 +127,6 @@ public class MyGame : Game
         this.HandleInput();
         targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;//Lower the framerate.
     }
-
-    /*public int GetNumberOfTanks()
-    {
-        return tanks.Count;
-    }
-    public Tank GetTank(int index)
-    {
-        if (index >= 0 && index < tanks.Count)
-        {
-            return tanks[index];
-        }
-        return null;
-    }
-    public void RemoveTank(Tank tank)
-    {
-        tanks.Remove(tank);//Remove the tank from the list
-        tank.Destroy();//And the game.
-    }*/
-
-    /*void AddLine(Vec2 start, Vec2 end, Boolean dualSided = true)//Add a line with caps
-    {
-        LineSegment line = new LineSegment(start, end, 0xff00ff00, 4);
-        Caps startCap = new Caps(start);
-        Caps endCap = new Caps(end);
-        caps.Add(startCap);
-        caps.Add(endCap);
-        line.AddChild(startCap);
-        line.AddChild(endCap);
-        AddChild(line);
-        lines.Add(line);
-        if (dualSided)//If true, there should be a second line, but with the opposite normal. 
-        {
-            LineSegment line2 = new LineSegment(end, start, 0xff00ff00, 4);
-            AddChild(line2);
-            lines.Add(line2);
-            //This doesn't need any caps as they share the same coordinates as the one above.
-        }
-    }*/
-    /*public int GetNumberOfLines()
-    {
-        return lines.Count;
-    }*/
-    /*public LineSegment GetLine(int index)
-    {
-        if (index >= 0 && index < lines.Count)
-        {
-            return lines[index];
-        }
-        return null;
-    }
-    public int GetNumberOfCaps()
-    {
-        return caps.Count;
-    }
-    public Caps GetCap(int index)
-    {
-        if (index >= 0 && index < caps.Count)
-        {
-            return caps[index];
-        }
-        return null;
-    }*/
-
-    /*void AddAccelerationField(int radius, Vec2 position)
-    {
-        AccelerationField accelerationField = new AccelerationField(radius,position);
-        accelerationFields.Add(accelerationField);
-        AddChild(accelerationField);
-    }
-    public int GetNumberOfAccelerationFields()
-    {
-        return accelerationFields.Count;
-    }
-    public AccelerationField GetAccelerationField(int index)
-    {
-
-        if (index >= 0 && index < accelerationFields.Count)
-        {
-            return accelerationFields[index];
-        }
-        return null;
-    }*/
-
 
     public void DrawLine(Vec2 start, Vec2 end)
     {

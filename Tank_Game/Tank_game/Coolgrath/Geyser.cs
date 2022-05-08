@@ -11,7 +11,7 @@ namespace GXPEngine.Coolgrath
     {
         public float strength { get; set; }
 
-        public Geyser(float _strength, Vec2 position, string filename, int cols, int rows) : base(position, filename, cols, rows)
+        public Geyser(float _strength, Vec2 position, string filename = "cyan_block.png", int cols, int rows, int frames = -1) : base(filename, cols, rows, frames)
         {
             strength = _strength;
             MyGame myGame = (MyGame)Game.main;
