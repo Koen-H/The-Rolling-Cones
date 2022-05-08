@@ -84,6 +84,7 @@ namespace GXPEngine.Golgrath.Objects
             //Rotate the sprite based on the direction of the velocity.
             if (velocity.Normalized().x < 0) rotation -= velocity.Length();
             else rotation += velocity.Length();
+            if (rotation >= 360 || rotation <= -360) rotation = 0;
         }
         private void DrawRect(byte red, byte green, byte blue)
         {
@@ -111,11 +112,28 @@ namespace GXPEngine.Golgrath.Objects
         }
         private void ApplyGravity()
         {
-            velocity += gravity;
-            if (umbrella && velocity.Normalized().y < 0)
+            
+            if (umbrella && velocity.Normalized().y > 0)
             {
                 //Do umbrella stuff
-                Console.WriteLine("TEST");
+                float oldRotation = rotation;
+                rotation = oldRotation * -0.90f;
+
+                //rotation = SinDamp(rotation);
+                //rotation = 0;//This could be improved. to make it slowly go back to 0
+
+                
+                velocity += new Vec2(0, 0.2F);//Gravity, but less
+                //Console.WriteLine(rotation);
+                if (velocity.Length() > 7.5f)
+                {
+                  velocity = velocity.Normalized() * 7.5f;
+                }
+               
+            }
+            else
+            {
+                velocity += gravity;
             }
         }
         private void OnGeyser()
@@ -134,5 +152,13 @@ namespace GXPEngine.Golgrath.Objects
         {
             this.camera = camera;
         }
+
+        float SinDamp(float t)
+        {
+            return Mathf.Sin(Mathf.PI * 4 * t) * (1-t);
+        }
+
     }
+
+
 }
