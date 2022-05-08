@@ -116,9 +116,21 @@ namespace GXPEngine.Golgrath.Objects
             if (umbrella && velocity.Normalized().y > 0)
             {
                 //Do umbrella stuff
-                float oldRotation = rotation;
-                rotation = oldRotation * -0.90f;
+                //float oldRotation = rotation;
+                //rotation = oldRotation * -0.99f;
 
+                float oldRotation = rotation * 0.90f;
+
+               // velocity = delta * _speed;
+                rotation *= 0.1f;
+                rotation += oldRotation; // now it's 0.01* desired + 0.99 * old
+                if(rotation <= 10 && rotation >= -10)
+                {
+                    rotation = 0;
+                }
+
+
+                Console.WriteLine(rotation);
                 //rotation = SinDamp(rotation);
                 //rotation = 0;//This could be improved. to make it slowly go back to 0
 
