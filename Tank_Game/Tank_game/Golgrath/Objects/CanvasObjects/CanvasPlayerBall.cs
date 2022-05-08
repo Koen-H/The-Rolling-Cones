@@ -99,8 +99,8 @@ namespace GXPEngine.Golgrath.Objects
                 this.HandleInput();
             }
             this.oldPosition = this.position;
-            ApplyGravity();
-            // this.velocity += MyGame.collisionManager.FirstTime == true ? (umbrella ? umbrellaGravity : gravity) : new Vec2(-gravity.x, -gravity.y);
+            
+            //this.velocity += MyGame.collisionManager.FirstTime == true ? (umbrella ? umbrellaGravity : gravity) : new Vec2(-gravity.x, -gravity.y);
 
             //new Vec2(-gravity.x, -gravity.y) I know i put this here, for a reason. KEEP THIS!
             if (MyGame.collisionManager.FirstTime == false)
@@ -108,6 +108,7 @@ namespace GXPEngine.Golgrath.Objects
                 this.umbrella = false;
                 this.umbrellaSprite.alpha = 0.0F;
             }
+            ApplyGravity();
             this.Position += velocity;
             MyGame.collisionManager.CollideWith(this.myCollider);
             OnGeyser();
@@ -119,12 +120,8 @@ namespace GXPEngine.Golgrath.Objects
             if (umbrella && velocity.Normalized().y > 0)
             {
                 //Do umbrella stuff
-                //float oldRotation = rotation;
-                //rotation = oldRotation * -0.99f;
-
                 float oldRotation = rotation * 0.90f;
 
-               // velocity = delta * _speed;
                 rotation *= 0.1f;
                 rotation += oldRotation; // now it's 0.01* desired + 0.99 * old
                 if(rotation <= 10 && rotation >= -10)
@@ -132,11 +129,8 @@ namespace GXPEngine.Golgrath.Objects
                     rotation = 0;
                 }
 
-
                 Console.WriteLine(rotation);
                 //rotation = SinDamp(rotation);
-                //rotation = 0;//This could be improved. to make it slowly go back to 0
-
                 
                 velocity += new Vec2(0, 0.2F);//Gravity, but less
                 //Console.WriteLine(rotation);
@@ -148,7 +142,7 @@ namespace GXPEngine.Golgrath.Objects
             }
             else
             {
-                velocity += gravity;
+                velocity += MyGame.collisionManager.FirstTime == true ? gravity : new Vec2(-gravity.x, -gravity.y);
             }
         }
         private void OnGeyser()
