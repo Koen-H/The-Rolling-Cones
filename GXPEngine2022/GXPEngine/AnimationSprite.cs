@@ -85,7 +85,7 @@ namespace GXPEngine
 		//------------------------------------------------------------------------------------------------------------------------
 		//														initializeAnimFrames()
 		//------------------------------------------------------------------------------------------------------------------------
-		protected void initializeAnimFrames(int cols, int rows, int frames=-1) 
+		public void initializeAnimFrames(int cols, int rows, int frames=-1) 
 		{
 			if (frames < 0) frames = rows * cols;
 			if (frames > rows * cols) frames = rows * cols;

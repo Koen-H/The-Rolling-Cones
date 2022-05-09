@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="300" height="300" tilewidth="50" tileheight="50" infinite="0" nextlayerid="15" nextobjectid="55">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="300" height="300" tilewidth="50" tileheight="50" infinite="0" nextlayerid="15" nextobjectid="63">
  <tileset firstgid="1" name="testtilesheet" tilewidth="50" tileheight="50" tilecount="300" columns="20">
   <image source="testtilesheet.png" width="1000" height="750"/>
  </tileset>
@@ -19,6 +19,30 @@
   <object id="51" x="2000" y="2000">
    <polyline points="0,0 500,-100 750,-200 750,-500"/>
   </object>
+  <object id="55" x="140" y="92">
+   <polyline points="0,0 350,96"/>
+  </object>
+  <object id="56" x="1138" y="204">
+   <polyline points="0,0 -828,170"/>
+  </object>
+  <object id="57" x="44" y="472">
+   <polyline points="0,0 450,78"/>
+  </object>
+  <object id="58" x="928" y="640">
+   <polyline points="0,0 -522,2"/>
+  </object>
+  <object id="59" x="1220" y="592">
+   <polyline points="0,0 -808,552"/>
+  </object>
+  <object id="60" x="108" y="1152">
+   <polyline points="0,0 316,198"/>
+  </object>
+  <object id="61" x="670" y="1400">
+   <polyline points="0,0 -398,178"/>
+  </object>
+  <object id="62" x="1226.67" y="28">
+   <polyline points="0,0 -185.333,94.6667"/>
+  </object>
  </objectgroup>
  <objectgroup id="8" name="SnowLines"/>
  <objectgroup id="9" name="InteractableEnvironments">
@@ -29,7 +53,7 @@
   <object id="50" x="2150" y="2050" width="350" height="350"/>
  </objectgroup>
  <objectgroup id="14" name="PreDefinedObjects">
-  <object id="52" name="Player" x="1098" y="2306"/>
+  <object id="52" name="Player" x="202" y="68"/>
   <object id="53" name="Geyser" x="1496" y="2330"/>
   <object id="54" name="MagneticField" x="488" y="2198"/>
  </objectgroup>

@@ -82,7 +82,7 @@ namespace GXPEngine.PhysicsEngine
             if (other != null && info != null)
             {
                 other.Resolve(info);
-                if (info.timeOfImpact <= 0.00001 && firstTime)
+                if (info.timeOfImpact <= 0.01 && firstTime) // was 0.00001
                 {
                     this.firstTime = false;
                     if (collideWith.Owner is Moveable)

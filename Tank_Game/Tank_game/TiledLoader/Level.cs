@@ -63,7 +63,7 @@ namespace GXPEngine.TiledLoader
                         if (obj.polyline != null)
                         {
                             string data = obj.polyline.points;
-                            Console.WriteLine("Found a polyline: " + data);
+                            Console.WriteLine("Found a polyline (" + obj.ID +"): " + data);
                             string[] subs = data.Split(' ', ',');
                             Vec2 objPos = new Vec2(obj.X, obj.Y); //Each point is relative of the parent, therefore it must be applied to each point to get the gamespace coordinates.
                             int coords = subs.Length;
@@ -78,7 +78,7 @@ namespace GXPEngine.TiledLoader
                     }
                 }
 
-                else if (group.Name.Equals("InteractableEnvironments"))
+                if (group.Name.Equals("InteractableEnvironments"))
                 {
                     foreach (TiledObject obj in group.Objects)
                     {
