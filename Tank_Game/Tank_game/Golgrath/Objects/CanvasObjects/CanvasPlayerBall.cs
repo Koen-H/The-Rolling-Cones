@@ -203,6 +203,24 @@ namespace GXPEngine.Golgrath.Objects
             {
                 velocity += Vec2.GetUnitVectorDeg(-90) * 2;
             }
+            if(other is OrbitalField)
+            {
+                Console.WriteLine("TRIGGER WITH ORBITALFIELD");
+                OrbitalField ownCircle = (OrbitalField)other;
+                CanvasBall incBall = this;
+                Vec2 relative = incBall.Position - ownCircle.Position;
+                if (relative.Length() < ownCircle.Radius + incBall.Radius)
+                {
+                    float gravity = incBall.Gravity.Length();
+                    Vec2 pullDirection = ownCircle.Position - incBall.Position; //Draws a line from the bullet position to the center of the acceleration field.
+                    float oldLength = incBall.Velocity.Length();//Gets the old lenght (speed)
+                    incBall.Velocity = incBall.Velocity + pullDirection * ownCircle.PullStrength;//Set the velocity to the direction of the center of the acceleration field based on the pullstrength.
+                    incBall.Velocity = incBall.Velocity.Normalized();//Set speed to 1
+                                                                     //  incBall.Velocity = (incBall.Velocity * (float)((oldLength + gravity) * 1.09));//Set speed back to original.
+                    incBall.Velocity = incBall.Velocity * (oldLength + gravity);
+                    //incBall.Gravity = new Vec2(0, 0);
+                }
+            }
         }
     }
 
