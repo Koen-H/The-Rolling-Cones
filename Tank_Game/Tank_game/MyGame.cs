@@ -51,7 +51,7 @@ public class MyGame : Game
         //CanvasSquare square2 = new CanvasSquare(new Vec2(400, 500), new Vec2(0, 0), new Vec2(0, 0), 100, 100);
         //AddChild(square2);
 
-        Geyser geyserTest = new Geyser(2, new Vec2(650,970), "cyan_block.png", 64, 128, 1, 1);
+        Geyser geyserTest = new Geyser(2, new Vec2(650,900), "cyan_block.png", 64, 128, 1, 1);
         AddChild(geyserTest);
 
         OrbitalField orbitalFieldTest = new OrbitalField(0.025F,44,new Vec2(400,720));
@@ -71,8 +71,8 @@ public class MyGame : Game
 
         CanvasPlayerBall ball = new CanvasPlayerBall(30, new Vec2(400, -500), new Vec2(0, 0.5F), new Vec2(0, 0));
         this.AddChild(ball);
-        this.AddChild(playerCamera);
-        ball.SetPlayerCamera(playerCamera);
+        //this.AddChild(playerCamera);
+        //ball.SetPlayerCamera(playerCamera);
 
 
         /*lineContainer = new Canvas(width, height);

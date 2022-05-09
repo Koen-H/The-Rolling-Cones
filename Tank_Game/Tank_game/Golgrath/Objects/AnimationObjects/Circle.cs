@@ -15,7 +15,7 @@ namespace GXPEngine.Golgrath.Objects
             this.width = radius;
             this.height = radius;
             this.SetOrigin(radius, radius);
-            this.myCollider = new CircleCollider(this);
+            this.myCollider = new CircleCollider(this, this.position, this.radius);
             MyGame.collisionManager.AddCollider(this.myCollider);
         }
 

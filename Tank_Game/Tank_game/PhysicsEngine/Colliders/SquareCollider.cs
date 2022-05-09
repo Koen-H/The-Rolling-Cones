@@ -10,6 +10,8 @@ namespace GXPEngine.PhysicsEngine.Colliders
 {
 	public class SquareCollider : Collider
 	{
+		protected Vec2 oldPosition;
+		protected float width, height;
 		public SquareCollider(CanvasRectangle rect) : base(rect)
 		{
 
@@ -19,42 +21,76 @@ namespace GXPEngine.PhysicsEngine.Colliders
 
 		}
 
+		public Vec2 OldPosition
+        {
+            get
+            {
+				return this.oldPosition;
+            }
+            set
+            {
+				this.oldPosition = value;
+            }
+        }
+
+		public float Width
+        {
+            get
+            {
+				return this.width;
+            }
+            set
+            {
+				this.width = value;
+            }
+        }
+
+		public float Height
+        {
+            get
+            {
+				return this.height;
+            }
+            set
+            {
+				this.height = value;
+            }
+        }
+
 		//Handle Circle to Circle collision.
 		public override CollisionInfo Collision(Collider collideWith)
 		{
 			CollisionInfo info = null;
 			if (collideWith != this)
 			{
-				if (collideWith.Owner is CanvasSquare && this.Owner is CanvasRectangle)
+				if (collideWith.Owner is CanvasSquare)
 				{
-					CanvasRectangle rectMe = (CanvasRectangle)this.Owner;
-					CanvasSquare rectOt = (CanvasSquare)collideWith.Owner;
+					SquareCollider rectOt = (SquareCollider)collideWith;
+					Vec2 tlcMe = new Vec2(this.Position.x, this.Position.y);
+					Vec2 trcMe = new Vec2(this.Position.x + this.width, this.Position.y);
+					Vec2 blcMe = new Vec2(this.Position.x, this.Position.y + this.height);
+					Vec2 brcMe = new Vec2(this.Position.x + this.width, this.Position.y + this.height);
 
-					Vec2 tlcMe = new Vec2(rectMe.x, rectMe.y);
-					Vec2 trcMe = new Vec2(rectMe.x + rectMe.width, rectMe.y);
-					Vec2 blcMe = new Vec2(rectMe.x, rectMe.y + rectMe.height);
-					Vec2 brcMe = new Vec2(rectMe.x + rectMe.width, rectMe.y + rectMe.height);
-
-					Vec2 tlcOt = new Vec2(rectOt.x, rectOt.y);
-					Vec2 trcOt = new Vec2(rectOt.x + rectOt.width, rectOt.y);
-					Vec2 blcOt = new Vec2(rectOt.x, rectOt.y + rectOt.height);
-					Vec2 brcOt = new Vec2(rectOt.x + rectOt.width, rectOt.y + rectOt.height);
+					Vec2 tlcOt = new Vec2(rectOt.Position.x, rectOt.Position.y);
+					Vec2 trcOt = new Vec2(rectOt.Position.x + rectOt.width, rectOt.Position.y);
+					Vec2 blcOt = new Vec2(rectOt.Position.x, rectOt.Position.y + rectOt.height);
+					Vec2 brcOt = new Vec2(rectOt.Position.x + rectOt.width, rectOt.Position.y + rectOt.height);
 					//Collision Right
-					if (((trcOt.x >= tlcMe.x && trcOt.x <= trcMe.x) && (brcOt.x >= blcMe.x && brcOt.x <= brcMe.x)) && this.SpecificYCalculation(rectOt.width, rectMe.width, trcOt, brcOt, tlcMe, blcMe))
+					if (((trcOt.x >= tlcMe.x && trcOt.x <= trcMe.x) && (brcOt.x >= blcMe.x && brcOt.x <= brcMe.x)) && this.SpecificYCalculation(rectOt.Width, this.Width, trcOt, brcOt, tlcMe, blcMe))
 					{
-						float toi = this.CalculateTimeOfImpact("Right", rectMe, rectOt);
+						float toi = this.CalculateTimeOfImpact("Right", this, rectOt);
 						//Console.WriteLine("TOI Right = " + toi);
 						//Console.WriteLine("Right collision");
 						if (toi >= 0.0F && toi <= 1.0F)
 						{
-							info = new CollisionInfo(new Vec2(-1.0F, 0), rectOt, toi);
+							info = new CollisionInfo(new Vec2(-1.0F, 0), rectOt.Owner, toi);
 						}
 
 					}
 					//Collision Left
-					if (((tlcOt.x <= trcMe.x && tlcOt.x >= tlcMe.x) && (blcOt.x <= brcMe.x && blcOt.x >= blcMe.x)) && this.SpecificYCalculation(rectOt.width, rectMe.width, trcOt, brcOt, tlcMe, blcMe))
+					if (((tlcOt.x <= trcMe.x && tlcOt.x >= tlcMe.x) && (blcOt.x <= brcMe.x && blcOt.x >= blcMe.x)) && this.SpecificYCalculation(rectOt.Width, this.Width, trcOt, brcOt, tlcMe, blcMe))
 					{
-						float toi = this.CalculateTimeOfImpact("Left", rectMe, rectOt);
+						float toi = this.CalculateTimeOfImpact("Left", this, rectOt);
 						//Console.WriteLine("TOI Left = " + toi);
 						//Console.WriteLine("Left collision");
 						if (toi >= 0.0F && toi <= 1.0F)
@@ -64,19 +100,19 @@ namespace GXPEngine.PhysicsEngine.Colliders
 								float otherToI = info.timeOfImpact;
 								if (toi < otherToI)
 								{
-									info = new CollisionInfo(new Vec2(1.0F, 0), rectOt, toi);
+									info = new CollisionInfo(new Vec2(1.0F, 0), rectOt.Owner, toi);
 								}
 							}
 							else
 							{
-								info = new CollisionInfo(new Vec2(1.0F, 0), rectOt, toi);
+								info = new CollisionInfo(new Vec2(1.0F, 0), rectOt.Owner, toi);
 							}
 						}
 					}
 					//Collision Top
-					if (((tlcOt.y <= blcMe.y && tlcOt.y >= tlcMe.y) && (trcOt.y <= brcMe.y && trcOt.y >= trcMe.y)) && this.SpecificXCalculation(rectOt.height, rectMe.height, trcOt, tlcOt, brcMe, blcMe))
+					if (((tlcOt.y <= blcMe.y && tlcOt.y >= tlcMe.y) && (trcOt.y <= brcMe.y && trcOt.y >= trcMe.y)) && this.SpecificXCalculation(rectOt.Height, this.Height, trcOt, tlcOt, brcMe, blcMe))
 					{
-						float toi = this.CalculateTimeOfImpact("Top", rectMe, rectOt);
+						float toi = this.CalculateTimeOfImpact("Top", this, rectOt);
 						//Console.WriteLine("TOI Top = " + toi);
 						//Console.WriteLine("Top collision");
 						if (toi >= 0.0F && toi <= 1.0F)
@@ -86,19 +122,19 @@ namespace GXPEngine.PhysicsEngine.Colliders
 								float otherToI = info.timeOfImpact;
 								if (toi < otherToI)
 								{
-									info = new CollisionInfo(new Vec2(0.0F, 1.0F), rectOt, toi);
+									info = new CollisionInfo(new Vec2(0.0F, 1.0F), rectOt.Owner, toi);
 								}
 							}
 							else
 							{
-								info = new CollisionInfo(new Vec2(0.0F, 1.0F), rectOt, toi);
+								info = new CollisionInfo(new Vec2(0.0F, 1.0F), rectOt.Owner, toi);
 							}
 						}
 					}
 					//Collision Bottom
-					if (((blcOt.y >= tlcMe.y && blcOt.y <= blcMe.y) && (brcOt.y >= trcMe.y && brcOt.y <= brcMe.y)) && this.SpecificXCalculation(rectMe.height, rectOt.height, trcMe, tlcMe, brcOt, blcOt))
+					if (((blcOt.y >= tlcMe.y && blcOt.y <= blcMe.y) && (brcOt.y >= trcMe.y && brcOt.y <= brcMe.y)) && this.SpecificXCalculation(rectOt.Height, this.Height, trcMe, tlcMe, brcOt, blcOt))
 					{
-						float toi = this.CalculateTimeOfImpact("Bottom", rectMe, rectOt);
+						float toi = this.CalculateTimeOfImpact("Bottom", this, rectOt);
 						//Console.WriteLine("TOI Bottom = " + toi);
 						//Console.WriteLine("Bottom collision");
 						if (toi >= 0.0F && toi <= 1.0F)
@@ -108,12 +144,12 @@ namespace GXPEngine.PhysicsEngine.Colliders
 								float otherToI = info.timeOfImpact;
 								if (toi < otherToI)
 								{
-									info = new CollisionInfo(new Vec2(0.0F, -1.0F), rectOt, toi);
+									info = new CollisionInfo(new Vec2(0.0F, -1.0F), rectOt.Owner, toi);
 								}
 							}
 							else
 							{
-								info = new CollisionInfo(new Vec2(0.0F, -1.0F), rectOt, toi);
+								info = new CollisionInfo(new Vec2(0.0F, -1.0F), rectOt.Owner, toi);
 							}
 						}
 					}
@@ -129,25 +165,18 @@ namespace GXPEngine.PhysicsEngine.Colliders
                 if (info.other is Moveable && info.other is MyCanvas)
                 {
 					MyCanvas myCanvas = (MyCanvas)info.other;
-                    if (this.trigger)
-                    {
-						myCanvas.Trigger(this.Owner);
-                    }
-                    else
+					Moveable moveable = (Moveable)info.other;
+					myCanvas.Position = moveable.OldPosition + moveable.Velocity * info.timeOfImpact;
+					if (MyGame.collisionManager.FirstTime)
 					{
-						Moveable moveable = (Moveable)info.other;
-						myCanvas.Position = moveable.OldPosition + moveable.Velocity * info.timeOfImpact;
-						if (MyGame.collisionManager.FirstTime)
-						{
-							Vec2 velocity = moveable.Velocity;
-							velocity.Reflect(info.normal, 1.0F);
-							moveable.Velocity = velocity;
-						}
+						Vec2 velocity = moveable.Velocity;
+						velocity.Reflect(info.normal, 1.0F);
+						moveable.Velocity = velocity;
 					}
 				}
 			}
 		}
-		private bool SpecificYCalculation(int widthMe, int widthOther, Vec2 trcMe, Vec2 brcMe, Vec2 tlcOt, Vec2 blcOt)
+		private bool SpecificYCalculation(float widthMe, float widthOther, Vec2 trcMe, Vec2 brcMe, Vec2 tlcOt, Vec2 blcOt)
 		{
 			if (widthMe > widthOther)
 			{
@@ -159,7 +188,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
 			}
 		}
 
-		private bool SpecificXCalculation(int heightMe, int heightOther, Vec2 trcMe, Vec2 tlcMe, Vec2 brcOt, Vec2 blcOt)
+		private bool SpecificXCalculation(float heightMe, float heightOther, Vec2 trcMe, Vec2 tlcMe, Vec2 brcOt, Vec2 blcOt)
 		{
 			if (heightMe > heightOther)
 			{
@@ -182,7 +211,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
 				return ((tlcMe.x >= blcOt.x && tlcMe.x <= brcOt.x) || (trcMe.x >= blcOt.x && trcMe.x <= brcOt.x));
 			}
 		}
-		public float CalculateTimeOfImpact(string impactSide, CanvasRectangle rectMe, CanvasSquare rectOt)
+		public float CalculateTimeOfImpact(string impactSide, SquareCollider rectMe, SquareCollider rectOt)
 		{
 			MyGame myGame = (MyGame)MyGame.main;
 			float impact = 0.0F;
