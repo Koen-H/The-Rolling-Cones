@@ -44,6 +44,7 @@ namespace GXPEngine.Coolgrath
             //Temporary
             //SetScaleXY(1,3);
         }
+        
 
     }
 }
