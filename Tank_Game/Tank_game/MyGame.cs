@@ -69,7 +69,7 @@ public class MyGame : Game
         Circle ballTest = new Circle(40, new Vec2(200, 100), "BallTest.png", 1, 1);
         this.AddChild(ballTest);
 
-        CanvasPlayerBall ball = new CanvasPlayerBall(30, new Vec2(400, 500), new Vec2(0, 0.5F), new Vec2(0, 0));
+        CanvasPlayerBall ball = new CanvasPlayerBall(30, new Vec2(400, -500), new Vec2(0, 0.5F), new Vec2(0, 0));
         this.AddChild(ball);
         //this.AddChild(playerCamera);
         //ball.SetPlayerCamera(playerCamera);

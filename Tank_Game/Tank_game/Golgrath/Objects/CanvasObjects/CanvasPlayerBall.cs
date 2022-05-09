@@ -84,6 +84,7 @@ namespace GXPEngine.Golgrath.Objects
             //Rotate the sprite based on the direction of the velocity.
             if (velocity.Normalized().x < 0) rotation -= velocity.Length();
             else rotation += velocity.Length();
+            if (rotation >= 360 || rotation <= -360) rotation = 0;
         }
         private void DrawRect(byte red, byte green, byte blue)
         {
@@ -99,9 +100,9 @@ namespace GXPEngine.Golgrath.Objects
             {
                 this.HandleInput();
             }
+            this.OldPosition = this.position;
             
-            //ApplyGravity();
-            this.Velocity = this.Velocity + (MyGame.collisionManager.FirstTime == true ? (umbrella ? umbrellaGravity : gravity) : new Vec2(-gravity.x, -gravity.y));
+            //this.velocity += MyGame.collisionManager.FirstTime == true ? (umbrella ? umbrellaGravity : gravity) : new Vec2(-gravity.x, -gravity.y);
 
             //new Vec2(-gravity.x, -gravity.y) I know i put this here, for a reason. KEEP THIS!
             if (MyGame.collisionManager.FirstTime == false)
@@ -109,18 +110,41 @@ namespace GXPEngine.Golgrath.Objects
                 this.umbrella = false;
                 this.umbrellaSprite.alpha = 0.0F;
             }
-            this.Position += this.Velocity;
+            ApplyGravity();
+            this.Position += velocity;
             MyGame.collisionManager.CollideWith(this.myCollider);
             OnGeyser();
             
         }
         private void ApplyGravity()
         {
-            velocity += gravity;
-            if (umbrella && velocity.Normalized().y < 0)
+            
+            if (umbrella && velocity.Normalized().y > 0)
             {
                 //Do umbrella stuff
-                Console.WriteLine("TEST");
+                float oldRotation = rotation * 0.90f;
+
+                rotation *= 0.1f;
+                rotation += oldRotation; // now it's 0.01* desired + 0.99 * old
+                if(rotation <= 10 && rotation >= -10)
+                {
+                    rotation = 0;
+                }
+
+                Console.WriteLine(rotation);
+                //rotation = SinDamp(rotation);
+                
+                velocity += new Vec2(0, 0.2F);//Gravity, but less
+                //Console.WriteLine(rotation);
+                if (velocity.Length() > 7.5f)
+                {
+                  velocity = velocity.Normalized() * 7.5f;
+                }
+               
+            }
+            else
+            {
+                Velocity += MyGame.collisionManager.FirstTime == true ? gravity : new Vec2(-gravity.x, -gravity.y);
             }
         }
         private void OnGeyser()
@@ -140,6 +164,11 @@ namespace GXPEngine.Golgrath.Objects
             this.camera = camera;
         }
 
+        float SinDamp(float t)
+        {
+            return Mathf.Sin(Mathf.PI * 4 * t) * (1-t);
+        }
+
         public override void Trigger(GameObject other)
         {
             Console.WriteLine("Test");
@@ -157,4 +186,6 @@ namespace GXPEngine.Golgrath.Objects
             }*/
         }
     }
+
+
 }
