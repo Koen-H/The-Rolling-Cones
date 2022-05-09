@@ -10,6 +10,7 @@ namespace GXPEngine.Golgrath.Objects
     {
         protected Vec2 position;
         protected Collider myCollider;
+        protected List<Collider> childColliders;
         /// <summary>
         /// A blank MyGameObject, which extends from EasyDraw. Contains a custom Vec2 position attribute and a custom Collider.
         /// </summary>
@@ -19,6 +20,7 @@ namespace GXPEngine.Golgrath.Objects
         public MyCanvas(Vec2 position, int canvasWidth, int canvasHeight): base(canvasWidth, canvasHeight, true)
         {
             this.Position = position;
+            this.childColliders = new List<Collider>();
         }
 
         public Vec2 Position
@@ -34,12 +36,46 @@ namespace GXPEngine.Golgrath.Objects
                 return this.position;
             }
         }
-
         public Collider MyCollider
         {
             get
             {
                 return this.myCollider;
+            }
+            set
+            {
+                if (this.myCollider != null)
+                {
+                    MyGame.collisionManager.RemoveCollider(this.myCollider);
+                }
+                this.myCollider = value;
+                MyGame.collisionManager.AddCollider(this.myCollider);
+            }
+        }
+
+        public List<Collider> ChildColliders
+        {
+            get
+            {
+                return this.childColliders;
+            }
+        }
+
+        public void AddCollider(Collider collider)
+        {
+            if (!this.childColliders.Contains(collider))
+            {
+                this.childColliders.Add(collider);
+                MyGame.collisionManager.AddCollider(collider);
+            }
+        }
+
+        public void RemoveCollider(Collider collider)
+        {
+            if (this.childColliders.Contains(collider))
+            {
+                this.childColliders.Remove(collider);
+                MyGame.collisionManager.RemoveCollider(collider);
             }
         }
 

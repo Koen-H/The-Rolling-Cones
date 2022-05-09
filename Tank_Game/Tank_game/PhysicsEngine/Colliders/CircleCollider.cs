@@ -10,14 +10,75 @@ namespace GXPEngine.PhysicsEngine.Colliders
 {
     public class CircleCollider : Collider
     {
-        public CircleCollider(CanvasCircle circle): base(circle)
+        protected Vec2 oldPosition, velocity;
+        protected float radius;
+
+        public CircleCollider(MyAnimationSprite sprite, Vec2 position, Vec2 velocity, float radius) : base(sprite)
         {
-            
+            this.position = position;
+            this.oldPosition = position;
+            this.velocity = velocity;
+            this.radius = radius;
         }
 
-        public CircleCollider(Circle circle) : base(circle)
+        public CircleCollider(MyAnimationSprite sprite, Vec2 position, float radius) : base(sprite)
         {
+            this.position = position;
+            this.oldPosition = position;
+            this.velocity = new Vec2(0, 0);
+            this.radius = radius;
+        }
 
+        public CircleCollider(MyCanvas canvas, Vec2 position, Vec2 velocity, float radius) : base(canvas)
+        {
+            this.position = position;
+            this.oldPosition = position;
+            this.velocity = velocity;
+            this.radius = radius;
+        }
+
+        public CircleCollider(MyCanvas sprite, Vec2 position, float radius) : base(sprite)
+        {
+            this.position = position;
+            this.oldPosition = position;
+            this.velocity = new Vec2(0, 0);
+            this.radius = radius;
+        }
+
+        public Vec2 OldPosition
+        {
+            get
+            {
+                return this.oldPosition;
+            }
+            set
+            {
+                this.oldPosition = value;
+            }
+        }
+        
+        public Vec2 Velocity
+        {
+            get
+            {
+                return this.velocity;
+            }
+            set
+            {
+                this.velocity = value;
+            }
+        }
+
+        public float Radius
+        {
+            get
+            {
+                return this.radius;
+            }
+            set
+            {
+                this.radius = value;
+            }
         }
 
         //Handle Circle to Circle collision.
@@ -42,19 +103,19 @@ namespace GXPEngine.PhysicsEngine.Colliders
                         incBall.Velocity = incBall.Velocity * (oldLength + gravity);
                         //incBall.Gravity = new Vec2(0, 0);
                     }
-                    
+
                 }
-                else if (collideWith.Owner is CanvasBall && this.Owner is CanvasCircle)
+                else if (collideWith.Owner is CanvasBall)
                 {
-                    CanvasCircle ownCircle = (CanvasCircle)this.Owner;
-                    CanvasBall incBall = (CanvasBall)collideWith.Owner;
-                    Vec2 relative = incBall.Position - ownCircle.Position;
-                    if (relative.Length() < ownCircle.Radius + incBall.Radius)
+                    CircleCollider ballCollider = (CircleCollider)collideWith;
+                    CircleCollider incBall = (CircleCollider)collideWith;
+                    Vec2 relative = ballCollider.Position - this.Position;
+                    if (relative.Length() < this.Radius + incBall.Radius)
                     {
-                        Vec2 u = incBall.OldPosition - ownCircle.Position;
+                        Vec2 u = incBall.OldPosition - this.Position;
                         float a = Mathf.Pow(incBall.Velocity.Length(), 2);
                         float b = (u * 2).Dot(incBall.Velocity);
-                        float c = Mathf.Pow(u.Length(), 2.0F) - Mathf.Pow(ownCircle.Radius + incBall.Radius, 2.0F);
+                        float c = Mathf.Pow(u.Length(), 2.0F) - Mathf.Pow(this.Radius + incBall.Radius, 2.0F);
                         float discrete = Mathf.Pow(b, 2) - (4 * a * c);
                         if (c >= 0)
                         {
@@ -64,16 +125,16 @@ namespace GXPEngine.PhysicsEngine.Colliders
                                 if (toi >= 0.0F && toi <= 1.0F)
                                 {
                                     if (info != null && toi < info.timeOfImpact)
-                                        info = new CollisionInfo(u.Normalized(), incBall, toi);
+                                        info = new CollisionInfo(u.Normalized(), incBall.Owner, toi);
                                     else if (info == null)
-                                        info = new CollisionInfo(u.Normalized(), incBall, toi);
+                                        info = new CollisionInfo(u.Normalized(), incBall.Owner, toi);
                                 }
                             }
                         }
                         else
                         {
                             if (b < 0)
-                                return new CollisionInfo(u.Normalized(), incBall, 0.0F);
+                                return new CollisionInfo(u.Normalized(), incBall.Owner, 0.0F);
                         }
                     }
                 }
@@ -119,21 +180,18 @@ namespace GXPEngine.PhysicsEngine.Colliders
         {
             if (info != null)
             {
-                CanvasBall ball = (CanvasBall)info.other;
-                if (this.trigger)
+                if (info.other is Moveable && info.other is MyCanvas)
                 {
-                    ball.Trigger(this.Owner);
-                }
-                else
-                {
-                    ball.Position = ball.OldPosition + ball.Velocity * info.timeOfImpact;
-                    if (MyGame.collisionManager.FirstTime)
-                    {
-                        Vec2 velocity = ball.Velocity;
-                        velocity.Reflect(info.normal, 1.0F);
-                        ball.Velocity = velocity;
-                    }
-                }
+					MyCanvas myCanvas = (MyCanvas)info.other;
+					Moveable moveable = (Moveable)info.other;
+					myCanvas.Position = moveable.OldPosition + moveable.Velocity * info.timeOfImpact;
+					if (MyGame.collisionManager.FirstTime)
+					{
+						Vec2 velocity = moveable.Velocity;
+						velocity.Reflect(info.normal, 1.0F);
+						moveable.Velocity = velocity;
+					}
+				}
             }
         }
     }

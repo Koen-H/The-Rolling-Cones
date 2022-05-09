@@ -54,8 +54,11 @@ public class MyGame : Game
         //CanvasSquare square2 = new CanvasSquare(new Vec2(400, 500), new Vec2(0, 0), new Vec2(0, 0), 100, 100);
         //AddChild(square2);
 
+
         // Geyser geyserTest = new Geyser(2, new Vec2(650,970), "cyan_block.png", 64, 128, 1, 1);
         // AddChild(geyserTest);
+
+
 
         //OrbitalField orbitalFieldTest = new OrbitalField(0.025F,44,new Vec2(400,720));
         //AddChild(orbitalFieldTest);
@@ -68,12 +71,12 @@ public class MyGame : Game
 
         //For now, Ball should be the last thing added to the scene/level
 
-
         // Circle ballTest = new Circle(40, new Vec2(200, 100), "BallTest.png", 1, 1);
         //this.AddChild(ballTest);
 
         //CanvasPlayerBall ball = new CanvasPlayerBall(30, new Vec2(400, -500), new Vec2(0, 0.5F), new Vec2(0, 0));
         //this.AddChild(ball);
+
         //this.AddChild(playerCamera);
         //ball.SetPlayerCamera(playerCamera);
 

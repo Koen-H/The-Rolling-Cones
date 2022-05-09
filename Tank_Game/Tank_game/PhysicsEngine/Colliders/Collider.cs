@@ -10,6 +10,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
     public abstract class Collider
     {
         public bool trigger;
+        protected Vec2 position;
         protected GameObject owner;
         /// <summary>
         /// Constructor for the Collider class, requires an owner to be attatched to.
@@ -72,5 +73,16 @@ namespace GXPEngine.PhysicsEngine.Colliders
             }
         }
 
+        public Vec2 Position
+        {
+            get
+            {
+                return this.position;
+            }
+            set
+            {
+                this.position = value;
+            }
+        }
     }
 }
