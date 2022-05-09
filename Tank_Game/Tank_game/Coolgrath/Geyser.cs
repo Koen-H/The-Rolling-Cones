@@ -27,7 +27,6 @@ namespace GXPEngine.Coolgrath
             this.LeftSide.StartCap.trigger = true;*/
             foreach (Collider collider in this.ChildColliders)
             {
-                Console.WriteLine("test");
                 collider.trigger = true;
             }
             //Temporary
@@ -49,7 +48,6 @@ namespace GXPEngine.Coolgrath
             this.LeftSide.StartCap.trigger = true;*/
             foreach (Collider collider in this.ChildColliders)
             {
-                Console.WriteLine("test");
                 collider.trigger = true;
             }
             //Temporary
