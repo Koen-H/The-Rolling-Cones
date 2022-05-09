@@ -51,6 +51,12 @@ namespace GXPEngine.PhysicsEngine
                                     MyCanvas mainOne = (MyCanvas)collideWith.Owner;
                                     mainOne.Trigger(otherOne);
                                 }
+                                else if (collider.Owner is MyAnimationSprite && collideWith.Owner is MyCanvas)
+                                {
+                                    MyAnimationSprite otherOne = (MyAnimationSprite)collider.Owner;
+                                    MyCanvas mainOne = (MyCanvas)collideWith.Owner;
+                                    mainOne.Trigger(otherOne);
+                                }
                             }
                         }
                     }
@@ -73,6 +79,12 @@ namespace GXPEngine.PhysicsEngine
                                         MyCanvas mainOne = (MyCanvas)collideWith.Owner;
                                         mainOne.Trigger(otherOne);
                                     }
+                                    else if (collider.Owner is MyAnimationSprite && collideWith.Owner is MyCanvas)
+                                    {
+                                        MyAnimationSprite otherOne = (MyAnimationSprite)collider.Owner;
+                                        MyCanvas mainOne = (MyCanvas)collideWith.Owner;
+                                        mainOne.Trigger(otherOne);
+                                    }
                                 }
                             }
                         }
@@ -82,7 +94,8 @@ namespace GXPEngine.PhysicsEngine
             if (other != null && info != null)
             {
                 other.Resolve(info);
-                if (info.timeOfImpact <= 0.01 && firstTime) // was 0.00001
+                //It was 0.00001
+                if (info.timeOfImpact <= 0.01 && firstTime)
                 {
                     this.firstTime = false;
                     if (collideWith.Owner is Moveable)

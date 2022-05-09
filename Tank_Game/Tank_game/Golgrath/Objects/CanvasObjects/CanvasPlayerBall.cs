@@ -130,8 +130,6 @@ namespace GXPEngine.Golgrath.Objects
                 this.HandleInput();
             }
             this.OldPosition = this.position;
-            
-            //this.velocity += MyGame.collisionManager.FirstTime == true ? (umbrella ? umbrellaGravity : gravity) : new Vec2(-gravity.x, -gravity.y);
 
             //new Vec2(-gravity.x, -gravity.y) I know i put this here, for a reason. KEEP THIS!
             if (MyGame.collisionManager.FirstTime == false)
@@ -174,6 +172,7 @@ namespace GXPEngine.Golgrath.Objects
             {
                // playerSprite.Animate(0.1f);
                 Velocity += MyGame.collisionManager.FirstTime == true ? gravity : new Vec2(0,0);
+
             }
         }
         private void OnGeyser()
@@ -200,19 +199,10 @@ namespace GXPEngine.Golgrath.Objects
 
         public override void Trigger(GameObject other)
         {
-            Console.WriteLine("Test");
-            if (other is CanvasLine)
+            if (other is Geyser)
             {
-                Console.WriteLine("Hey2");
-                CanvasLine geyser = (CanvasLine)other;
                 velocity += Vec2.GetUnitVectorDeg(-90) * 2;
             }
-            /*if (other is CanvasCap)
-            {
-                Console.WriteLine("Hey1");
-                CanvasCap geyser = (CanvasCap)other;
-                velocity += Vec2.GetUnitVectorDeg(-90) * 2;
-            }*/
         }
     }
 
