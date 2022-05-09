@@ -11,30 +11,29 @@ namespace GXPEngine.Golgrath.Objects
     {
         protected Vec2 start, end;
         protected uint color;
-        protected CanvasCap cap1, cap2;
+        protected CircleCollider cap1, cap2;
         protected bool render;
         public CanvasLine(Vec2 start, Vec2 end, uint pColor = 0xffffffff, bool render = true, bool disableStartCap = false, bool disableEndCap = false): base(new Vec2(0, 0), 3000, 3000)
         {
             this.start = start;
             this.end = end;
             this.render = render;
-            this.myCollider = new LineCollider(this);
+            this.MyCollider = new LineCollider(this);
             if (!disableStartCap)
             {
-                this.cap1 = new CanvasCap(0, start);
-                MyGame.collisionManager.AddCollider(this.cap1.MyCollider);
+                this.cap1 = new CircleCollider(this, this.start, 0);
+                this.childColliders.Add(this.cap1);
             }
             if (!disableEndCap)
             {
-                this.cap2 = new CanvasCap(0, end);
-                MyGame.collisionManager.AddCollider(this.cap2.MyCollider);
+                this.cap2 = new CircleCollider(this, this.end, 0);
+                this.childColliders.Add(this.cap2);
             }
             this.Stroke(System.Drawing.Color.Red);
             if (this.render)
             {
                 this.Line(start.x, start.y, end.x, end.y);
             }
-            MyGame.collisionManager.AddCollider(this.myCollider);
         }
         public Vec2 Start
         {
@@ -83,7 +82,7 @@ namespace GXPEngine.Golgrath.Objects
             return length.Length();
         }
 
-        public CanvasCap StartCap
+        public CircleCollider StartCap
         {
             get
             {
@@ -91,7 +90,7 @@ namespace GXPEngine.Golgrath.Objects
             }
         }
 
-        public CanvasCap EndCap
+        public CircleCollider EndCap
         {
             get
             {

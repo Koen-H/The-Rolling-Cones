@@ -38,8 +38,20 @@ namespace GXPEngine.PhysicsEngine
                     {
                         if (newInfo != null)
                         {
-                            info = newInfo;
-                            other = collider;
+                            if (!collider.trigger)
+                            {
+                                info = newInfo;
+                                other = collider;
+                            }
+                            else
+                            {
+                                if (collider.Owner is MyCanvas && collideWith.Owner is MyCanvas)
+                                {
+                                    MyCanvas otherOne = (MyCanvas)collider.Owner;
+                                    MyCanvas mainOne = (MyCanvas)collideWith.Owner;
+                                    mainOne.Trigger(otherOne);
+                                }
+                            }
                         }
                     }
                     else
@@ -48,8 +60,20 @@ namespace GXPEngine.PhysicsEngine
                         {
                             if (newInfo.timeOfImpact < info.timeOfImpact)
                             {
-                                info = newInfo;
-                                other = collider;
+                                if (!collider.trigger)
+                                {
+                                    info = newInfo;
+                                    other = collider;
+                                }
+                                else
+                                {
+                                    if (collider.Owner is MyCanvas && collideWith.Owner is MyCanvas)
+                                    {
+                                        MyCanvas otherOne = (MyCanvas)collider.Owner;
+                                        MyCanvas mainOne = (MyCanvas)collideWith.Owner;
+                                        mainOne.Trigger(otherOne);
+                                    }
+                                }
                             }
                         }
                     }

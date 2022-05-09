@@ -1,5 +1,6 @@
 ﻿using GXPEngine.Golgrath.Objects;
 using GXPEngine.Golgrath.Objects.AnimationObjects;
+using GXPEngine.PhysicsEngine.Colliders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,19 @@ namespace GXPEngine.Coolgrath
             strength = _strength;
             MyGame myGame = (MyGame)Game.main;
             //myGame.geysers.Add(this);
-            this.TopSide.MyCollider.trigger = true;
-            this.TopSide.StartCap.MyCollider.trigger = true;
+            /*this.TopSide.MyCollider.trigger = true;
+            this.TopSide.StartCap.trigger = true;
             this.RightSide.MyCollider.trigger = true;
-            this.RightSide.StartCap.MyCollider.trigger = true;
+            this.RightSide.StartCap.trigger = true;
             this.BottomSide.MyCollider.trigger = true;
-            this.BottomSide.StartCap.MyCollider.trigger = true;
+            this.BottomSide.StartCap.trigger = true;
             this.LeftSide.MyCollider.trigger = true;
-            this.LeftSide.StartCap.MyCollider.trigger = true;
+            this.LeftSide.StartCap.trigger = true;*/
+            foreach (Collider collider in this.ChildColliders)
+            {
+                Console.WriteLine("test");
+                collider.trigger = true;
+            }
             //Temporary
             //SetScaleXY(1,3);
         }
@@ -33,14 +39,19 @@ namespace GXPEngine.Coolgrath
             strength = _strength;
             MyGame myGame = (MyGame)Game.main;
             //myGame.geysers.Add(this);
-            this.TopSide.MyCollider.trigger = true;
-            this.TopSide.StartCap.MyCollider.trigger = true;
+            /*this.TopSide.MyCollider.trigger = true;
+            this.TopSide.StartCap.trigger = true;
             this.RightSide.MyCollider.trigger = true;
-            this.RightSide.StartCap.MyCollider.trigger = true;
+            this.RightSide.StartCap.trigger = true;
             this.BottomSide.MyCollider.trigger = true;
-            this.BottomSide.StartCap.MyCollider.trigger = true;
+            this.BottomSide.StartCap.trigger = true;
             this.LeftSide.MyCollider.trigger = true;
-            this.LeftSide.StartCap.MyCollider.trigger = true;
+            this.LeftSide.StartCap.trigger = true;*/
+            foreach (Collider collider in this.ChildColliders)
+            {
+                Console.WriteLine("test");
+                collider.trigger = true;
+            }
             //Temporary
             //SetScaleXY(1,3);
         }

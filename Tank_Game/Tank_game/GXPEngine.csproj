@@ -46,7 +46,6 @@
     <Compile Include="Golgrath\Objects\AnimationObjects\Circle.cs" />
     <Compile Include="Golgrath\Objects\AnimationObjects\Rectangle.cs" />
     <Compile Include="Golgrath\Objects\CanvasObjects\CanvasBall.cs" />
-    <Compile Include="Golgrath\Objects\CanvasObjects\CanvasCap.cs" />
     <Compile Include="Golgrath\Objects\CanvasObjects\CanvasCircle.cs" />
     <Compile Include="Golgrath\Objects\CanvasObjects\CanvasLine.cs" />
     <Compile Include="Golgrath\Objects\Base\Moveable.cs" />
