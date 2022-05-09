@@ -38,7 +38,7 @@
   <ItemGroup>
     <Compile Include="Coolgrath\Geyser.cs" />
     <Compile Include="Coolgrath\OrbitalField.cs" />
-    <Compile Include="Coolgrath\QuestionShop.cs" />
+    <Compile Include="Coolgrath\InteractableEnvironment.cs" />
     <Compile Include="Coolgrath\ShopButton.cs" />
     <Compile Include="Coolgrath\ShopPopUp.cs" />
     <Compile Include="Golgrath\Cameras\PlayerCamera.cs" />
