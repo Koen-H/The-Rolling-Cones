@@ -12,6 +12,8 @@ namespace GXPEngine.Coolgrath
         PlayerCamera mainCamera;
         MyGame myGame;
 
+        public GameObject interactableObject;
+
         public InteractableEnvironment(Vec2 position, int width, int height) : base(position, width, height)
         {
            myGame = (MyGame)Game.main;
