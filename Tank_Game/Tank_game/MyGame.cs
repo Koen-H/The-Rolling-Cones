@@ -26,8 +26,11 @@ public class MyGame : Game
     public MyGame() : base(1920, 1080, false,false, 1920, 1080)
 	{
         collisionManager = new MyCollisionManager();
-
         playerCamera = new PlayerCamera(0, 0, this.width, this.height);
+        AddChild(playerCamera);
+
+
+        //playerCamera = new PlayerCamera(0, 0, this.width, this.height);
         //The very simple basic level we had at the start  
         /*Line lineBottom = new Line(new Vec2(200, 1000), new Vec2(600, 1000));
         Line lineLeft1 = new Line(new Vec2(200, 1000), new Vec2(25, 800));
@@ -51,26 +54,29 @@ public class MyGame : Game
         //CanvasSquare square2 = new CanvasSquare(new Vec2(400, 500), new Vec2(0, 0), new Vec2(0, 0), 100, 100);
         //AddChild(square2);
 
-        Geyser geyserTest = new Geyser(2, new Vec2(650,900), "cyan_block.png", 64, 128, 1, 1);
-        AddChild(geyserTest);
 
-        OrbitalField orbitalFieldTest = new OrbitalField(0.025F,44,new Vec2(400,720));
-        AddChild(orbitalFieldTest);
+        // Geyser geyserTest = new Geyser(2, new Vec2(650,970), "cyan_block.png", 64, 128, 1, 1);
+        // AddChild(geyserTest);
+
+
+
+        //OrbitalField orbitalFieldTest = new OrbitalField(0.025F,44,new Vec2(400,720));
+        //AddChild(orbitalFieldTest);
         //OrbitalField orbitalFieldTest2 = new OrbitalField(0.025F, 50, new Vec2(590, 720));
         //AddChild(orbitalFieldTest2);
 
-        QuestionShop questionShop = new QuestionShop(new Vec2(150,800), "QuestionShop.png",1,1);
-        AddChild(questionShop);
+        /* InteractableEnvironment questionShop = new InteractableEnvironment(new Vec2(150,800), "QuestionShop.png",1,1);
+         AddChild(questionShop);*/
 
 
         //For now, Ball should be the last thing added to the scene/level
-       
-        
-        Circle ballTest = new Circle(40, new Vec2(200, 100), "BallTest.png", 1, 1);
-        this.AddChild(ballTest);
 
-        CanvasPlayerBall ball = new CanvasPlayerBall(30, new Vec2(400, -500), new Vec2(0, 0.5F), new Vec2(0, 0));
-        this.AddChild(ball);
+        // Circle ballTest = new Circle(40, new Vec2(200, 100), "BallTest.png", 1, 1);
+        //this.AddChild(ballTest);
+
+        //CanvasPlayerBall ball = new CanvasPlayerBall(30, new Vec2(400, -500), new Vec2(0, 0.5F), new Vec2(0, 0));
+        //this.AddChild(ball);
+
         //this.AddChild(playerCamera);
         //ball.SetPlayerCamera(playerCamera);
 

@@ -72,7 +72,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
                 float a2 = normal2.Dot(newLine2) - ball.Radius;
                 float b2 = -normal2.Dot(ball.Velocity);
                 //Console.WriteLine(a2);
-                if (b1 >= 0)
+                if (b1 > 0)
                 {
                     if (a1 >= 0 || a1 >= -ball.Radius)
                     {
@@ -92,7 +92,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
                         }
                     }
                 }
-                if (b2 >= 0)
+                if (b2 > 0)
                 {
                     if (a2 >= 0 || a2 >= -ball.Radius)
                     {

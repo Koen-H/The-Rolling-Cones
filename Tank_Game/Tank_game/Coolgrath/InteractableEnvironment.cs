@@ -7,12 +7,14 @@ using GXPEngine.Golgrath.Cameras;
 using GXPEngine.Core;
 namespace GXPEngine.Coolgrath
 {
-    public class QuestionShop : MyAnimationSprite
+    public class InteractableEnvironment : CanvasRectangle
     {
         PlayerCamera mainCamera;
         MyGame myGame;
 
-        public QuestionShop(Vec2 position, string filename, int columns, int rows, int frames = -1, bool keepInCache = false, bool addCollider = true) : base(position, filename, columns, rows, frames, keepInCache, addCollider)
+        public GameObject interactableObject;
+
+        public InteractableEnvironment(Vec2 position, int width, int height) : base(position, width, height)
         {
            myGame = (MyGame)Game.main;
            mainCamera = myGame.playerCamera;

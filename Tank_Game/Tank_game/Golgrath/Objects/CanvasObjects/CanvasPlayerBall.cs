@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using GXPEngine.Coolgrath;
 using GXPEngine.PhysicsEngine.Colliders;
+using GXPEngine.Core;
 
 namespace GXPEngine.Golgrath.Objects
 {
@@ -12,11 +13,17 @@ namespace GXPEngine.Golgrath.Objects
     {
         private float drag, acceleration, maxSpeed;
         private bool umbrella;
+        private AnimationSprite playerSprite;
+        bool goingLeft = false;
+
         private AnimationSprite umbrellaSprite;
         private Vec2 umbrellaGravity;
         private PlayerCamera camera;
         public CanvasPlayerBall(int radius, Vec2 position, Vec2 gravity, Vec2 velocity) : base(radius, position, gravity, velocity)
         {
+            playerSprite = new AnimationSprite("RollingPineCone.png", 8,1,-1,false,false);
+            playerSprite.SetOrigin(this.radius,this.radius);
+            
             this.DrawRect(0, 200, 0);
             this.drag = 0.08F;
             this.acceleration = 0.4F;
@@ -26,12 +33,15 @@ namespace GXPEngine.Golgrath.Objects
            // this.umbrellaGravity = gravity / 8;
             this.umbrellaSprite.alpha = 0.0F;
             this.umbrellaSprite.SetOrigin(this.umbrellaSprite.width / 2, this.umbrellaSprite.height / 2);
+            this.AddChild(playerSprite);
             this.AddChild(umbrellaSprite);
+            
         }
 
         public new void Update()
         {
             this.Step();
+            
             Gizmos.DrawRectangle(this.x + _bounds.x, this.y + _bounds.y, 20, 20);
             Gizmos.DrawRectangle(this.x + width + _bounds.x, this.y + _bounds.y, 20, 20);
             Gizmos.DrawRectangle(this.x + _bounds.x, this.y + height + _bounds.y, 20, 20);
@@ -40,7 +50,7 @@ namespace GXPEngine.Golgrath.Objects
             {
                 this.camera.SetXY(this.position.x, this.position.y - 200);
             }
-            umbrellaSprite.rotation = -rotation;
+            //umbrellaSprite.rotation = -rotation;
         }
 
         private void HandleInput()
@@ -82,9 +92,30 @@ namespace GXPEngine.Golgrath.Objects
 
             this.Velocity = velocity;
             //Rotate the sprite based on the direction of the velocity.
+
+            //Old rotation,it was actual ball rotation!
             if (velocity.Normalized().x < 0) rotation -= velocity.Length();
             else rotation += velocity.Length();
             if (rotation >= 360 || rotation <= -360) rotation = 0;
+
+            //Rotatin sprite instead of ball...
+            /* if (velocity.Normalized().x < 0 && !goingLeft)// To left
+             {
+                 playerSprite.initializeFromTexture(Texture2D.GetInstance("RollingPineConeLeft.png", false));
+                 playerSprite.initializeAnimFrames(8, 1, -1);
+                 playerSprite.SetOrigin(this.radius, this.radius);
+                 goingLeft = true;
+             }
+             else if(velocity.Normalized().x > 0 && goingLeft)//To right
+             {
+                 playerSprite.initializeFromTexture(Texture2D.GetInstance("RollingPineCone.png", false));
+                 playerSprite.initializeAnimFrames(8, 1, -1);
+                 playerSprite.SetOrigin(this.radius, this.radius);
+                 goingLeft = false;
+             }
+             playerSprite.Animate(velocity.Length()/50);*/
+            playerSprite.Animate(0.05f);
+
         }
         private void DrawRect(byte red, byte green, byte blue)
         {
@@ -129,7 +160,6 @@ namespace GXPEngine.Golgrath.Objects
                     rotation = 0;
                 }
 
-                Console.WriteLine(rotation);
                 //rotation = SinDamp(rotation);
                 
                 velocity += new Vec2(0, 0.2F);//Gravity, but less
@@ -142,7 +172,9 @@ namespace GXPEngine.Golgrath.Objects
             }
             else
             {
-                Velocity += MyGame.collisionManager.FirstTime == true ? gravity : new Vec2(0, 0);
+               // playerSprite.Animate(0.1f);
+                Velocity += MyGame.collisionManager.FirstTime == true ? gravity : new Vec2(0,0);
+
             }
         }
         private void OnGeyser()
@@ -171,7 +203,26 @@ namespace GXPEngine.Golgrath.Objects
         {
             if (other is Geyser)
             {
-                velocity += Vec2.GetUnitVectorDeg(-90) * 2;
+                Geyser geyser = (Geyser)other;
+                velocity += Vec2.GetUnitVectorDeg(-90 + geyser.rotation) * geyser.strength;
+            }
+            if(other is OrbitalField)
+            {
+                Console.WriteLine("TRIGGER WITH ORBITALFIELD");
+                OrbitalField ownCircle = (OrbitalField)other;
+                CanvasBall incBall = this;
+                Vec2 relative = incBall.Position - ownCircle.Position;
+                if (relative.Length() < ownCircle.Radius + incBall.Radius)
+                {
+                    float gravity = incBall.Gravity.Length();
+                    Vec2 pullDirection = ownCircle.Position - incBall.Position; //Draws a line from the bullet position to the center of the acceleration field.
+                    float oldLength = incBall.Velocity.Length();//Gets the old lenght (speed)
+                    incBall.Velocity = incBall.Velocity + pullDirection * ownCircle.PullStrength;//Set the velocity to the direction of the center of the acceleration field based on the pullstrength.
+                    incBall.Velocity = incBall.Velocity.Normalized();//Set speed to 1
+                                                                     //  incBall.Velocity = (incBall.Velocity * (float)((oldLength + gravity) * 1.09));//Set speed back to original.
+                    incBall.Velocity = incBall.Velocity * (oldLength + gravity);
+                    //incBall.Gravity = new Vec2(0, 0);
+                }
             }
         }
     }

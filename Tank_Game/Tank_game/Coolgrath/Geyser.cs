@@ -14,6 +14,7 @@ namespace GXPEngine.Coolgrath
 
         public Geyser(float _strength, Vec2 position, string filename, int cols, int rows, int frames = -1) : base(position, filename, cols, rows, frames)
         {
+            SetOrigin(width/2,height/2);
             strength = _strength;
             MyGame myGame = (MyGame)Game.main;
             //myGame.geysers.Add(this);
@@ -53,6 +54,7 @@ namespace GXPEngine.Coolgrath
             //Temporary
             //SetScaleXY(1,3);
         }
+        
 
     }
 }

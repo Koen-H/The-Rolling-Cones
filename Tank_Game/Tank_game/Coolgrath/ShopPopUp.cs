@@ -18,8 +18,8 @@ namespace GXPEngine.Coolgrath
     class ShopPopUp : MyAnimationSprite
     {
         MyGame myGame;
-        QuestionShop questionShopObject;
-        public ShopPopUp(QuestionShop _questionShopObject, Vec2 position, string filename, int columns, int rows, int frames = -1, bool keepInCache = false, bool addCollider = false) : base(position, filename, columns, rows, frames, keepInCache, addCollider)
+        InteractableEnvironment questionShopObject;
+        public ShopPopUp(InteractableEnvironment _questionShopObject, Vec2 position, string filename, int columns, int rows, int frames = -1, bool keepInCache = false, bool addCollider = false) : base(position, filename, columns, rows, frames, keepInCache, addCollider)
         {
             questionShopObject = _questionShopObject;
             myGame = (MyGame)Game.main;
