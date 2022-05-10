@@ -47,10 +47,10 @@ namespace GXPEngine.Golgrath.Objects
         {
             this.Step();
             
-            Gizmos.DrawRectangle(this.x + _bounds.x, this.y + _bounds.y, 20, 20);
+            /*Gizmos.DrawRectangle(this.x + _bounds.x, this.y + _bounds.y, 20, 20);
             Gizmos.DrawRectangle(this.x + width + _bounds.x, this.y + _bounds.y, 20, 20);
             Gizmos.DrawRectangle(this.x + _bounds.x, this.y + height + _bounds.y, 20, 20);
-            Gizmos.DrawRectangle(this.x + width + _bounds.x, this.y + height + _bounds.y, 20, 20);
+            Gizmos.DrawRectangle(this.x + width + _bounds.x, this.y + height + _bounds.y, 20, 20);*/
             if (camera != null)
             {
                 this.camera.SetXY(this.position.x, this.position.y - 200);
@@ -154,7 +154,6 @@ namespace GXPEngine.Golgrath.Objects
             OnGeyser();
             InOrbital();
 
-
         }
         private void ApplyGravity()
         {
@@ -198,7 +197,7 @@ namespace GXPEngine.Golgrath.Objects
                 if (HitTest(geyser))
                 {
                     Console.WriteLine("On Geyser!");
-                    velocity += Vec2.GetUnitVectorDeg(-90 + geyser.rotation) * geyser.strength;
+                    velocity = Vec2.GetUnitVectorDeg(-90 + geyser.rotation) * 25;
                 }
             }
         }

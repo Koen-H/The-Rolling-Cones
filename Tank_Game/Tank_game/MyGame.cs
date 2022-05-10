@@ -131,7 +131,7 @@ public class MyGame : Game
     void Update()
     {
         if (Input.GetKeyDown(Key.D)) drawDebugLine ^= true;
-        if (Input.GetKeyDown(Key.C)) lineContainer.graphics.Clear(Color.Black);
+       // if (Input.GetKeyDown(Key.C)) lineContainer.graphics.Clear(Color.Black);
         this.HandleInput();
         targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;//Lower the framerate.
     }
