@@ -26,7 +26,14 @@ namespace GXPEngine.Coolgrath
             if (HitTestPoint(worldSpaceMousePos.x, worldSpaceMousePos.y) && Input.GetMouseButtonDown(0) && interactableObject == null) OpenShop();
             else if (HitTestPoint(worldSpaceMousePos.x, worldSpaceMousePos.y)  && interactableObject != null && interactableObject.HitTestPoint(worldSpaceMousePos.x, worldSpaceMousePos.y))
             {
-                if (Input.GetMouseButton(0)) interactableObject.SetXY(worldSpaceMousePos.x, worldSpaceMousePos.y);
+                if (Input.GetMouseButton(0))
+                {
+                    interactableObject.SetXY(worldSpaceMousePos.x, worldSpaceMousePos.y);
+                    if (interactableObject is OrbitalField) {
+                        OrbitalField temp = (OrbitalField)interactableObject;
+                        temp.Position = new Vec2(worldSpaceMousePos.x,worldSpaceMousePos.y);
+                    }
+                }
                 if (Input.GetMouseButton(1)) OpenShop();
             }
 

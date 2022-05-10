@@ -38,6 +38,8 @@ namespace GXPEngine.Golgrath.Objects
                 this.position = value;
                 this.x = value.x;
                 this.y = value.y;
+                if(myCollider != null) myCollider.Position = position;
+
             }
             get
             {

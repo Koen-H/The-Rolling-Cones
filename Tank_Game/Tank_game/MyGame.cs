@@ -19,13 +19,14 @@ public class MyGame : Game
 
     public List<Geyser> geysers = new List<Geyser>();
     public List<OrbitalField> fields = new List<OrbitalField>();
+    public List<NextLevelBlock> coins = new List<NextLevelBlock>();
     public PlayerCamera playerCamera;
     public Pivot objectLayer;
     public bool drawDebugLine;
     Canvas lineContainer = null;
     public static MyCollisionManager collisionManager;
 
-    public MyGame() : base(1920, 1080, false, false, 1920, 1080)
+    public MyGame() : base(1920, 1080, false, false, 1920, 1080, false)
 	{
         collisionManager = new MyCollisionManager();
         playerCamera = new PlayerCamera(0, 0, this.width, this.height);
@@ -140,7 +141,7 @@ public class MyGame : Game
         {
             Console.WriteLine(GetDiagnostics());
         }
-        Console.WriteLine( Time.deltaTime);
+        //Console.WriteLine( Time.deltaTime);
     }
 
     public void DrawLine(Vec2 start, Vec2 end)
@@ -164,7 +165,10 @@ public class MyGame : Game
 
     private void LoadLevel(string fileName = "NEWLEVEL.tmx")
     {
-       // DestroyAll();
+        geysers = new List<Geyser>();
+        fields = new List<OrbitalField>();
+        coins = new List<NextLevelBlock>();
+        // DestroyAll();
         Level level = new Level(fileName);
         List<GameObject> children = level.GetChildren();
         foreach (GameObject child in children)

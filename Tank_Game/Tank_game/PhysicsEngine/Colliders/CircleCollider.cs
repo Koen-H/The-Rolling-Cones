@@ -95,7 +95,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
                     OrbitalField ownCircle = (OrbitalField)this.Owner;
                     CanvasBall incBall = (CanvasBall)collideWith.Owner;
                     Vec2 relative = incBall.Position - ownCircle.Position;
-                    if (relative.Length() < ownCircle.Radius + incBall.Radius)
+                    if (relative.Length() < ownCircle.radius + incBall.Radius)
                     {
                         float gravity = incBall.Gravity.Length();
                         Vec2 pullDirection = ownCircle.Position - incBall.Position; //Draws a line from the bullet position to the center of the acceleration field.
