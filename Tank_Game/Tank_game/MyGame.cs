@@ -25,10 +25,11 @@ public class MyGame : Game
     Canvas lineContainer = null;
     public static MyCollisionManager collisionManager;
 
-    public MyGame() : base(1920, 1080, false,false, 1920, 1080)
+    public MyGame() : base(1920, 1080, false, false, 1920, 1080)
 	{
         collisionManager = new MyCollisionManager();
         playerCamera = new PlayerCamera(0, 0, this.width, this.height);
+        playerCamera.SetXY(1920 / 2, 1080 / 2);
         AddChild(playerCamera);
 
 
@@ -134,6 +135,12 @@ public class MyGame : Game
        // if (Input.GetKeyDown(Key.C)) lineContainer.graphics.Clear(Color.Black);
         this.HandleInput();
         targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;//Lower the framerate.
+
+        if (Input.GetKeyDown(Key.F1))
+        {
+            Console.WriteLine(GetDiagnostics());
+        }
+        Console.WriteLine( Time.deltaTime);
     }
 
     public void DrawLine(Vec2 start, Vec2 end)
@@ -155,7 +162,7 @@ public class MyGame : Game
         this.targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;
     }
 
-    private void LoadLevel(string fileName = "level.tmx")
+    private void LoadLevel(string fileName = "NEWLEVEL.tmx")
     {
        // DestroyAll();
         Level level = new Level(fileName);

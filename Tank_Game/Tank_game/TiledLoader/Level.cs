@@ -98,7 +98,7 @@ namespace GXPEngine.TiledLoader
                         {
                             case "Player":
                                 CanvasPlayerBall ball = new CanvasPlayerBall(30, new Vec2(obj.X, obj.Y), new Vec2(0, 0.5F), new Vec2(0, 0));
-                                ball.SetPlayerCamera(myGame.playerCamera);
+                                //ball.SetPlayerCamera(myGame.playerCamera);
                                 playerLayer.AddChild(ball);
                                 break;
                             case "Geyser":

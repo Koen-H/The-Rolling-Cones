@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="300" height="300" tilewidth="50" tileheight="50" infinite="0" nextlayerid="15" nextobjectid="115">
+ <tileset firstgid="1" name="testtilesheet" tilewidth="50" tileheight="50" tilecount="300" columns="20">
+  <image source="testtilesheet.png" width="1000" height="750"/>
+ </tileset>
+ <imagelayer id="7" name="Background" visible="0" offsetx="0" offsety="2500">
+  <image source="test.png" width="2500" height="2500"/>
+ </imagelayer>
+ <imagelayer id="10" name="Background" visible="0" offsetx="2500" offsety="0">
+  <image source="test2.png" width="2500" height="2500"/>
+ </imagelayer>
+ <objectgroup id="2" name="Lines" offsetx="1.25" offsety="-0.5">
+  <object id="79" x="6.75" y="1484.5">
+   <polyline points="0,0 1144,0"/>
+  </object>
+  <object id="80" x="854.284" y="1485.52">
+   <polyline points="0,0 -2.43896,-769.091 295.258,-766.757"/>
+  </object>
+  <object id="81" x="496.75" y="1338.5">
+   <polyline points="0,0 4,-823.333"/>
+  </object>
+  <object id="82" x="0.75" y="1344.5">
+   <polyline points="0,0 495.25,-2"/>
+  </object>
+  <object id="83" x="772.75" y="1485.5">
+   <polyline points="0,0 83,-40"/>
+  </object>
+  <object id="84" x="496.386" y="1266.14">
+   <polyline points="0,0 56,49"/>
+  </object>
+  <object id="85" x="852.583" y="1092.17">
+   <polyline points="0,0 -64,50.1667"/>
+  </object>
+  <object id="91" x="1150.11" y="718.731">
+   <polyline points="0,0 0.636364,765.78"/>
+  </object>
+  <object id="93" x="1149.52" y="718.766">
+   <polyline points="0,0 0.59375,-0.0195313"/>
+  </object>
+  <object id="98" x="1498.11" y="1095.23">
+   <polyline points="0,0 1.30303,-198.727 201.303,-197.394"/>
+  </object>
+  <object id="99" x="1148.75" y="994.5" rotation="-10">
+   <polyline points="0,0 29,37"/>
+  </object>
+  <object id="100" x="1298.25" y="872">
+   <polyline points="0,0 -36,46"/>
+  </object>
+  <object id="105" x="1300" y="1172.5">
+   <polyline points="0,0 -0.5,-365.083"/>
+  </object>
+  <object id="106" x="1149.67" y="1219.75" rotation="-10">
+   <polyline points="0,0 29,37"/>
+  </object>
+  <object id="107" x="1299.08" y="1110.5">
+   <polyline points="0,0 -36,46"/>
+  </object>
+  <object id="108" x="501.417" y="515.167">
+   <polyline points="0,0 997.333,4.33333 999.333,277.333"/>
+  </object>
+  <object id="110" x="1500.75" y="792.25">
+   <polyline points="0,0 198.667,0.916667"/>
+  </object>
+  <object id="114" x="1498.18" y="1094.19">
+   <polyline points="0,0 -0.454545,154.091 -347.767,155.028"/>
+  </object>
+ </objectgroup>
+ <objectgroup id="8" name="SnowLines"/>
+ <objectgroup id="9" name="InteractableEnvironments">
+  <object id="43" x="2316" y="3684" width="500" height="350"/>
+  <object id="45" x="3052" y="2484" width="400" height="200"/>
+  <object id="48" x="3120" y="3076" width="500" height="450"/>
+  <object id="50" x="1051.65" y="618.114" width="100" height="100"/>
+ </objectgroup>
+ <objectgroup id="14" name="PreDefinedObjects">
+  <object id="52" name="Player" x="135.7" y="1441.64"/>
+  <object id="53" name="Geyser" x="1469.67" y="2985.33" rotation="50"/>
+  <object id="54" name="MagneticField" x="1712.22" y="889.163"/>
+  <object id="63" name="Geyser" x="1172.66" y="998.462" rotation="40"/>
+  <object id="76" name="Geyser" x="1546.13" y="2831.5" rotation="50"/>
+  <object id="88" name="Geyser" x="533.636" y="1282.64" rotation="48"/>
+  <object id="89" name="Geyser" x="810.75" y="1456.08" rotation="334.172"/>
+  <object id="90" name="Geyser" x="811.333" y="1111.92" rotation="322.532"/>
+  <object id="101" name="Geyser" x="1177.75" y="1228.25" rotation="35"/>
+  <object id="102" name="Geyser" x="1276.39" y="1122.55" rotation="315"/>
+  <object id="103" name="Geyser" x="1278.33" y="881.333" rotation="315"/>
+  <object id="104" name="Geyser" x="556.909" y="904.424" rotation="40"/>
+  <object id="111" x="1723.5" y="897.625">
+   <polyline points="0,0 69.625,-0.25"/>
+  </object>
+  <object id="112" x="1700.69" y="792.656">
+   <polyline points="0,0 99.6458,0.677083"/>
+  </object>
+ </objectgroup>
+</map>

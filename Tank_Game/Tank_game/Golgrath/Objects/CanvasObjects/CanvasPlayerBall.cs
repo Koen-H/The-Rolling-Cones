@@ -61,6 +61,7 @@ namespace GXPEngine.Golgrath.Objects
         private void HandleInput()
         {
             Vec2 velocity = this.Velocity;
+
             if (Input.GetKey(Key.A) && velocity.x > -this.maxSpeed)
             {
                 velocity.x -= acceleration;
