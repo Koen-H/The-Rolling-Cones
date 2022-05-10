@@ -7,6 +7,7 @@ using GXPEngine.Golgrath.Objects;
 using GXPEngine.Coolgrath;
 using GXPEngine.PhysicsEngine;
 using GXPEngine.Golgrath.Cameras;
+using GXPEngine.PhysicsEngine.Colliders;
 using GXPEngine.TiledLoader;
 
 public class MyGame : Game
@@ -182,6 +183,7 @@ public class MyGame : Game
         geysers = new List<Geyser>();
         fields = new List<OrbitalField>();
         coins = new List<NextLevelBlock>();
+        collisionManager.colliders = new List<Collider>();
         List<GameObject> children = GetChildren();
         foreach (GameObject child in children)
         {
