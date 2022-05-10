@@ -40,34 +40,30 @@ namespace GXPEngine.Coolgrath
                         this.Destroy();
                         break;
                     }
+
                 case ShopButtonProperty.Geyser:
                     {
-
-                        //if(coins >= enough){
-
+                        DeleteObject();
                         Console.WriteLine("Geyser sellected and placed!");
                         Vec2 objectPos = new Vec2(questionShopObject.Position.x + (questionShopObject.width/2), questionShopObject.Position.y + (questionShopObject.height / 2));
-                        myGame.AddChild(new Geyser(10, objectPos, "cyan_block.png", 1,1));
-                        RemoveCoins(10);
+                        questionShopObject.interactableObject = new Geyser(5, objectPos, "cyan_block.png", 1, 1);
+                        myGame.objectLayer.AddChild(questionShopObject.interactableObject);
                         KillShop();
-                        //} else {  YOU ARE BROKE LOL 
-                        //Console.WriteLine("Geyser sellected but not placed!"); }
                         break;
                     }
+
                 case ShopButtonProperty.OrbitalField:
                     {
-
-                        //if(coins >= enough){
-
+                        DeleteObject();
                         Console.WriteLine("OrbitalField sellected and placed!");
                         Vec2 objectPos = new Vec2(questionShopObject.Position.x + (questionShopObject.width / 2), questionShopObject.Position.y + (questionShopObject.height / 2));
-                        myGame.AddChild(new OrbitalField(0.025F, 40, objectPos));
+                        questionShopObject.interactableObject = new OrbitalField(0.025F, 40, objectPos);
+                        myGame.objectLayer.AddChild(questionShopObject.interactableObject);
                         RemoveCoins(10);
                         KillShop();
-                        //} else {  YOU ARE BROKE LOL 
-                        //Console.WriteLine("Geyser sellected but not placed!"); }
                         break;
                     }
+
                 default:
                     {
                         Console.WriteLine("This button hasn't been setup yet, " + buttonProperty);
@@ -80,13 +76,21 @@ namespace GXPEngine.Coolgrath
             }
         }
 
+        public void DeleteObject()
+        {
+            if(questionShopObject.interactableObject != null)
+            {
+                questionShopObject.interactableObject.Destroy();
+            }
+        }
+
         public void RemoveCoins(int coins)
         {
             //remove coins here
         }
         public void KillShop()
         {
-            questionShopObject.Destroy();
+            //questionShopObject.Destroy();
             this.Destroy();
             
         }

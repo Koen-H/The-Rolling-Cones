@@ -23,7 +23,13 @@ namespace GXPEngine.Coolgrath
         public new void Update()
         {
             Vector2 worldSpaceMousePos = mainCamera.ScreenPointToGlobal(Input.mouseX, Input.mouseY);
-            if (HitTestPoint(worldSpaceMousePos.x, worldSpaceMousePos.y) && Input.GetMouseButtonDown(0)) OpenShop();
+            if (HitTestPoint(worldSpaceMousePos.x, worldSpaceMousePos.y) && Input.GetMouseButtonDown(0) && interactableObject == null) OpenShop();
+            else if (HitTestPoint(worldSpaceMousePos.x, worldSpaceMousePos.y)  && interactableObject != null && interactableObject.HitTestPoint(worldSpaceMousePos.x, worldSpaceMousePos.y))
+            {
+                if (Input.GetMouseButton(0)) interactableObject.SetXY(worldSpaceMousePos.x, worldSpaceMousePos.y);
+                if (Input.GetMouseButton(1)) OpenShop();
+            }
+
             
         }
 

@@ -17,7 +17,7 @@ namespace GXPEngine.Coolgrath
             SetOrigin(width/2,height/2);
             strength = _strength;
             MyGame myGame = (MyGame)Game.main;
-            //myGame.geysers.Add(this);
+            myGame.geysers.Add(this);
             /*this.TopSide.MyCollider.trigger = true;
             this.TopSide.StartCap.trigger = true;
             this.RightSide.MyCollider.trigger = true;
@@ -38,9 +38,9 @@ namespace GXPEngine.Coolgrath
         {
             strength = _strength;
             MyGame myGame = (MyGame)Game.main;
-            //myGame.geysers.Add(this);
-            /*this.TopSide.MyCollider.trigger = true;
-            this.TopSide.StartCap.trigger = true;
+            myGame.geysers.Add(this);
+            this.TopSide.MyCollider.trigger = true;
+            /*this.TopSide.StartCap.trigger = true;
             this.RightSide.MyCollider.trigger = true;
             this.RightSide.StartCap.trigger = true;
             this.BottomSide.MyCollider.trigger = true;

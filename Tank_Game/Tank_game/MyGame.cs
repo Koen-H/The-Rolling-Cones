@@ -18,7 +18,9 @@ public class MyGame : Game
     public Tank playerTank;*/
 
     public List<Geyser> geysers = new List<Geyser>();
+    public List<OrbitalField> fields = new List<OrbitalField>();
     public PlayerCamera playerCamera;
+    public Pivot objectLayer;
     public bool drawDebugLine;
     Canvas lineContainer = null;
     public static MyCollisionManager collisionManager;
@@ -153,7 +155,7 @@ public class MyGame : Game
         this.targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;
     }
 
-    private void LoadLevel(string fileName = "test.tmx")
+    private void LoadLevel(string fileName = "level.tmx")
     {
        // DestroyAll();
         Level level = new Level(fileName);
@@ -162,6 +164,7 @@ public class MyGame : Game
         {
             AddChild(child);
         }
+        objectLayer = level.objectLayer;
 
     }
     private void DestroyAll()

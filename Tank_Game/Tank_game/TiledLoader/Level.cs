@@ -18,7 +18,7 @@ namespace GXPEngine.TiledLoader
         readonly private string levelFileName;
         private Pivot colliders;
         private Pivot backgroundLayer;
-        private Pivot objectLayer;
+        public Pivot objectLayer;
         private Pivot playerLayer;
         private Pivot frontgroundLayer;
 
@@ -102,7 +102,7 @@ namespace GXPEngine.TiledLoader
                                 playerLayer.AddChild(ball);
                                 break;
                             case "Geyser":
-                                Geyser geyser = new Geyser(10,new Vec2(obj.X,obj.Y),"cyan_block.png",1,1);
+                                Geyser geyser = new Geyser(5,new Vec2(obj.X,obj.Y),"cyan_block.png",1,1);
                                 objectLayer.AddChild(geyser);
                                 geyser.rotation = obj.Rotation;
                                 break;

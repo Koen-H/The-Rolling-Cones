@@ -1,0 +1,6 @@
+D:\Saxion\project_final_approach\Rolie_Polie\Tank_Game\Tank_game\bin\Debug\GXPEngine.exe
+D:\Saxion\project_final_approach\Rolie_Polie\Tank_Game\Tank_game\bin\Debug\GXPEngine.pdb
+D:\Saxion\project_final_approach\Rolie_Polie\Tank_Game\Tank_game\obj\x86\Debug\GXPEngine.csprojAssemblyReference.cache
+D:\Saxion\project_final_approach\Rolie_Polie\Tank_Game\Tank_game\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
+D:\Saxion\project_final_approach\Rolie_Polie\Tank_Game\Tank_game\obj\x86\Debug\GXPEngine.exe
+D:\Saxion\project_final_approach\Rolie_Polie\Tank_Game\Tank_game\obj\x86\Debug\GXPEngine.pdb

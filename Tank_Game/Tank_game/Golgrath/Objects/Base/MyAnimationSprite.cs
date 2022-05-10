@@ -17,13 +17,13 @@ namespace GXPEngine.Golgrath.Objects
         /// <param name="position">Vec2, a point in a 2 dimensional space.</param>
         /// <param name="canvasWidth">Canvas width</param>
         /// <param name="canvasHeight">Canvas height</param>
-        public MyAnimationSprite(Vec2 position, string filename, int columns, int rows, int frames = -1, bool keepInCache = false, bool addCollider = false): base(filename, columns, rows, frames, keepInCache, addCollider)
+        public MyAnimationSprite(Vec2 position, string filename, int columns, int rows, int frames = -1, bool keepInCache = false, bool addCollider = true): base(filename, columns, rows, frames, keepInCache, addCollider)
         {
             this.Position = position;
             this.childColliders = new List<Collider>();
         }
 
-        public MyAnimationSprite(Vec2 position, string filename, int width, int height, int columns, int rows, int frames = -1, bool keepInCache = false, bool addCollider = false) : base(filename, columns, rows, frames, keepInCache, addCollider)
+        public MyAnimationSprite(Vec2 position, string filename, int width, int height, int columns, int rows, int frames = -1, bool keepInCache = false, bool addCollider = true) : base(filename, columns, rows, frames, keepInCache, addCollider)
         {
             this.width = width;
             this.height = height;
