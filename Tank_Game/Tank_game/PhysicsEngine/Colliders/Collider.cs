@@ -7,7 +7,7 @@ using Physics;
 
 namespace GXPEngine.PhysicsEngine.Colliders
 {
-    public abstract class Collider
+    public abstract class Collider : GameObject
     {
         public bool trigger;
         protected Vec2 position;

@@ -21,7 +21,7 @@ namespace GXPEngine.Golgrath.Objects
         private PlayerCamera camera;
         public CanvasPlayerBall(int radius, Vec2 position, Vec2 gravity, Vec2 velocity) : base(radius, position, gravity, velocity)
         {
-            playerSprite = new AnimationSprite("ConeTest.png", 1,1,-1,false,false);
+            playerSprite = new AnimationSprite("RollingPineCone.png", 8,1,-1,false,false);
             playerSprite.SetOrigin(this.radius,this.radius);
             
             this.DrawRect(0, 200, 0);
@@ -98,21 +98,23 @@ namespace GXPEngine.Golgrath.Objects
             else rotation += velocity.Length();
             if (rotation >= 360 || rotation <= -360) rotation = 0;
 
-           /* if (velocity.Normalized().x < 0 && !goingLeft)// To left
-            {
-                playerSprite.initializeFromTexture(Texture2D.GetInstance("RollingPineConeLeft.png", false));
-                playerSprite.initializeAnimFrames(8, 1, -1);
-                playerSprite.SetOrigin(this.radius, this.radius);
-                goingLeft = true;
-            }
-            else if(velocity.Normalized().x > 0 && goingLeft)//To right
-            {
-                playerSprite.initializeFromTexture(Texture2D.GetInstance("RollingPineCone.png", false));
-                playerSprite.initializeAnimFrames(8, 1, -1);
-                playerSprite.SetOrigin(this.radius, this.radius);
-                goingLeft = false;
-            }
-            playerSprite.Animate(velocity.Length()/50);*/
+            //Rotatin sprite instead of ball...
+            /* if (velocity.Normalized().x < 0 && !goingLeft)// To left
+             {
+                 playerSprite.initializeFromTexture(Texture2D.GetInstance("RollingPineConeLeft.png", false));
+                 playerSprite.initializeAnimFrames(8, 1, -1);
+                 playerSprite.SetOrigin(this.radius, this.radius);
+                 goingLeft = true;
+             }
+             else if(velocity.Normalized().x > 0 && goingLeft)//To right
+             {
+                 playerSprite.initializeFromTexture(Texture2D.GetInstance("RollingPineCone.png", false));
+                 playerSprite.initializeAnimFrames(8, 1, -1);
+                 playerSprite.SetOrigin(this.radius, this.radius);
+                 goingLeft = false;
+             }
+             playerSprite.Animate(velocity.Length()/50);*/
+            playerSprite.Animate(0.05f);
 
         }
         private void DrawRect(byte red, byte green, byte blue)
@@ -201,7 +203,8 @@ namespace GXPEngine.Golgrath.Objects
         {
             if (other is Geyser)
             {
-                velocity += Vec2.GetUnitVectorDeg(-90) * 2;
+                Geyser geyser = (Geyser)other;
+                velocity += Vec2.GetUnitVectorDeg(-90 + geyser.rotation) * geyser.strength;
             }
             if(other is OrbitalField)
             {

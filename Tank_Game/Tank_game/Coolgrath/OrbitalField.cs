@@ -11,6 +11,7 @@ namespace GXPEngine.Coolgrath
     class OrbitalField : CanvasCircle
     {
         public float PullStrength {get;set;}
+        public Boolean isInteractableObject;
         public OrbitalField(float pPullStrength, int pRadius, Vec2 pPosition) : base(pRadius * 2 + 1, pPosition)
         {
             PullStrength = pPullStrength;
