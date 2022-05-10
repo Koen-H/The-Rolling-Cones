@@ -130,7 +130,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
                     if (MyGame.collisionManager.FirstTime)
                     {
                         Vec2 velocity = moveable.Velocity;
-                        velocity.Reflect(info.normal, 0.7F);
+                        velocity.Reflect(info.normal, 0.5F);//was 0.7f
                         moveable.Velocity = velocity;
                     }
                 }

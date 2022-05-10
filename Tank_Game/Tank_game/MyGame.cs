@@ -25,6 +25,7 @@ public class MyGame : Game
     public bool drawDebugLine;
     Canvas lineContainer = null;
     public static MyCollisionManager collisionManager;
+    public int currentLevel = 1;
 
     public MyGame() : base(1920, 1080, false, false, 1920, 1080, false)
 	{
@@ -163,12 +164,10 @@ public class MyGame : Game
         this.targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;
     }
 
-    private void LoadLevel(string fileName = "NEWLEVEL.tmx")
+    public void LoadLevel(string fileName = "NEWLEVEL.tmx")
     {
-        geysers = new List<Geyser>();
-        fields = new List<OrbitalField>();
-        coins = new List<NextLevelBlock>();
-        // DestroyAll();
+        
+        DestroyAll();
         Level level = new Level(fileName);
         List<GameObject> children = level.GetChildren();
         foreach (GameObject child in children)
@@ -180,11 +179,17 @@ public class MyGame : Game
     }
     private void DestroyAll()
     {
+        geysers = new List<Geyser>();
+        fields = new List<OrbitalField>();
+        coins = new List<NextLevelBlock>();
         List<GameObject> children = GetChildren();
         foreach (GameObject child in children)
         {
             child.Destroy();
         }
+        playerCamera = new PlayerCamera(0, 0, this.width, this.height);
+        playerCamera.SetXY(1920 / 2, 1080 / 2);
+        AddChild(playerCamera);
 
     }
 }

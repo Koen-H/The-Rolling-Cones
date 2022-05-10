@@ -154,6 +154,7 @@ namespace GXPEngine.Golgrath.Objects
             MyGame.collisionManager.CollideWith(this.myCollider);
             OnGeyser();
             InOrbital();
+            OnCoin();
 
         }
         private void ApplyGravity()
@@ -228,6 +229,22 @@ namespace GXPEngine.Golgrath.Objects
                     //}
                 }
                 
+            }
+        }
+
+        private void OnCoin()
+        {
+            MyGame myGame = (MyGame)Game.main;
+            foreach (NextLevelBlock other in myGame.coins)
+            {
+                if (HitTest(other))
+                {
+                    Console.WriteLine("ON A COIN!");
+                    myGame.currentLevel++;
+                    myGame.LoadLevel("NEWLEVEL_" + myGame.currentLevel + ".tmx");
+
+                }
+
             }
         }
 

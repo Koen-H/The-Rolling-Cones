@@ -110,8 +110,9 @@ namespace GXPEngine.TiledLoader
                                 OrbitalField magneticField = new OrbitalField(0.025F, 44, new Vec2(obj.X, obj.Y));
                                 objectLayer.AddChild(magneticField);
                                 break;
-                            case "Other stuff here":
-
+                            case "Coin":
+                                NextLevelBlock coin = new NextLevelBlock(new Vec2(obj.X, obj.Y));
+                                objectLayer.AddChild(coin);
                                 break;
                             default:
                                 Console.WriteLine("This predefinedobject doesn't exist: " + objName); //shouldn't happen, but let the game continue anyway

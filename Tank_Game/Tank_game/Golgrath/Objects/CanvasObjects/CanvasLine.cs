@@ -14,7 +14,7 @@ namespace GXPEngine.Golgrath.Objects
         protected CircleCollider cap1, cap2;
         protected bool render;
         protected bool oneWay;
-        public CanvasLine(Vec2 start, Vec2 end, bool _oneWay = false, uint pColor = 0xffffffff, bool render = false, bool disableStartCap = false, bool disableEndCap = false): base(new Vec2(0, 0), 2000, 2000)
+        public CanvasLine(Vec2 start, Vec2 end, bool _oneWay = false, uint pColor = 0xffffffff, bool render = true, bool disableStartCap = false, bool disableEndCap = false): base(new Vec2(0, 0), 2000, 2000)
         {
             this.start = start;
             this.end = end;
