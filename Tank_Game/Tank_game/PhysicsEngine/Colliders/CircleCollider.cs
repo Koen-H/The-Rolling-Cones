@@ -88,7 +88,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
             if (collideWith != this)
             {
 
-                if (collideWith.Owner is CanvasBall && this.Owner is OrbitalField)
+                /*if (collideWith.Owner is CanvasBall && this.Owner is OrbitalField)
                // if (collideWith.Owner is CanvasBall)
                 {
                     Console.WriteLine("test");
@@ -107,9 +107,10 @@ namespace GXPEngine.PhysicsEngine.Colliders
                         //incBall.Gravity = new Vec2(0, 0);
                     }
 
-                }
-               /* else if (collideWith.Owner is CanvasBall)
+                }*/
+                if (collideWith.Owner is CanvasBall)
                 {
+                    
                     CircleCollider ballCollider = (CircleCollider)collideWith;
                     CircleCollider incBall = (CircleCollider)collideWith;
                     Vec2 relative = ballCollider.Position - this.Position;
@@ -140,7 +141,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
                                 return new CollisionInfo(u.Normalized(), incBall.Owner, 0.0F);
                         }
                     }
-                }*/
+                }
                 /*else if (collideWith.Owner is CanvasBall && this.Owner is CanvasCircle)
                 {
                     CanvasCircle ownCircle = (CanvasCircle)this.Owner;

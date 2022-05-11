@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="192" height="108" tilewidth="10" tileheight="10" infinite="0" nextlayerid="15" nextobjectid="107">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="192" height="108" tilewidth="10" tileheight="10" infinite="0" nextlayerid="15" nextobjectid="110">
  <tileset firstgid="1" name="testtilesheet" tilewidth="50" tileheight="50" tilecount="300" columns="20">
   <image source="testtilesheet.png" width="1000" height="750"/>
  </tileset>
@@ -28,6 +28,9 @@
   <object id="106" x="926.667" y="926.667">
    <polyline points="0,0 773.333,3.33333"/>
   </object>
+  <object id="109" x="780" y="830">
+   <polyline points="0,0 0,-230"/>
+  </object>
  </objectgroup>
  <objectgroup id="9" name="InteractableEnvironments">
   <object id="65" x="465.985" y="187.712" width="292.212" height="85.667"/>
@@ -36,10 +39,10 @@
   <object id="102" x="53.2273" y="512.5" width="152.212" height="85.667"/>
  </objectgroup>
  <objectgroup id="14" name="PreDefinedObjects">
-  <object id="52" name="Player" x="202.826" y="152.868"/>
-  <object id="53" name="Geyser" x="742.004" y="1139.25" rotation="50"/>
-  <object id="54" name="MagneticField" x="215.597" y="1216.25"/>
-  <object id="63" name="Geyser" x="341.125" y="1165.71" rotation="50"/>
+  <object id="52" name="Player" x="203.826" y="133.868"/>
+  <object id="53" name="Geyser" x="666.004" y="1371.25" rotation="50"/>
+  <object id="54" name="MagneticField" x="115.597" y="1354.25"/>
+  <object id="63" name="Geyser" x="342.125" y="1369.71" rotation="50"/>
   <object id="79" name="Coin" x="136.58" y="902.499" width="106.667" height="48"/>
  </objectgroup>
 </map>

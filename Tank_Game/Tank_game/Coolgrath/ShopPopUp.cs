@@ -26,14 +26,16 @@ namespace GXPEngine.Coolgrath
             myGame = (MyGame)Game.main;
 
             AddChild(new ShopButton(ShopButtonProperty.Close, this, new Vec2(0, 0), "CloseButton.png", 1, 1));
-            AddChild(new ShopButton(ShopButtonProperty.Geyser, this, new Vec2(500, 500), "GeyserButton.png", 1, 1));
-            AddChild(new ShopButton(ShopButtonProperty.OrbitalField, this, new Vec2(150, 500), "OrbitalField.png", 1, 1));
-            AddChild(new ShopButton(ShopButtonProperty.BushShot, this, new Vec2(750, 500), "OrbitalField.png", 1, 1));
-
+            if (myGame.newGamePlus || myGame.currentLevel != 6 ) AddChild(new ShopButton(ShopButtonProperty.Geyser, this, new Vec2(240, 500), "GeyserButton.png", 1, 1));
+            if (myGame.newGamePlus || myGame.currentLevel == 4 || myGame.currentLevel == 5 || myGame.currentLevel == 7) AddChild(new ShopButton(ShopButtonProperty.OrbitalField, this, new Vec2(810, 500), "OrbitalField.png", 1, 1));
+            if (myGame.newGamePlus || myGame.currentLevel == 6 || myGame.currentLevel == 7) AddChild(new ShopButton(ShopButtonProperty.BushShot, this, new Vec2(1380, 500), "BushShotButton.png", 1, 1));
         }
 
         public void ClickedButton(ShopButtonProperty buttonProperty)
         {
+            new Sound("button.wav").Play();
+            
+            
             switch (buttonProperty)
             {
                 case ShopButtonProperty.Close:
@@ -48,7 +50,7 @@ namespace GXPEngine.Coolgrath
                         DeleteObject();
                         Console.WriteLine("Geyser sellected and placed!");
                         Vec2 objectPos = new Vec2(questionShopObject.Position.x + (questionShopObject.width/2), questionShopObject.Position.y + (questionShopObject.height / 2));
-                        questionShopObject.interactableObject = new Geyser(5, objectPos, "cyan_block.png", 1, 1);
+                        questionShopObject.interactableObject = new Geyser(5, objectPos, "cyan_block.png", 8, 1);
                         myGame.objectLayer.AddChild(questionShopObject.interactableObject);
                         KillShop();
                         break;
@@ -96,7 +98,12 @@ namespace GXPEngine.Coolgrath
                 questionShopObject.interactableObject.Destroy();
                 if (questionShopObject.interactableObject is Geyser) myGame.geysers.Remove((Geyser)questionShopObject.interactableObject);
                 else if (questionShopObject.interactableObject is OrbitalField) myGame.fields.Remove((OrbitalField)questionShopObject.interactableObject);
-                else if (questionShopObject.interactableObject is BushShot) myGame.bushes.Remove((BushShot)questionShopObject.interactableObject);
+                else if (questionShopObject.interactableObject is BushShot)
+                {
+                    BushShot temp = (BushShot)questionShopObject.interactableObject;
+                    temp.leaves.Destroy();
+                    myGame.bushes.Remove((BushShot)questionShopObject.interactableObject);
+                }
             }
         }
 

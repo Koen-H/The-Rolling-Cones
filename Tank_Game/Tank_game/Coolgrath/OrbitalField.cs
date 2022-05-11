@@ -28,7 +28,7 @@ namespace GXPEngine.Coolgrath
         }
         public float radius;
 
-        public OrbitalField(float pPullStrength, int pRadius, Vec2 pPosition) : base("BallTest.png", 1, 1, -1, true)
+        public OrbitalField(float pPullStrength, int pRadius, Vec2 pPosition) : base("Magnet.png", 8, 1, -1, true)
         {
             Position = pPosition;
             //collider = new Circle(pRadius * 2 + 1, pPosition, "BallTest.png", 1, 1, true);
@@ -40,6 +40,12 @@ namespace GXPEngine.Coolgrath
             myGame.fields.Add(this);
             SetOrigin(width/2,height/2);
 
+        }
+
+        public new void Update()
+        {
+            this.Animate(0.1f);
+            //this.rotation += 0.3f;
         }
 
         /* public class OrbitalField : CanvasCircle

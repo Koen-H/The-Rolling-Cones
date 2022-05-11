@@ -33,7 +33,7 @@
  </objectgroup>
  <objectgroup id="14" name="PreDefinedObjects">
   <object id="52" name="Player" x="1045.73" y="947.875"/>
-  <object id="53" name="Geyser" x="742.004" y="1139.25" rotation="50"/>
+  <object id="53" name="Geyser" x="714.671" y="1339.92" rotation="50"/>
   <object id="54" name="MagneticField" x="114.264" y="1304.25"/>
   <object id="63" name="Geyser" x="691.625" y="432.21"/>
   <object id="79" name="Coin" x="136.574" y="181.576" width="106.667" height="48"/>

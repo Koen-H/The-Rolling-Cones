@@ -19,6 +19,7 @@ namespace GXPEngine.Coolgrath
         {
             buttonProperty = _buttonProperty;
             shopPopUp = _shopPopUp;
+            this.SetScaleXY(1.5f,1.5f);
             myGame = (MyGame)Game.main;
         }
 
@@ -26,6 +27,7 @@ namespace GXPEngine.Coolgrath
         {
             Vector2 worldSpaceMousePos = myGame.playerCamera.ScreenPointToGlobal(Input.mouseX, Input.mouseY);
             if (HitTestPoint(worldSpaceMousePos.x, worldSpaceMousePos.y) && Input.GetMouseButtonDown(0)) shopPopUp.ClickedButton(buttonProperty);
+            
         }
     }
 }

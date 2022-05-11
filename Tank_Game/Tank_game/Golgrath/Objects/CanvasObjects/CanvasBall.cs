@@ -5,12 +5,15 @@ namespace GXPEngine.Golgrath.Objects
     public class CanvasBall : CanvasCircle, Moveable
     {
         protected Vec2 oldPosition, gravity, velocity;
+        public ColliderObject koenCollider;
+
         public CanvasBall(int radius, Vec2 position, Vec2 gravity, Vec2 velocity): base(radius, position)
         {
             this.radius = radius;
             this.velocity = velocity;
             this.gravity = gravity;
             this.oldPosition = position;
+            koenCollider = new ColliderObject(this);
         }
 
         public new Vec2 Position
