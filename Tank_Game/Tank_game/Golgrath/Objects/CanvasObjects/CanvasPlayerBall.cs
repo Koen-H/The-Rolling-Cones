@@ -15,6 +15,12 @@ namespace GXPEngine.Golgrath.Objects
         private bool umbrella;
         private AnimationSprite playerSprite;
         bool goingLeft = false;
+        bool inBush = false;
+        public BushShot currentBush;
+        BushShot lastBush;
+        float bushInterval = 0;
+
+
         public bool pausePlayer;
         public new bool PausePlayer
         {
@@ -166,12 +172,17 @@ namespace GXPEngine.Golgrath.Objects
                 playerSprite.alpha = 1f;
             }
             ApplyGravity();
-            this.Position += velocity;
+            
             MyGame.collisionManager.CollideWith(this.myCollider);
             OnGeyser();
             InOrbital();
             OnCoin();
-
+            OnBushShot();
+            if(currentBush != null && inBush)
+            {
+                InBush();
+            }
+            this.Position += velocity;
         }
         private void ApplyGravity()
         {
@@ -217,6 +228,48 @@ namespace GXPEngine.Golgrath.Objects
                     Console.WriteLine("On Geyser!");
                     velocity = Vec2.GetUnitVectorDeg(-90 + geyser.rotation) * 25;
                 }
+            }
+        }
+
+        private void OnBushShot()
+        {
+            if (!inBush){ 
+                MyGame myGame = (MyGame)Game.main;
+                foreach (BushShot bush in myGame.bushes)
+                {
+                    if(Time.time > bushInterval || bush != lastBush)
+                    if (HitTest(bush))
+                    {
+                        this.umbrella = false;
+                        this.umbrellaSprite.alpha = 0.0F;
+                        playerSprite.alpha = 1f;
+                        Console.WriteLine("On bush");
+                        this.Position = bush.Position;// TODO: Make fancy?
+                        inBush = true;
+                        currentBush = bush;
+                        bush.target.rotation = -90;
+                        bush.target.alpha = 1f;
+                    }
+                }
+            }
+        }
+        private void InBush()
+        {
+            currentBush.Aiming();
+            rotation = currentBush.target.rotation;
+            if (Input.GetKeyDown(Key.S))
+            {
+                velocity = Vec2.GetUnitVectorDeg(rotation) * 20; //Strength of Bushshot
+                lastBush = currentBush;
+                currentBush.target.alpha = 0f;
+                currentBush = null;
+                inBush = false;
+                bushInterval = Time.time + 1200; //1.2 seconds
+                Console.WriteLine(bushInterval);
+            }
+            else
+            {
+                velocity = new Vec2(0,0);
             }
         }
 

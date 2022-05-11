@@ -26,15 +26,29 @@ namespace GXPEngine.Coolgrath
             if (HitTestPoint(worldSpaceMousePos.x, worldSpaceMousePos.y) && Input.GetMouseButtonDown(0) && interactableObject == null) OpenShop();
             else if (HitTestPoint(worldSpaceMousePos.x, worldSpaceMousePos.y)  && interactableObject != null && interactableObject.HitTestPoint(worldSpaceMousePos.x, worldSpaceMousePos.y))
             {
-                if (Input.GetMouseButton(0))
+                bool dontContinue = false;
+                if (interactableObject is BushShot)
+                {
+                    BushShot temp = (BushShot)interactableObject;
+                    if(myGame.player.currentBush != null && temp == myGame.player.currentBush)
+                    {
+                        dontContinue = true;
+                    }
+                }
+                if (Input.GetMouseButton(0) && !dontContinue)
                 {
                     myGame.player.pausePlayer = true;
                     interactableObject.SetXY(worldSpaceMousePos.x, worldSpaceMousePos.y);
                     if (interactableObject is OrbitalField) {
                         OrbitalField temp = (OrbitalField)interactableObject;
                         temp.Position = new Vec2(worldSpaceMousePos.x,worldSpaceMousePos.y);
+                    } else if (interactableObject is BushShot)
+                    {
+                        BushShot temp = (BushShot)interactableObject;
+                        temp.Position = new Vec2(worldSpaceMousePos.x, worldSpaceMousePos.y);
                     }
-                }else if (Input.GetMouseButton(1) && !myGame.shopOpen) OpenShop();
+                }
+                else if (Input.GetMouseButton(1) && !myGame.shopOpen && !dontContinue) OpenShop();
                 else
                 {
                     myGame.player.pausePlayer = false;
@@ -46,8 +60,7 @@ namespace GXPEngine.Coolgrath
 
         void OpenShop()
         {
-            // Pause game?
-            mainCamera.AddChild(new ShopPopUp(this,new Vec2(-game.width / 2, -game.height / 2),"ShopBackground.png",1,1));
+            myGame.AddChild(new ShopPopUp(this,new Vec2(0, 0), "ShopBackground.jpg", 1,1));
             myGame.player.pausePlayer = true;
             myGame.shopOpen = true;
             Console.WriteLine("Shop opened");
