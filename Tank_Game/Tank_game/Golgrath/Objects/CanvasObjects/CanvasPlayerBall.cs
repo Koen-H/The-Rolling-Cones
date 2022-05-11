@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GXPEngine.Coolgrath;
+using GXPEngine.PhysicsEngine;
 using GXPEngine.PhysicsEngine.Colliders;
 using GXPEngine.Core;
+using Physics;
+using GXPEngine.Golgrath.Objects.CanvasObjects;
 
 namespace GXPEngine.Golgrath.Objects
 {
@@ -20,6 +23,9 @@ namespace GXPEngine.Golgrath.Objects
         BushShot lastBush;
         float bushInterval = 0;
         SoundChannel orbit = new SoundChannel(1);
+        public MyGame myGame = (MyGame) Game.main;
+
+
 
 
         public bool pausePlayer;
@@ -190,6 +196,8 @@ namespace GXPEngine.Golgrath.Objects
                 InBush();
             }
             //this.Position += velocity.Normalized() * (velocity.Length()/17 * Time.deltaTime);
+            CapCheck();
+
             this.Position += velocity;
         }
         private void ApplyGravity()
@@ -348,32 +356,105 @@ namespace GXPEngine.Golgrath.Objects
             return Mathf.Sin(Mathf.PI * 4 * t) * (1-t);
         }
 
-      /*  public override void Trigger(GameObject other)
+        private void ResolveCollisions()
         {
-            if (other is Geyser)
+           // CollisionInfo collision = MyGame.collisionManager.CapsCollisionsTOI(this.koenCollider);
+            //if (collision != null) MyGame.collisionManager.ResolveCollision(this.koenCollider, collision);
+            //if (collision.x != 0 && collision.y != 0) velocity.Reflect(collision);
+            /*CollisionInfo collision = MyGame.collisionManager.CapsCollisions(this.koenCollider);
+            Console.WriteLine(collision);
+            if (collision != null) MyGame.collisionManager.ResolveCollision(this.koenCollider, collision);*/
+        }
+
+        private void CapCheck()
+        {
+            CollisionInfo earliestCollision = null;
+            for (int i = 0; i < myGame.caps.Count(); i++)
             {
-                Geyser geyser = (Geyser)other;
-                velocity += Vec2.GetUnitVectorDeg(-90 + geyser.rotation) * geyser.strength;
+                Cap cap = myGame.GetCap(i);
+                    CollisionInfo colCheck = BallCheck(cap);
+                    if (colCheck != null) if ((earliestCollision == null || earliestCollision.timeOfImpact > colCheck.timeOfImpact)) earliestCollision = colCheck;
             }
-            if(other is OrbitalField)
+            if (earliestCollision != null)
             {
-                Console.WriteLine("TRIGGER WITH ORBITALFIELD");
-                OrbitalField ownCircle = (OrbitalField)other;
-                CanvasBall incBall = this;
-                Vec2 relative = incBall.Position - ownCircle.Position;
-                if (relative.Length() < ownCircle.Radius + incBall.Radius)
+                Console.WriteLine($"Time of impact: {0}", earliestCollision.timeOfImpact);
+                ResolveCollision(earliestCollision);
+            }
+        }
+
+        CollisionInfo BallCheck(Cap other)
+        {
+
+            Vec2 relativePosition = position - other.position;
+            if (relativePosition.Length() < radius + other.radius)
+            {
+                // DONE: compute correct normal and time of impact, and 
+                // 		 return *earliest* collision instead of *first detected collision*:
+
+                Vec2 normal = (OldPosition - other.position);
+                float a = Mathf.Pow(velocity.Length(), 2);
+                float b = 2 * normal.Dot(velocity);
+                float c = Mathf.Pow(normal.Length(), 2) - Mathf.Pow(radius + other.radius, 2);
+                Console.WriteLine($"A: {a}");
+                Console.WriteLine($"B: {b}");
+                Console.WriteLine($"C: {c}");
+                //float d = Mathf.Pow(b, 2) - (4 * a * c);
+                if (c < 0)
                 {
-                    float gravity = incBall.Gravity.Length();
-                    Vec2 pullDirection = ownCircle.Position - incBall.Position; //Draws a line from the bullet position to the center of the acceleration field.
-                    float oldLength = incBall.Velocity.Length();//Gets the old lenght (speed)
-                    incBall.Velocity = incBall.Velocity + pullDirection * ownCircle.PullStrength;//Set the velocity to the direction of the center of the acceleration field based on the pullstrength.
-                    incBall.Velocity = incBall.Velocity.Normalized();//Set speed to 1
-                                                                     //  incBall.Velocity = (incBall.Velocity * (float)((oldLength + gravity) * 1.09));//Set speed back to original.
-                    incBall.Velocity = incBall.Velocity * (oldLength + gravity);
-                    //incBall.Gravity = new Vec2(0, 0);
+                    if (b < 0) return new CollisionInfo(normal, other, 0);
+                    else return null;
                 }
+                if (a == 0) return null;
+                float d = Mathf.Pow(b, 2) - (4 * a * c);
+                if (d < 0) return null;
+                float toi = (-b - Mathf.Sqrt(d)) / (2 * a);
+                if (0 <= toi && toi < 1) return new CollisionInfo(normal, other, toi);
+                else return null;
             }
-        }*/
+            return null;
+        }
+
+        public void ResolveCollision(CollisionInfo col)
+        {
+            // DONE: resolve the collision correctly: position reset & velocity reflection.
+            if (col.other is Cap)
+            {
+                Cap otherBall = (Cap)col.other;
+                Vec2 poi = OldPosition + col.timeOfImpact * velocity;
+                position = poi;
+                velocity.Reflect(col.normal.Normal());
+                velocity *= -1;
+
+            }
+
+        }
+
+        /*  public override void Trigger(GameObject other)
+          {
+              if (other is Geyser)
+              {
+                  Geyser geyser = (Geyser)other;
+                  velocity += Vec2.GetUnitVectorDeg(-90 + geyser.rotation) * geyser.strength;
+              }
+              if(other is OrbitalField)
+              {
+                  Console.WriteLine("TRIGGER WITH ORBITALFIELD");
+                  OrbitalField ownCircle = (OrbitalField)other;
+                  CanvasBall incBall = this;
+                  Vec2 relative = incBall.Position - ownCircle.Position;
+                  if (relative.Length() < ownCircle.Radius + incBall.Radius)
+                  {
+                      float gravity = incBall.Gravity.Length();
+                      Vec2 pullDirection = ownCircle.Position - incBall.Position; //Draws a line from the bullet position to the center of the acceleration field.
+                      float oldLength = incBall.Velocity.Length();//Gets the old lenght (speed)
+                      incBall.Velocity = incBall.Velocity + pullDirection * ownCircle.PullStrength;//Set the velocity to the direction of the center of the acceleration field based on the pullstrength.
+                      incBall.Velocity = incBall.Velocity.Normalized();//Set speed to 1
+                                                                       //  incBall.Velocity = (incBall.Velocity * (float)((oldLength + gravity) * 1.09));//Set speed back to original.
+                      incBall.Velocity = incBall.Velocity * (oldLength + gravity);
+                      //incBall.Gravity = new Vec2(0, 0);
+                  }
+              }
+          }*/
     }
 
 

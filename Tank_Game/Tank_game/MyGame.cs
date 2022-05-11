@@ -9,6 +9,7 @@ using GXPEngine.PhysicsEngine;
 using GXPEngine.Golgrath.Cameras;
 using GXPEngine.PhysicsEngine.Colliders;
 using GXPEngine.TiledLoader;
+using GXPEngine.Golgrath.Objects.CanvasObjects;
 
 public class MyGame : Game
 {
@@ -22,6 +23,7 @@ public class MyGame : Game
     public List<OrbitalField> fields = new List<OrbitalField>();
     public List<NextLevelBlock> coins = new List<NextLevelBlock>();
     public List<BushShot> bushes = new List<BushShot>();
+    public List<Cap> caps = new List<Cap>();
     public PlayerCamera playerCamera;
     public Pivot objectLayer;
     public bool drawDebugLine;
@@ -68,6 +70,15 @@ public class MyGame : Game
         //Console.WriteLine( Time.deltaTime);
     }
 
+    public Cap GetCap(int index)
+    {
+        if (index >= 0 && index < caps.Count)
+        {
+            return caps[index];
+        }
+        return null;
+    }
+
     public void DrawLine(Vec2 start, Vec2 end)
     {
         lineContainer.graphics.DrawLine(Pens.White, start.x, start.y, end.x, end.y);
@@ -106,6 +117,7 @@ public class MyGame : Game
         fields = new List<OrbitalField>();
         coins = new List<NextLevelBlock>();
         bushes = new List<BushShot>();
+        caps = new List<Cap>();
         collisionManager.colliders = new List<Collider>();
         player = null;
         List<GameObject> children = GetChildren();

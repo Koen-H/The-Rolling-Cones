@@ -57,6 +57,7 @@
     <Compile Include="Golgrath\Objects\CanvasObjects\CanvasPlayerBall.cs" />
     <Compile Include="Golgrath\Objects\CanvasObjects\CanvasRectangle.cs" />
     <Compile Include="Golgrath\Objects\CanvasObjects\CanvasSquare.cs" />
+    <Compile Include="Golgrath\Objects\CanvasObjects\Cap.cs" />
     <Compile Include="MyGame.cs" />
     <Compile Include="..\..\GXPEngine2022\GXPEngine\AddOns\Gizmos.cs">
       <Link>GXPEngine\AddOns\Gizmos.cs</Link>
@@ -180,6 +181,7 @@
     </Compile>
     <Compile Include="PhysicsEngine\Colliders\CircleCollider.cs" />
     <Compile Include="PhysicsEngine\Colliders\Collider.cs" />
+    <Compile Include="PhysicsEngine\Colliders\ColliderObject.cs" />
     <Compile Include="PhysicsEngine\Colliders\LineCollider.cs" />
     <Compile Include="PhysicsEngine\Colliders\SquareCollider.cs" />
     <Compile Include="PhysicsEngine\CollisionInfo.cs" />

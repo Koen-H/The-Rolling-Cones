@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using GXPEngine.Core;
 using GXPEngine.PhysicsEngine.Colliders;
+using GXPEngine.Golgrath.Objects.CanvasObjects;
 
 namespace GXPEngine.Golgrath.Objects
 {
@@ -21,6 +22,10 @@ namespace GXPEngine.Golgrath.Objects
             this.oneWay = _oneWay;
             this.render = render;
             this.MyCollider = new LineCollider(this,oneWay);
+
+            MyGame myGame = (MyGame)Game.main;
+            myGame.caps.Add(new Cap(0,start));
+            myGame.caps.Add(new Cap(0,end));
             if (!disableStartCap)
             {
                 this.cap1 = new CircleCollider(this, this.start, 0);

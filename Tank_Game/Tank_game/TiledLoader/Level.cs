@@ -8,6 +8,7 @@ using GXPEngine.Golgrath.Objects;
 using GXPEngine.Coolgrath;
 using System.Globalization;
 using GXPEngine.Golgrath.Cameras;
+using GXPEngine.PhysicsEngine.Colliders;
 
 namespace GXPEngine.TiledLoader
 {
@@ -101,6 +102,8 @@ namespace GXPEngine.TiledLoader
                                 //ball.SetPlayerCamera(myGame.playerCamera);
                                 playerLayer.AddChild(ball);
                                 myGame.player = ball;
+                                // myGame.caps.Add(new ColliderObject(new CanvasBall(0, new Vec2(obj.X, obj.Y), new Vec2(0f, 0f), new Vec2(0f, 0f))));
+
                                 break;
                             case "Geyser":
                                 Geyser geyser = new Geyser(5,new Vec2(obj.X,obj.Y),"cyan_block.png",8,1);
