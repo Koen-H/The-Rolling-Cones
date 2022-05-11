@@ -19,6 +19,7 @@ namespace GXPEngine.Golgrath.Objects
         public BushShot currentBush;
         BushShot lastBush;
         float bushInterval = 0;
+        SoundChannel orbit = new SoundChannel(1);
 
 
         public bool pausePlayer;
@@ -106,6 +107,12 @@ namespace GXPEngine.Golgrath.Objects
                     playerSprite.alpha = 1f;
                 }
             }
+
+            if (Input.GetKeyDown(Key.K)) {
+              MyGame myGame = (MyGame)Game.main;
+                myGame.newGamePlus = !myGame.newGamePlus;
+            }
+
             /*if (velocity.x > drag)
             {
                 velocity.x -= drag;
@@ -228,7 +235,7 @@ namespace GXPEngine.Golgrath.Objects
                 if (HitTest(geyser))
                 {
                     Console.WriteLine("On Geyser!");
-                    velocity = Vec2.GetUnitVectorDeg(-90 + geyser.rotation) * 25;
+                    velocity = Vec2.GetUnitVectorDeg(-90 + geyser.rotation) * 24;
                     geyser.doAnimate = true;
                 }
             }
@@ -240,10 +247,13 @@ namespace GXPEngine.Golgrath.Objects
                 MyGame myGame = (MyGame)Game.main;
                 foreach (BushShot bush in myGame.bushes)
                 {
-                    if(Time.time > bushInterval || bush != lastBush)
+                    
+                    if (Time.time > bushInterval || bush != lastBush)
                     if (HitTest(bush))
                     {
+                            
                         new Sound("Branch_bend.wav").Play();
+                        
                         this.umbrella = false;
                         this.umbrellaSprite.alpha = 0.0F;
                         playerSprite.alpha = 1f;
@@ -263,6 +273,7 @@ namespace GXPEngine.Golgrath.Objects
             rotation = currentBush.target.rotation;
             if (Input.GetKeyDown(Key.S))
             {
+                Console.WriteLine("BranchGo.wav");
                 velocity = Vec2.GetUnitVectorDeg(rotation) * 20; //Strength of Bushshot
                 lastBush = currentBush;
                 currentBush.target.alpha = 0f;
@@ -285,12 +296,17 @@ namespace GXPEngine.Golgrath.Objects
                 if (HitTest(other))
                 {
                     Console.WriteLine("TRIGGER WITH ORBITALFIELD");
+                    
                     OrbitalField ownCircle = (OrbitalField)other;
                     CanvasBall incBall = this;
                     Vec2 relative = incBall.Position - ownCircle.Position;
-                    //if (relative.Length() < ownCircle.Radius + incBall.Radius)
-                    //{
-                        Console.WriteLine("ORBITAL 2");
+                    if (!orbit.IsPlaying)
+                    {
+                        orbit = new Sound("Orbit.wav").Play();
+                    }
+
+                        //if (relative.Length() < ownCircle.Radius + incBall.Radius)
+                        //{
                         float gravity = incBall.Gravity.Length();
                         Vec2 pullDirection = ownCircle.Position - incBall.Position; //Draws a line from the bullet position to the center of the acceleration field.
                         float oldLength = incBall.Velocity.Length();//Gets the old lenght (speed)
@@ -313,9 +329,10 @@ namespace GXPEngine.Golgrath.Objects
                 if (HitTest(other))
                 {
                     Console.WriteLine("ON A COIN!");
+                    new Sound("Coin.wav").Play();
                     myGame.currentLevel++;
                     myGame.LoadLevel("NEWLEVEL_" + myGame.currentLevel + ".tmx");
-
+                    
                 }
 
             }
