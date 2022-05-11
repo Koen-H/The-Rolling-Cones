@@ -168,7 +168,7 @@ public class MyGame : Game
         this.targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;
     }
 
-    public void LoadLevel(string fileName = "NEWLEVEL.tmx")
+    public void LoadLevel(string fileName = "NEWLEVEL_1.tmx")
     {
         
         DestroyAll();

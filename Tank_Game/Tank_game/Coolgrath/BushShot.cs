@@ -8,6 +8,7 @@ namespace GXPEngine.Coolgrath
     public class BushShot : AnimationSprite
     {
         public AnimationSprite target = new AnimationSprite("target.png",1,1,-1,false);
+        public AnimationSprite leaves = new AnimationSprite("Leaves.png",1,1,-1,false);
         private Vec2 position;
         public Vec2 Position
         {
@@ -35,6 +36,9 @@ namespace GXPEngine.Coolgrath
             SetOrigin(width / 2, height / 2);
             MyGame myGame = (MyGame)Game.main;
             myGame.bushes.Add(this);
+            leaves.alpha = 0.4f;
+            leaves.SetScaleXY(1.1f,1.1f);
+            myGame.AddChild(leaves);
         }
 
         public void Aiming()
@@ -43,6 +47,10 @@ namespace GXPEngine.Coolgrath
             else target.rotation++;
             if (target.rotation > 95 - 90 || target.rotation < -95 - 90) targetDirectionLeft = !targetDirectionLeft;
             
+        }
+        public new void Update()
+        {
+            leaves.SetXY(this.position.x - width/2,this.position.y - height/1.5f);
         }
 
     }

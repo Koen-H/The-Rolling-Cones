@@ -13,7 +13,7 @@ namespace GXPEngine.Golgrath.Objects
         {
             this.radius = radius;
             this.SetOrigin(radius, radius);
-            Draw(230, 200, 0);
+           // Draw(230, 200, 0);
             this.myCollider = new CircleCollider(this, this.position, this.radius);
         }
 
@@ -21,7 +21,7 @@ namespace GXPEngine.Golgrath.Objects
         {
             this.radius = radius;
             this.SetOrigin(radius, radius);
-            Draw(230, 200, 0);
+            //Draw(230, 200, 0);
             this.myCollider = new CircleCollider(this, this.position, this.radius);
         }
 

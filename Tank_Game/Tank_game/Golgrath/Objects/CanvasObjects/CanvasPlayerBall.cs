@@ -150,9 +150,9 @@ namespace GXPEngine.Golgrath.Objects
         }
         private void DrawRect(byte red, byte green, byte blue)
         {
-            Fill(red, green, blue);
+         /*   Fill(red, green, blue);
             Stroke(red, green, blue);
-            Rect(radius, radius * 2, radius / 2, radius / 2);
+            Rect(radius, radius * 2, radius / 2, radius / 2);*/
         }
 
         public new void Step()
@@ -182,7 +182,8 @@ namespace GXPEngine.Golgrath.Objects
             {
                 InBush();
             }
-            this.Position += velocity.Normalized() * (velocity.Length()/17 * Time.deltaTime);
+            //this.Position += velocity.Normalized() * (velocity.Length()/17 * Time.deltaTime);
+            this.Position += velocity;
         }
         private void ApplyGravity()
         {
@@ -190,6 +191,7 @@ namespace GXPEngine.Golgrath.Objects
             if (umbrella && velocity.Normalized().y > 0)
             {
                 //Do umbrella stuff
+                Console.WriteLine("umbrella thigns" + rotation );
                 float oldRotation = rotation * 0.90f;
 
                 rotation *= 0.1f;
@@ -203,10 +205,10 @@ namespace GXPEngine.Golgrath.Objects
                 
                 velocity += new Vec2(0, 0.2F);//Gravity, but less
                 //Console.WriteLine(rotation);
-                /*if (velocity.Length() > 7.5f )
+                if (velocity.Length() > 7.5f )
                 {
-                  velocity = velocity.Normalized() * (7.5f * Time.deltaTime);
-                }*/
+                  velocity = velocity.Normalized() * 7.5f;
+                }
                 
 
 
@@ -227,6 +229,7 @@ namespace GXPEngine.Golgrath.Objects
                 {
                     Console.WriteLine("On Geyser!");
                     velocity = Vec2.GetUnitVectorDeg(-90 + geyser.rotation) * 25;
+                    geyser.DoAnimate();
                 }
             }
         }

@@ -45,6 +45,7 @@ namespace GXPEngine.Coolgrath
                     } else if (interactableObject is BushShot)
                     {
                         BushShot temp = (BushShot)interactableObject;
+                        
                         temp.Position = new Vec2(worldSpaceMousePos.x, worldSpaceMousePos.y);
                     }
                 }

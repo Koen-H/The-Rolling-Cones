@@ -103,7 +103,7 @@ namespace GXPEngine.TiledLoader
                                 myGame.player = ball;
                                 break;
                             case "Geyser":
-                                Geyser geyser = new Geyser(5,new Vec2(obj.X,obj.Y),"cyan_block.png",1,1);
+                                Geyser geyser = new Geyser(5,new Vec2(obj.X,obj.Y),"cyan_block.png",8,1);
                                 objectLayer.AddChild(geyser);
                                 geyser.rotation = obj.Rotation;
                                 break;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="192" height="108" tilewidth="10" tileheight="10" infinite="0" nextlayerid="15" nextobjectid="137">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="192" height="108" tilewidth="10" tileheight="10" infinite="0" nextlayerid="15" nextobjectid="151">
  <tileset firstgid="1" name="testtilesheet" tilewidth="50" tileheight="50" tilecount="300" columns="20">
   <image source="testtilesheet.png" width="1000" height="750"/>
  </tileset>
@@ -10,27 +10,41 @@
   <object id="64" x="50" y="50">
    <polyline points="0,0 0,990 1820,990 1820,0 -0.255556,0"/>
   </object>
-  <object id="130" x="1096" y="198">
-   <polyline points="0,0 -292,0"/>
+  <object id="130" x="1328" y="198">
+   <polyline points="0,0 -532,0"/>
   </object>
   <object id="132" x="746" y="714">
    <polyline points="0,0 -292,0"/>
   </object>
-  <object id="134" x="343" y="300.667">
-   <polyline points="0,0 -292,0"/>
+  <object id="134" x="429" y="406.667">
+   <polyline points="0,0 -378.998,0"/>
+  </object>
+  <object id="138" x="1524.33" y="262.333">
+   <polyline points="0,0 -189.333,1"/>
+  </object>
+  <object id="141" x="200" y="200">
+   <polyline points="0,0 400,0"/>
+  </object>
+  <object id="142" x="600" y="300">
+   <polyline points="0,0 200,0"/>
+  </object>
+  <object id="143" x="1536" y="199">
+   <polyline points="0,0 164,1"/>
   </object>
  </objectgroup>
  <objectgroup id="9" name="InteractableEnvironments">
-  <object id="102" x="455.381" y="625.538" width="298.212" height="85.667"/>
   <object id="131" x="69.2273" y="955.833" width="152.212" height="85.667"/>
-  <object id="133" x="1589.89" y="951.167" width="152.212" height="85.667"/>
-  <object id="135" x="1365.89" y="545.167" width="152.212" height="85.667"/>
-  <object id="136" x="53.894" y="213.167" width="290.212" height="85.667"/>
+  <object id="133" x="1241.89" y="956.5" width="152.212" height="85.667"/>
+  <object id="135" x="457.894" y="629.167" width="280.212" height="85.667"/>
+  <object id="136" x="195.894" y="321.167" width="232.212" height="85.667"/>
+  <object id="148" x="1389.89" y="493.166" width="152.212" height="85.667"/>
+  <object id="149" x="1353.89" y="147.166" width="152.212" height="85.667"/>
+  <object id="150" x="627.894" y="137.166" width="152.212" height="85.667"/>
  </objectgroup>
  <objectgroup id="14" name="PreDefinedObjects">
-  <object id="52" name="Player" x="959.763" y="920.253"/>
+  <object id="52" name="Player" x="969.763" y="834.253"/>
   <object id="53" name="Geyser" x="742.004" y="1139.25" rotation="50"/>
-  <object id="54" name="MagneticField" x="104.597" y="1423.25"/>
+  <object id="54" name="MagneticField" x="1787.26" y="223.25"/>
   <object id="63" name="Geyser" x="492.507" y="1402.2"/>
   <object id="79" name="Coin" x="947.923" y="162.69" width="106.667" height="48"/>
  </objectgroup>

@@ -48,7 +48,7 @@ namespace GXPEngine.Coolgrath
                         DeleteObject();
                         Console.WriteLine("Geyser sellected and placed!");
                         Vec2 objectPos = new Vec2(questionShopObject.Position.x + (questionShopObject.width/2), questionShopObject.Position.y + (questionShopObject.height / 2));
-                        questionShopObject.interactableObject = new Geyser(5, objectPos, "cyan_block.png", 1, 1);
+                        questionShopObject.interactableObject = new Geyser(5, objectPos, "cyan_block.png", 8, 1);
                         myGame.objectLayer.AddChild(questionShopObject.interactableObject);
                         KillShop();
                         break;
@@ -96,7 +96,12 @@ namespace GXPEngine.Coolgrath
                 questionShopObject.interactableObject.Destroy();
                 if (questionShopObject.interactableObject is Geyser) myGame.geysers.Remove((Geyser)questionShopObject.interactableObject);
                 else if (questionShopObject.interactableObject is OrbitalField) myGame.fields.Remove((OrbitalField)questionShopObject.interactableObject);
-                else if (questionShopObject.interactableObject is BushShot) myGame.bushes.Remove((BushShot)questionShopObject.interactableObject);
+                else if (questionShopObject.interactableObject is BushShot)
+                {
+                    BushShot temp = (BushShot)questionShopObject.interactableObject;
+                    temp.leaves.Destroy();
+                    myGame.bushes.Remove((BushShot)questionShopObject.interactableObject);
+                }
             }
         }
 
