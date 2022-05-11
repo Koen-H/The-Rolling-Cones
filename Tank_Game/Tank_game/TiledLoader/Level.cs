@@ -100,6 +100,7 @@ namespace GXPEngine.TiledLoader
                                 CanvasPlayerBall ball = new CanvasPlayerBall(30, new Vec2(obj.X, obj.Y), new Vec2(0, 0.5F), new Vec2(0, 0));
                                 //ball.SetPlayerCamera(myGame.playerCamera);
                                 playerLayer.AddChild(ball);
+                                myGame.player = ball;
                                 break;
                             case "Geyser":
                                 Geyser geyser = new Geyser(5,new Vec2(obj.X,obj.Y),"cyan_block.png",1,1);

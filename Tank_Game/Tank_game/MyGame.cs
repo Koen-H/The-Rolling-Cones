@@ -24,9 +24,11 @@ public class MyGame : Game
     public PlayerCamera playerCamera;
     public Pivot objectLayer;
     public bool drawDebugLine;
+    public bool shopOpen;
     Canvas lineContainer = null;
     public static MyCollisionManager collisionManager;
     public int currentLevel = 1;
+    public CanvasPlayerBall player;
 
     public MyGame() : base(1920, 1080, false, false, 1920, 1080, false)
 	{
@@ -184,6 +186,7 @@ public class MyGame : Game
         fields = new List<OrbitalField>();
         coins = new List<NextLevelBlock>();
         collisionManager.colliders = new List<Collider>();
+        player = null;
         List<GameObject> children = GetChildren();
         foreach (GameObject child in children)
         {

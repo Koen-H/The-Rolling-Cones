@@ -15,6 +15,20 @@ namespace GXPEngine.Golgrath.Objects
         private bool umbrella;
         private AnimationSprite playerSprite;
         bool goingLeft = false;
+        public bool pausePlayer;
+        public new bool PausePlayer
+        {
+            get
+            {
+                return this.pausePlayer;
+            }
+            set
+            {
+                this.pausePlayer = value;
+                this.pausedVelocity = this.velocity;
+            }
+        }
+        private Vec2 pausedVelocity;
 
         private AnimationSprite umbrellaSprite;
 
@@ -45,8 +59,10 @@ namespace GXPEngine.Golgrath.Objects
 
         public new void Update()
         {
-            this.Step();
-            
+            if (!pausePlayer)
+            {
+                this.Step();
+            }
             /*Gizmos.DrawRectangle(this.x + _bounds.x, this.y + _bounds.y, 20, 20);
             Gizmos.DrawRectangle(this.x + width + _bounds.x, this.y + _bounds.y, 20, 20);
             Gizmos.DrawRectangle(this.x + _bounds.x, this.y + height + _bounds.y, 20, 20);

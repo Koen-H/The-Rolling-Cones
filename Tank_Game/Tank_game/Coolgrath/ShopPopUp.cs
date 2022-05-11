@@ -67,8 +67,7 @@ namespace GXPEngine.Coolgrath
                 default:
                     {
                         Console.WriteLine("This button hasn't been setup yet, " + buttonProperty);
-
-                        this.Destroy();
+                        KillShop();
                         break;
                     }
 
@@ -80,7 +79,10 @@ namespace GXPEngine.Coolgrath
         {
             if(questionShopObject.interactableObject != null)
             {
+                Console.WriteLine("Deleted!");
                 questionShopObject.interactableObject.Destroy();
+                if (questionShopObject.interactableObject is OrbitalField) myGame.fields.Remove((OrbitalField)questionShopObject.interactableObject);
+                if (questionShopObject.interactableObject is Geyser) myGame.geysers.Remove((Geyser)questionShopObject.interactableObject);
             }
         }
 
@@ -91,6 +93,8 @@ namespace GXPEngine.Coolgrath
         public void KillShop()
         {
             //questionShopObject.Destroy();
+            myGame.player.pausePlayer = false;
+            myGame.shopOpen = false;
             this.Destroy();
             
         }
