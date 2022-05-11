@@ -13,12 +13,14 @@ namespace GXPEngine.Golgrath.Objects
         protected uint color;
         protected CircleCollider cap1, cap2;
         protected bool render;
-        public CanvasLine(Vec2 start, Vec2 end, uint pColor = 0xffffffff, bool render = true, bool disableStartCap = false, bool disableEndCap = false): base(new Vec2(0, 0), 2000, 2000)
+        protected bool oneWay;
+        public CanvasLine(Vec2 start, Vec2 end, bool _oneWay = false, uint pColor = 0xffffffff, bool render = true, bool disableStartCap = false, bool disableEndCap = false): base(new Vec2(0, 0), 2000, 2000)
         {
             this.start = start;
             this.end = end;
+            this.oneWay = _oneWay;
             this.render = render;
-            this.MyCollider = new LineCollider(this);
+            this.MyCollider = new LineCollider(this,oneWay);
             if (!disableStartCap)
             {
                 this.cap1 = new CircleCollider(this, this.start, 0);

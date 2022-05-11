@@ -15,8 +15,26 @@ namespace GXPEngine.Golgrath.Objects
         private bool umbrella;
         private AnimationSprite playerSprite;
         bool goingLeft = false;
+        public bool pausePlayer;
+        public new bool PausePlayer
+        {
+            get
+            {
+                return this.pausePlayer;
+            }
+            set
+            {
+                this.pausePlayer = value;
+                this.pausedVelocity = this.velocity;
+            }
+        }
+        private Vec2 pausedVelocity;
 
         private AnimationSprite umbrellaSprite;
+
+
+        private AnimationSprite snowSprite;
+
         private Vec2 umbrellaGravity;
         private PlayerCamera camera;
         public CanvasPlayerBall(int radius, Vec2 position, Vec2 gravity, Vec2 velocity) : base(radius, position, gravity, velocity)
@@ -29,23 +47,26 @@ namespace GXPEngine.Golgrath.Objects
             this.acceleration = 0.4F;
             this.maxSpeed = 5F;
             this.SetOrigin(this.radius, this.radius);
-            this.umbrellaSprite = new AnimationSprite("Umbrella.png", 1, 1, -1, false, false);
+            this.umbrellaSprite = new AnimationSprite("Umbrella.png", 8, 1, -1, false, false);
            // this.umbrellaGravity = gravity / 8;
             this.umbrellaSprite.alpha = 0.0F;
             this.umbrellaSprite.SetOrigin(this.umbrellaSprite.width / 2, this.umbrellaSprite.height / 2);
             this.AddChild(playerSprite);
             this.AddChild(umbrellaSprite);
+            //this.AddChild(snowSprite);
             
         }
 
         public new void Update()
         {
-            this.Step();
-            
-            Gizmos.DrawRectangle(this.x + _bounds.x, this.y + _bounds.y, 20, 20);
+            if (!pausePlayer)
+            {
+                this.Step();
+            }
+            /*Gizmos.DrawRectangle(this.x + _bounds.x, this.y + _bounds.y, 20, 20);
             Gizmos.DrawRectangle(this.x + width + _bounds.x, this.y + _bounds.y, 20, 20);
             Gizmos.DrawRectangle(this.x + _bounds.x, this.y + height + _bounds.y, 20, 20);
-            Gizmos.DrawRectangle(this.x + width + _bounds.x, this.y + height + _bounds.y, 20, 20);
+            Gizmos.DrawRectangle(this.x + width + _bounds.x, this.y + height + _bounds.y, 20, 20);*/
             if (camera != null)
             {
                 this.camera.SetXY(this.position.x, this.position.y - 200);
@@ -56,6 +77,7 @@ namespace GXPEngine.Golgrath.Objects
         private void HandleInput()
         {
             Vec2 velocity = this.Velocity;
+
             if (Input.GetKey(Key.A) && velocity.x > -this.maxSpeed)
             {
                 velocity.x -= acceleration;
@@ -70,10 +92,12 @@ namespace GXPEngine.Golgrath.Objects
                 if (this.umbrella)
                 {
                     this.umbrellaSprite.alpha = 1.0F;
+                    playerSprite.alpha = 0.0f;
                 }
                 else
                 {
                     this.umbrellaSprite.alpha = 0.0F;
+                    playerSprite.alpha = 1f;
                 }
             }
             /*if (velocity.x > drag)
@@ -115,6 +139,7 @@ namespace GXPEngine.Golgrath.Objects
              }
              playerSprite.Animate(velocity.Length()/50);*/
             playerSprite.Animate(0.05f);
+            umbrellaSprite.Animate(0.05f);
 
         }
         private void DrawRect(byte red, byte green, byte blue)
@@ -138,12 +163,15 @@ namespace GXPEngine.Golgrath.Objects
             {
                 this.umbrella = false;
                 this.umbrellaSprite.alpha = 0.0F;
+                playerSprite.alpha = 1f;
             }
             ApplyGravity();
             this.Position += velocity;
             MyGame.collisionManager.CollideWith(this.myCollider);
             OnGeyser();
-            
+            InOrbital();
+            OnCoin();
+
         }
         private void ApplyGravity()
         {
@@ -168,7 +196,9 @@ namespace GXPEngine.Golgrath.Objects
                 {
                   velocity = velocity.Normalized() * 7.5f;
                 }
-               
+                
+
+
             }
             else
             {
@@ -179,16 +209,61 @@ namespace GXPEngine.Golgrath.Objects
         }
         private void OnGeyser()
         {
-            /*MyGame myGame = (MyGame)Game.main;
+            MyGame myGame = (MyGame)Game.main;
             foreach (Geyser geyser in myGame.geysers)
             {
                 if (HitTest(geyser))
                 {
                     Console.WriteLine("On Geyser!");
-                    velocity += Vec2.GetUnitVectorDeg(-90) * geyser.strength;
+                    velocity = Vec2.GetUnitVectorDeg(-90 + geyser.rotation) * 25;
                 }
-            }*/
+            }
         }
+
+        private void InOrbital()
+        {
+            MyGame myGame = (MyGame)Game.main;
+            foreach (OrbitalField other in myGame.fields)
+            {
+                if (HitTest(other))
+                {
+                    Console.WriteLine("TRIGGER WITH ORBITALFIELD");
+                    OrbitalField ownCircle = (OrbitalField)other;
+                    CanvasBall incBall = this;
+                    Vec2 relative = incBall.Position - ownCircle.Position;
+                    //if (relative.Length() < ownCircle.Radius + incBall.Radius)
+                    //{
+                        Console.WriteLine("ORBITAL 2");
+                        float gravity = incBall.Gravity.Length();
+                        Vec2 pullDirection = ownCircle.Position - incBall.Position; //Draws a line from the bullet position to the center of the acceleration field.
+                        float oldLength = incBall.Velocity.Length();//Gets the old lenght (speed)
+                        incBall.Velocity = incBall.Velocity + pullDirection * ownCircle.PullStrength;//Set the velocity to the direction of the center of the acceleration field based on the pullstrength.
+                        incBall.Velocity = incBall.Velocity.Normalized();//Set speed to 1
+                                                                         //  incBall.Velocity = (incBall.Velocity * (float)((oldLength + gravity) * 1.09));//Set speed back to original.
+                        incBall.Velocity = incBall.Velocity * (oldLength + gravity);
+                        //incBall.Gravity = new Vec2(0, 0);
+                    //}
+                }
+                
+            }
+        }
+
+        private void OnCoin()
+        {
+            MyGame myGame = (MyGame)Game.main;
+            foreach (NextLevelBlock other in myGame.coins)
+            {
+                if (HitTest(other))
+                {
+                    Console.WriteLine("ON A COIN!");
+                    myGame.currentLevel++;
+                    myGame.LoadLevel("NEWLEVEL_" + myGame.currentLevel + ".tmx");
+
+                }
+
+            }
+        }
+
         public void SetPlayerCamera(PlayerCamera camera)
         {
             this.camera = camera;
@@ -199,7 +274,7 @@ namespace GXPEngine.Golgrath.Objects
             return Mathf.Sin(Mathf.PI * 4 * t) * (1-t);
         }
 
-        public override void Trigger(GameObject other)
+      /*  public override void Trigger(GameObject other)
         {
             if (other is Geyser)
             {
@@ -224,7 +299,7 @@ namespace GXPEngine.Golgrath.Objects
                     //incBall.Gravity = new Vec2(0, 0);
                 }
             }
-        }
+        }*/
     }
 
 

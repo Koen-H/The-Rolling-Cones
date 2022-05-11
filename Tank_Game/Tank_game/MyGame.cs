@@ -7,6 +7,7 @@ using GXPEngine.Golgrath.Objects;
 using GXPEngine.Coolgrath;
 using GXPEngine.PhysicsEngine;
 using GXPEngine.Golgrath.Cameras;
+using GXPEngine.PhysicsEngine.Colliders;
 using GXPEngine.TiledLoader;
 
 public class MyGame : Game
@@ -18,15 +19,22 @@ public class MyGame : Game
     public Tank playerTank;*/
 
     public List<Geyser> geysers = new List<Geyser>();
+    public List<OrbitalField> fields = new List<OrbitalField>();
+    public List<NextLevelBlock> coins = new List<NextLevelBlock>();
     public PlayerCamera playerCamera;
+    public Pivot objectLayer;
     public bool drawDebugLine;
+    public bool shopOpen;
     Canvas lineContainer = null;
     public static MyCollisionManager collisionManager;
+    public int currentLevel = 1;
+    public CanvasPlayerBall player;
 
-    public MyGame() : base(1920, 1080, false,false, 1920, 1080)
+    public MyGame() : base(1920, 1080, false, false, 1920, 1080, false)
 	{
         collisionManager = new MyCollisionManager();
         playerCamera = new PlayerCamera(0, 0, this.width, this.height);
+        playerCamera.SetXY(1920 / 2, 1080 / 2);
         AddChild(playerCamera);
 
 
@@ -129,9 +137,15 @@ public class MyGame : Game
     void Update()
     {
         if (Input.GetKeyDown(Key.D)) drawDebugLine ^= true;
-        if (Input.GetKeyDown(Key.C)) lineContainer.graphics.Clear(Color.Black);
+       // if (Input.GetKeyDown(Key.C)) lineContainer.graphics.Clear(Color.Black);
         this.HandleInput();
         targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;//Lower the framerate.
+
+        if (Input.GetKeyDown(Key.F1))
+        {
+            Console.WriteLine(GetDiagnostics());
+        }
+        //Console.WriteLine( Time.deltaTime);
     }
 
     public void DrawLine(Vec2 start, Vec2 end)
@@ -153,24 +167,34 @@ public class MyGame : Game
         this.targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;
     }
 
-    private void LoadLevel(string fileName = "test.tmx")
+    public void LoadLevel(string fileName = "NEWLEVEL.tmx")
     {
-       // DestroyAll();
+        
+        DestroyAll();
         Level level = new Level(fileName);
         List<GameObject> children = level.GetChildren();
         foreach (GameObject child in children)
         {
             AddChild(child);
         }
+        objectLayer = level.objectLayer;
 
     }
     private void DestroyAll()
     {
+        geysers = new List<Geyser>();
+        fields = new List<OrbitalField>();
+        coins = new List<NextLevelBlock>();
+        collisionManager.colliders = new List<Collider>();
+        player = null;
         List<GameObject> children = GetChildren();
         foreach (GameObject child in children)
         {
             child.Destroy();
         }
+        playerCamera = new PlayerCamera(0, 0, this.width, this.height);
+        playerCamera.SetXY(1920 / 2, 1080 / 2);
+        AddChild(playerCamera);
 
     }
 }

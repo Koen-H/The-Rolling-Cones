@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" infinite="0" nextlayerid="15" nextobjectid="137">
+ <tileset firstgid="1" name="testtilesheet" tilewidth="50" tileheight="50" tilecount="300" columns="20">
+  <image source="testtilesheet.png" width="1000" height="750"/>
+ </tileset>
+ <imagelayer id="7" name="Background" visible="0" offsetx="0" offsety="2500">
+  <image source="test.png" width="2500" height="2500"/>
+ </imagelayer>
+ <imagelayer id="10" name="Background" visible="0" offsetx="2500" offsety="0">
+  <image source="test2.png" width="2500" height="2500"/>
+ </imagelayer>
+ <objectgroup id="2" name="Lines" offsetx="1.25" offsety="-0.5">
+  <object id="79" x="6.75" y="1484.5">
+   <polyline points="0,0 848.002,0"/>
+  </object>
+  <object id="80" x="854.284" y="1485.52">
+   <polyline points="-1.33333,-2.66667 7.14783,-224.06 16.9623,-442.787 91.8696,-529.484 185.444,-559.848 306.008,-610.325"/>
+  </object>
+  <object id="81" x="496.75" y="1338.5">
+   <polyline points="-29.5,-52 4,-872"/>
+  </object>
+  <object id="82" x="0.75" y="1344.5">
+   <polyline points="0,0 224.292,-20.3333 355.771,-34.5 463.25,-58"/>
+  </object>
+  <object id="91" x="1150.11" y="885.397">
+   <polyline points="8,5.33333 -25.1742,102.07 -35.6818,204.14 0.636364,365.613"/>
+  </object>
+  <object id="108" x="501.417" y="463.167">
+   <polyline points="0,0 1434.96,1.15625 1437.83,74"/>
+  </object>
+  <object id="118" x="0.375" y="1344.5">
+   <polyline points="0,0 -0.125,139.625 6.875,139.875"/>
+  </object>
+  <object id="121" x="436.083" y="3464" width="90" height="19">
+   <text wrap="1">Hallo Wereld</text>
+  </object>
+  <object id="125" x="-1.25" y="3496.5">
+   <polyline points="0,0 994,-2"/>
+  </object>
+  <object id="126" x="-0.25" y="3496.25">
+   <polyline points="0,0 -1,-759.75"/>
+  </object>
+ </objectgroup>
+ <objectgroup id="8" name="SnowLines"/>
+ <objectgroup id="9" name="InteractableEnvironments">
+  <object id="45" x="3052" y="2484" width="400" height="200"/>
+  <object id="48" x="3120" y="3076" width="500" height="450"/>
+  <object id="50" x="2207.65" y="94.1136" width="100" height="100"/>
+ </objectgroup>
+ <objectgroup id="14" name="PreDefinedObjects">
+  <object id="52" name="Player" x="43.5712" y="1466.59"/>
+  <object id="53" name="Geyser" x="1613.41" y="2671.02" rotation="50"/>
+  <object id="54" name="MagneticField" x="2442.22" y="1534.16"/>
+  <object id="76" name="Geyser" x="1581.76" y="2680.59" rotation="50"/>
+  <object id="89" name="Geyser" x="806.25" y="1470.58"/>
+  <object id="117" name="Geyser" x="1180" y="1239"/>
+ </objectgroup>
+</map>

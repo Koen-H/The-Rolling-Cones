@@ -10,8 +10,10 @@ namespace GXPEngine.PhysicsEngine.Colliders
     public class LineCollider : Collider
     {
         protected Vec2 start, end;
-        public LineCollider(CanvasLine line) : base(line)
+        protected bool isOneWay;
+        public LineCollider(CanvasLine line, bool _isOneWay) : base(line)
         {
+            isOneWay = _isOneWay;
             this.start = line.Start;
             this.end = line.End;
         }
@@ -92,7 +94,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
                         }
                     }
                 }
-                if (b2 > 0)
+                if (b2 > 0 && !this.isOneWay)
                 {
                     if (a2 >= 0 || a2 >= -ball.Radius)
                     {
@@ -128,7 +130,7 @@ namespace GXPEngine.PhysicsEngine.Colliders
                     if (MyGame.collisionManager.FirstTime)
                     {
                         Vec2 velocity = moveable.Velocity;
-                        velocity.Reflect(info.normal, 0.7F);
+                        velocity.Reflect(info.normal, 0.5F);//was 0.7f
                         moveable.Velocity = velocity;
                     }
                 }

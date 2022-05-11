@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="192" height="108" tilewidth="10" tileheight="10" infinite="0" nextlayerid="15" nextobjectid="91">
+ <tileset firstgid="1" name="testtilesheet" tilewidth="50" tileheight="50" tilecount="300" columns="20">
+  <image source="testtilesheet.png" width="1000" height="750"/>
+ </tileset>
+ <imagelayer id="10" name="Background" visible="0">
+  <image source="test2.png" width="2500" height="2500"/>
+ </imagelayer>
+ <objectgroup id="2" name="Lines">
+  <object id="64" x="50" y="50">
+   <polyline points="0,0 0,990 1820,990 1820,0 -0.255556,0"/>
+  </object>
+  <object id="74" x="73.3337" y="673.333">
+   <polyline points="0,0 300,0"/>
+  </object>
+  <object id="81" x="366.666" y="336">
+   <polyline points="0,0 369.167,0"/>
+  </object>
+  <object id="82" x="1651.42" y="861.841">
+   <polyline points="0,0 135.833,0"/>
+  </object>
+  <object id="87" x="1786.5" y="862.75">
+   <polyline points="0,0 0.25,-324"/>
+  </object>
+  <object id="88" x="1652.13" y="861.938">
+   <polyline points="0,0 0.875,-323.604"/>
+  </object>
+  <object id="90" x="1000" y="699.333">
+   <polyline points="0,0 300,0.666667"/>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="InteractableEnvironments">
+  <object id="65" x="268.697" y="954.576" width="292.212" height="85.667"/>
+  <object id="83" x="142.416" y="563.333" width="229.129" height="111.323"/>
+  <object id="89" x="1056.1" y="588.672" width="229.129" height="111.323"/>
+ </objectgroup>
+ <objectgroup id="14" name="PreDefinedObjects">
+  <object id="52" name="Player" x="112.993" y="998.201"/>
+  <object id="53" name="Geyser" x="742.004" y="1139.25" rotation="50"/>
+  <object id="54" name="MagneticField" x="154.711" y="1137.02"/>
+  <object id="63" name="Geyser" x="341.125" y="1165.71" rotation="50"/>
+  <object id="79" name="Coin" x="1662.58" y="812.166" width="106.667" height="48"/>
+ </objectgroup>
+</map>

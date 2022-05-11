@@ -10,7 +10,7 @@ namespace GXPEngine.PhysicsEngine
 {
     public class MyCollisionManager
     {
-        private List<Collider> colliders;
+        public List<Collider> colliders;
         private bool firstTime;
         /// <summary>
         /// My Own CollisionManager constructor.

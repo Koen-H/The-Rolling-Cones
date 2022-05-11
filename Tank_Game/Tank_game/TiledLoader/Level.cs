@@ -18,7 +18,7 @@ namespace GXPEngine.TiledLoader
         readonly private string levelFileName;
         private Pivot colliders;
         private Pivot backgroundLayer;
-        private Pivot objectLayer;
+        public Pivot objectLayer;
         private Pivot playerLayer;
         private Pivot frontgroundLayer;
 
@@ -98,11 +98,12 @@ namespace GXPEngine.TiledLoader
                         {
                             case "Player":
                                 CanvasPlayerBall ball = new CanvasPlayerBall(30, new Vec2(obj.X, obj.Y), new Vec2(0, 0.5F), new Vec2(0, 0));
-                                ball.SetPlayerCamera(myGame.playerCamera);
+                                //ball.SetPlayerCamera(myGame.playerCamera);
                                 playerLayer.AddChild(ball);
+                                myGame.player = ball;
                                 break;
                             case "Geyser":
-                                Geyser geyser = new Geyser(10,new Vec2(obj.X,obj.Y),"cyan_block.png",1,1);
+                                Geyser geyser = new Geyser(5,new Vec2(obj.X,obj.Y),"cyan_block.png",1,1);
                                 objectLayer.AddChild(geyser);
                                 geyser.rotation = obj.Rotation;
                                 break;
@@ -110,8 +111,9 @@ namespace GXPEngine.TiledLoader
                                 OrbitalField magneticField = new OrbitalField(0.025F, 44, new Vec2(obj.X, obj.Y));
                                 objectLayer.AddChild(magneticField);
                                 break;
-                            case "Other stuff here":
-
+                            case "Coin":
+                                NextLevelBlock coin = new NextLevelBlock(new Vec2(obj.X, obj.Y));
+                                objectLayer.AddChild(coin);
                                 break;
                             default:
                                 Console.WriteLine("This predefinedobject doesn't exist: " + objName); //shouldn't happen, but let the game continue anyway
