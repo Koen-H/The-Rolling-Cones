@@ -26,14 +26,16 @@ namespace GXPEngine.Coolgrath
             myGame = (MyGame)Game.main;
 
             AddChild(new ShopButton(ShopButtonProperty.Close, this, new Vec2(0, 0), "CloseButton.png", 1, 1));
-            AddChild(new ShopButton(ShopButtonProperty.Geyser, this, new Vec2(500, 500), "GeyserButton.png", 1, 1));
-            AddChild(new ShopButton(ShopButtonProperty.OrbitalField, this, new Vec2(150, 500), "OrbitalField.png", 1, 1));
-            AddChild(new ShopButton(ShopButtonProperty.BushShot, this, new Vec2(750, 500), "OrbitalField.png", 1, 1));
-
+            if (myGame.newGamePlus || myGame.currentLevel != 6 ) AddChild(new ShopButton(ShopButtonProperty.Geyser, this, new Vec2(240, 500), "GeyserButton.png", 1, 1));
+            if (myGame.newGamePlus || myGame.currentLevel == 4 || myGame.currentLevel == 5 || myGame.currentLevel == 7) AddChild(new ShopButton(ShopButtonProperty.OrbitalField, this, new Vec2(810, 500), "OrbitalField.png", 1, 1));
+            if (myGame.newGamePlus || myGame.currentLevel == 6 || myGame.currentLevel == 7) AddChild(new ShopButton(ShopButtonProperty.BushShot, this, new Vec2(1380, 500), "BushShotButton.png", 1, 1));
         }
 
         public void ClickedButton(ShopButtonProperty buttonProperty)
         {
+            new Sound("button.wav").Play();
+            
+            
             switch (buttonProperty)
             {
                 case ShopButtonProperty.Close:

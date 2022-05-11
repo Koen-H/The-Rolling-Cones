@@ -61,10 +61,12 @@ namespace GXPEngine.Coolgrath
 
         void OpenShop()
         {
-            myGame.AddChild(new ShopPopUp(this,new Vec2(0, 0), "ShopBackground.jpg", 1,1));
-            myGame.player.pausePlayer = true;
-            myGame.shopOpen = true;
-            Console.WriteLine("Shop opened");
+            if (!myGame.shopOpen) { 
+                myGame.AddChild(new ShopPopUp(this,new Vec2(0, 0), "ShopBackground.jpg", 1,1));
+                myGame.player.pausePlayer = true;
+                myGame.shopOpen = true;
+                Console.WriteLine("Shop opened");
+            }
         }
     }
 }

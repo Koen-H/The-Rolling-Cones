@@ -229,7 +229,7 @@ namespace GXPEngine.Golgrath.Objects
                 {
                     Console.WriteLine("On Geyser!");
                     velocity = Vec2.GetUnitVectorDeg(-90 + geyser.rotation) * 25;
-                    geyser.DoAnimate();
+                    geyser.doAnimate = true;
                 }
             }
         }
@@ -243,6 +243,7 @@ namespace GXPEngine.Golgrath.Objects
                     if(Time.time > bushInterval || bush != lastBush)
                     if (HitTest(bush))
                     {
+                        new Sound("Branch_bend.wav").Play();
                         this.umbrella = false;
                         this.umbrellaSprite.alpha = 0.0F;
                         playerSprite.alpha = 1f;

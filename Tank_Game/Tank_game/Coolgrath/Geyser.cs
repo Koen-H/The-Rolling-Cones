@@ -13,7 +13,7 @@ namespace GXPEngine.Coolgrath
         public float strength { get; set; }
 
         public float animationIntervalTime;
-        public int currentFrame;
+        public int currentFrame = 0;
         public bool doAnimate;
 
         private Vec2 position;
@@ -77,11 +77,24 @@ namespace GXPEngine.Coolgrath
             //SetScaleXY(1,3);
         }
         
+        public new void Update()
+        {
+            if (doAnimate) DoAnimate();
+        }
+
         public void DoAnimate()
         {
             if(Time.time > animationIntervalTime)
             {
-
+                this.Animate();
+                currentFrame++;
+                animationIntervalTime = Time.time + 125;
+            }
+            
+            if(currentFrame == 8)
+            {
+                doAnimate = false;
+                currentFrame = 0;
             }
         }
     }

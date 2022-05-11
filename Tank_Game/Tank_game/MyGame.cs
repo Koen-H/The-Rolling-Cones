@@ -26,6 +26,7 @@ public class MyGame : Game
     public Pivot objectLayer;
     public bool drawDebugLine;
     public bool shopOpen;
+    public bool newGamePlus = false;
     Canvas lineContainer = null;
     public static MyCollisionManager collisionManager;
     public int currentLevel = 1;
@@ -168,7 +169,7 @@ public class MyGame : Game
         this.targetFps = Input.GetKey(Key.SPACE) ? 5 : 60;
     }
 
-    public void LoadLevel(string fileName = "NEWLEVEL_1.tmx")
+    public void LoadLevel(string fileName = "NEWLEVEL.tmx")
     {
         
         DestroyAll();
