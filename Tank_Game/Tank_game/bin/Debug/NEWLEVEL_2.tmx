@@ -26,9 +26,9 @@
  </objectgroup>
  <objectgroup id="14" name="PreDefinedObjects">
   <object id="52" name="Player" x="112.993" y="998.201"/>
-  <object id="53" name="Geyser" x="742.004" y="1139.25" rotation="50"/>
+  <object id="53" name="Geyser" x="726.004" y="1401.25" rotation="50"/>
   <object id="54" name="MagneticField" x="78.711" y="1383.02"/>
-  <object id="63" name="Geyser" x="341.125" y="1165.71" rotation="50"/>
-  <object id="79" name="Coin" x="1701.33" y="589.333" width="106.667" height="48"/>
+  <object id="63" name="Geyser" x="325.125" y="1427.71" rotation="50"/>
+  <object id="79" name="Coin" x="1742.33" y="606.666" width="106.667" height="48"/>
  </objectgroup>
 </map>
