@@ -13,6 +13,7 @@ namespace GXPEngine.Coolgrath
         Close,
         Geyser,
         OrbitalField,
+        BushShot,
     }
 
     class ShopPopUp : MyAnimationSprite
@@ -27,6 +28,7 @@ namespace GXPEngine.Coolgrath
             AddChild(new ShopButton(ShopButtonProperty.Close, this, new Vec2(0, 0), "CloseButton.png", 1, 1));
             AddChild(new ShopButton(ShopButtonProperty.Geyser, this, new Vec2(500, 500), "GeyserButton.png", 1, 1));
             AddChild(new ShopButton(ShopButtonProperty.OrbitalField, this, new Vec2(150, 500), "OrbitalField.png", 1, 1));
+            AddChild(new ShopButton(ShopButtonProperty.BushShot, this, new Vec2(750, 500), "OrbitalField.png", 1, 1));
 
         }
 
@@ -37,7 +39,7 @@ namespace GXPEngine.Coolgrath
                 case ShopButtonProperty.Close:
                     {
                         Console.WriteLine("Close sellected");
-                        this.Destroy();
+                        KillShop();
                         break;
                     }
 
@@ -63,6 +65,17 @@ namespace GXPEngine.Coolgrath
                         KillShop();
                         break;
                     }
+                case ShopButtonProperty.BushShot:
+                    {
+                        DeleteObject();
+                        Console.WriteLine("BushShot sellected and placed!");
+                        Vec2 objectPos = new Vec2(questionShopObject.Position.x + (questionShopObject.width / 2), questionShopObject.Position.y + (questionShopObject.height / 2));
+                        questionShopObject.interactableObject = new BushShot(objectPos);
+                        myGame.objectLayer.AddChild(questionShopObject.interactableObject);
+                        RemoveCoins(10);
+                        KillShop();
+                        break;
+                    }
 
                 default:
                     {
@@ -81,8 +94,9 @@ namespace GXPEngine.Coolgrath
             {
                 Console.WriteLine("Deleted!");
                 questionShopObject.interactableObject.Destroy();
-                if (questionShopObject.interactableObject is OrbitalField) myGame.fields.Remove((OrbitalField)questionShopObject.interactableObject);
                 if (questionShopObject.interactableObject is Geyser) myGame.geysers.Remove((Geyser)questionShopObject.interactableObject);
+                else if (questionShopObject.interactableObject is OrbitalField) myGame.fields.Remove((OrbitalField)questionShopObject.interactableObject);
+                else if (questionShopObject.interactableObject is BushShot) myGame.bushes.Remove((BushShot)questionShopObject.interactableObject);
             }
         }
 

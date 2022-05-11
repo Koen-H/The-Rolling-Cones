@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="192" height="108" tilewidth="10" tileheight="10" infinite="0" nextlayerid="15" nextobjectid="115">
+ <tileset firstgid="1" name="testtilesheet" tilewidth="50" tileheight="50" tilecount="300" columns="20">
+  <image source="testtilesheet.png" width="1000" height="750"/>
+ </tileset>
+ <imagelayer id="10" name="Background" visible="0">
+  <image source="test2.png" width="2500" height="2500"/>
+ </imagelayer>
+ <objectgroup id="2" name="Lines">
+  <object id="64" x="50" y="50">
+   <polyline points="0,0 0,990 1820,990 1820,0 -0.255556,0"/>
+  </object>
+  <object id="107" x="164.984" y="807.852">
+   <polyline points="0,0 137.961,-167.828"/>
+  </object>
+  <object id="108" x="342.768" y="827.764">
+   <polyline points="0,0 103.826,-166.406"/>
+  </object>
+  <object id="109" x="94.6743" y="214.852">
+   <polyline points="0,0 719.916,3.33333"/>
+  </object>
+  <object id="111" x="1440" y="570">
+   <polyline points="0,0 -270,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="InteractableEnvironments">
+  <object id="65" x="404.827" y="546.125" width="292.212" height="85.667"/>
+  <object id="97" x="1171.36" y="482.561" width="262.879" height="85.667"/>
+  <object id="102" x="174.432" y="952.693" width="152.212" height="85.667"/>
+  <object id="112" x="991.227" y="162.5" width="262.879" height="85.667"/>
+  <object id="113" x="1689.23" y="953.167" width="152.212" height="85.667"/>
+  <object id="114" x="1637.23" y="442.5" width="152.212" height="85.667"/>
+ </objectgroup>
+ <objectgroup id="14" name="PreDefinedObjects">
+  <object id="52" name="Player" x="1045.73" y="947.875"/>
+  <object id="53" name="Geyser" x="742.004" y="1139.25" rotation="50"/>
+  <object id="54" name="MagneticField" x="114.264" y="1304.25"/>
+  <object id="63" name="Geyser" x="691.625" y="432.21"/>
+  <object id="79" name="Coin" x="136.574" y="181.576" width="106.667" height="48"/>
+ </objectgroup>
+</map>

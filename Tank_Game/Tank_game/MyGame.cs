@@ -21,6 +21,7 @@ public class MyGame : Game
     public List<Geyser> geysers = new List<Geyser>();
     public List<OrbitalField> fields = new List<OrbitalField>();
     public List<NextLevelBlock> coins = new List<NextLevelBlock>();
+    public List<BushShot> bushes = new List<BushShot>();
     public PlayerCamera playerCamera;
     public Pivot objectLayer;
     public bool drawDebugLine;
@@ -185,6 +186,7 @@ public class MyGame : Game
         geysers = new List<Geyser>();
         fields = new List<OrbitalField>();
         coins = new List<NextLevelBlock>();
+        bushes = new List<BushShot>();
         collisionManager.colliders = new List<Collider>();
         player = null;
         List<GameObject> children = GetChildren();
