@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="192" height="108" tilewidth="10" tileheight="10" infinite="0" nextlayerid="15" nextobjectid="134">
+ <tileset firstgid="1" name="testtilesheet" tilewidth="50" tileheight="50" tilecount="300" columns="20">
+  <image source="testtilesheet.png" width="1000" height="750"/>
+ </tileset>
+ <imagelayer id="10" name="Background" visible="0">
+  <image source="test2.png" width="2500" height="2500"/>
+ </imagelayer>
+ <objectgroup id="2" name="Lines">
+  <object id="64" x="50" y="50">
+   <polyline points="0,0 0,990 1820,990 1820,0 -0.255556,0"/>
+  </object>
+  <object id="122" x="1227" y="767">
+   <polyline points="0,0 -270,0"/>
+  </object>
+  <object id="124" x="800" y="50">
+   <polyline points="0,0 0,450"/>
+  </object>
+  <object id="125" x="800" y="949.333">
+   <polyline points="0,0 0,-249.333"/>
+  </object>
+  <object id="128" x="1508.25" y="440.159">
+   <polyline points="361.75,3.57861 0,0 0,600.091"/>
+  </object>
+  <object id="129" x="1507.75" y="49.875">
+   <polyline points="0,0 0,283 363,283.125"/>
+  </object>
+  <object id="131" x="800.565" y="499.87">
+   <polyline points="0,0 -100.565,0.130435"/>
+  </object>
+  <object id="133" x="1507.83" y="295.91">
+   <polyline points="0,0 -707.712,-0.246377"/>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="InteractableEnvironments">
+  <object id="102" x="385.381" y="954.538" width="152.212" height="85.667"/>
+  <object id="123" x="957.39" y="682.167" width="267.712" height="85.667"/>
+ </objectgroup>
+ <objectgroup id="14" name="PreDefinedObjects">
+  <object id="52" name="Player" x="104.096" y="974.253"/>
+  <object id="53" name="Geyser" x="742.004" y="1139.25" rotation="50"/>
+  <object id="54" name="MagneticField" x="154.439" y="1439.55"/>
+  <object id="63" name="Geyser" x="492.507" y="1402.2"/>
+  <object id="79" name="Coin" x="1757.59" y="411.69" width="106.667" height="48"/>
+ </objectgroup>
+</map>

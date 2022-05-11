@@ -182,7 +182,7 @@ namespace GXPEngine.Golgrath.Objects
             {
                 InBush();
             }
-            this.Position += velocity;
+            this.Position += velocity.Normalized() * (velocity.Length()/17 * Time.deltaTime);
         }
         private void ApplyGravity()
         {
@@ -203,10 +203,10 @@ namespace GXPEngine.Golgrath.Objects
                 
                 velocity += new Vec2(0, 0.2F);//Gravity, but less
                 //Console.WriteLine(rotation);
-                if (velocity.Length() > 7.5f)
+                /*if (velocity.Length() > 7.5f )
                 {
-                  velocity = velocity.Normalized() * 7.5f;
-                }
+                  velocity = velocity.Normalized() * (7.5f * Time.deltaTime);
+                }*/
                 
 
 
