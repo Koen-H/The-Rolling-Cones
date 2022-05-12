@@ -12,7 +12,7 @@ namespace GXPEngine.Golgrath.Objects
         protected CanvasLine topSide, rightSide, bottomSide, leftSide;
         public CanvasRectangle(Vec2 position, int width, int height, string type = null): base(position, width, height)
         {
-            if (type.Equals("InteractableEnvironment"))this.Draw(0, 100, 200, 50);
+            if (type.Equals("InteractableEnvironment"))this.Draw(200, 0, 200, 50);
             this.myCollider = new SquareCollider(this);
             MyGame.collisionManager.AddCollider(this.myCollider);
             Vec2[] sides = { new Vec2(position.x, position.y), new Vec2(position.x + width, position.y), new Vec2(position.x + width, position.y + height), new Vec2(position.x, position.y + height) };

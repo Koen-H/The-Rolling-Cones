@@ -44,13 +44,13 @@ namespace GXPEngine.Coolgrath
                     Dragging(worldSpaceMousePos);
                 }
                 else if (Input.GetMouseButton(1) && !myGame.shopOpen && !dontContinue) OpenShop();
-                else
+                else if(!myGame.shopOpen)
                 {
                     myGame.player.pausePlayer = false;
                     isDragging = false;
                 }
             }
-            if (this == myGame.interactableEnvironmentActive) {
+            if (this == myGame.interactableEnvironmentActive && !myGame.shopOpen) {
                 if(!HitTestPoint(worldSpaceMousePos.x, worldSpaceMousePos.y))
                 {
                     myGame.player.pausePlayer = false;
@@ -84,7 +84,7 @@ namespace GXPEngine.Coolgrath
         void OpenShop()
         {
             if (!myGame.shopOpen) { 
-                myGame.AddChild(new ShopPopUp(this,new Vec2(0, 0), "ShopBackground.jpg", 1,1));
+                myGame.AddChild(new ShopPopUp(this,new Vec2(0, 0), "menuBG.png", 1,1));
                 myGame.player.pausePlayer = true;
                 myGame.shopOpen = true;
                 Console.WriteLine("Shop opened");

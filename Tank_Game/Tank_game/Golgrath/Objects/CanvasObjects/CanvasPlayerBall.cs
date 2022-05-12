@@ -44,6 +44,7 @@ namespace GXPEngine.Golgrath.Objects
         private Vec2 pausedVelocity;
 
         private AnimationSprite umbrellaSprite;
+        private Sprite shadow = new Sprite("Shadow.png",false);
 
 
         private AnimationSprite snowSprite;
@@ -54,6 +55,8 @@ namespace GXPEngine.Golgrath.Objects
         {
             playerSprite = new AnimationSprite("RollingPineCone.png", 8,1,-1,false,false);
             playerSprite.SetOrigin(this.radius,this.radius);
+            shadow.SetOrigin(width/2,height/2);
+            
             
             this.DrawRect(0, 200, 0);
             this.drag = 0.08F;
@@ -66,8 +69,10 @@ namespace GXPEngine.Golgrath.Objects
             this.umbrellaSprite.SetOrigin(this.umbrellaSprite.width / 2, this.umbrellaSprite.height / 2);
             this.AddChild(playerSprite);
             this.AddChild(umbrellaSprite);
+            this.AddChild(shadow);
+            shadow.alpha = 0.5f;
             //this.AddChild(snowSprite);
-            
+
         }
 
         public new void Update()
@@ -137,8 +142,14 @@ namespace GXPEngine.Golgrath.Objects
             //Rotate the sprite based on the direction of the velocity.
 
             //Old rotation,it was actual ball rotation!
-            if (velocity.Normalized().x < 0) rotation -= velocity.Length();
-            else rotation += velocity.Length();
+            if(velocity.Length() > 0.5f) {
+                if (velocity.Normalized().x < 0) rotation -= velocity.Length();
+                else rotation += velocity.Length();
+            }
+            else
+            {
+                velocity = new Vec2(0,0);
+            }
             if (rotation >= 360 || rotation <= -360) rotation = 0;
 
             //Rotatin sprite instead of ball...
@@ -171,6 +182,7 @@ namespace GXPEngine.Golgrath.Objects
         public new void Step()
         {
             this.OldPosition = this.Position;
+            shadow.rotation = -rotation;
             if (MyGame.collisionManager.FirstTime)
             {
                 this.HandleInput();
@@ -180,6 +192,7 @@ namespace GXPEngine.Golgrath.Objects
             //new Vec2(-gravity.x, -gravity.y) I know i put this here, for a reason. KEEP THIS!
             if (MyGame.collisionManager.FirstTime == false)
             {
+                
                 this.umbrella = false;
                 this.umbrellaSprite.alpha = 0.0F;
                 playerSprite.alpha = 1f;
@@ -282,6 +295,7 @@ namespace GXPEngine.Golgrath.Objects
             if (Input.GetKeyDown(Key.S))
             {
                 Console.WriteLine("BranchGo.wav");
+                new Sound("BranchGo.wav").Play();
                 velocity = Vec2.GetUnitVectorDeg(rotation) * 20; //Strength of Bushshot
                 lastBush = currentBush;
                 currentBush.target.alpha = 0f;
@@ -339,8 +353,14 @@ namespace GXPEngine.Golgrath.Objects
                     Console.WriteLine("ON A COIN!");
                     new Sound("Coin.wav").Play();
                     myGame.currentLevel++;
-                    myGame.LoadLevel("NEWLEVEL_" + myGame.currentLevel + ".tmx");
-                    
+                    if(myGame.currentLevel == 8)
+                    {
+                        
+                        myGame.MainMenu();
+                    }
+                    else myGame.LoadLevel("NEWLEVEL_" + myGame.currentLevel + ".tmx");
+
+
                 }
 
             }

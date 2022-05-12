@@ -26,7 +26,6 @@ namespace TiledMapParser
 			TextReader reader = new StreamReader (filename);
 			Map myMap = serial.Deserialize (reader) as Map;
 			reader.Close ();
-
 			return myMap;
 		}
 
