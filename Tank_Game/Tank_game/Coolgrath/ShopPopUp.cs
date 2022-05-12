@@ -11,9 +11,12 @@ namespace GXPEngine.Coolgrath
     enum ShopButtonProperty //Each button has a property, for example, a close button has the close property.
     {
         Close,
+        CloseGame,
         Geyser,
         OrbitalField,
         BushShot,
+        Play,
+        PlayNewGamePlus,
     }
 
     class ShopPopUp : MyAnimationSprite
@@ -25,10 +28,17 @@ namespace GXPEngine.Coolgrath
             questionShopObject = _questionShopObject;
             myGame = (MyGame)Game.main;
 
-            AddChild(new ShopButton(ShopButtonProperty.Close, this, new Vec2(0, 0), "CloseButton.png", 1, 1));
-            if (myGame.newGamePlus || myGame.currentLevel != 6 ) AddChild(new ShopButton(ShopButtonProperty.Geyser, this, new Vec2(240, 500), "GeyserButton.png", 1, 1));
-            if (myGame.newGamePlus || myGame.currentLevel == 4 || myGame.currentLevel == 5 || myGame.currentLevel == 7) AddChild(new ShopButton(ShopButtonProperty.OrbitalField, this, new Vec2(810, 500), "OrbitalField.png", 1, 1));
-            if (myGame.newGamePlus || myGame.currentLevel == 6 || myGame.currentLevel == 7) AddChild(new ShopButton(ShopButtonProperty.BushShot, this, new Vec2(1380, 500), "BushShotButton.png", 1, 1));
+            if (myGame.currentLevel != 0) AddChild(new ShopButton(ShopButtonProperty.Close, this, new Vec2(835, 600), "CloseButton.png", 1, 1));
+            if (myGame.newGamePlus || (myGame.currentLevel != 6 && myGame.currentLevel != 0)) AddChild(new ShopButton(ShopButtonProperty.Geyser, this, new Vec2(440, 300), "GeyserButton.png", 1, 1));
+            if (myGame.newGamePlus || myGame.currentLevel == 4 || myGame.currentLevel == 5 || myGame.currentLevel == 7) AddChild(new ShopButton(ShopButtonProperty.OrbitalField, this, new Vec2(835, 300), "OrbitalField.png", 1, 1));
+            if (myGame.newGamePlus || myGame.currentLevel == 6 || myGame.currentLevel == 7) AddChild(new ShopButton(ShopButtonProperty.BushShot, this, new Vec2(1224, 300), "BushShotButton.png", 1, 1));
+
+            if(myGame.currentLevel == 0)
+            {
+                AddChild(new ShopButton(ShopButtonProperty.Play, this, new Vec2(580, 350), "PlayButton.png", 1, 1));
+                AddChild(new ShopButton(ShopButtonProperty.PlayNewGamePlus, this, new Vec2(1095, 350), "PlayButtonPlus.png", 1, 1));
+                AddChild(new ShopButton(ShopButtonProperty.CloseGame, this, new Vec2(835, 650), "CloseButton.png", 1, 1));
+            }
         }
 
         public void ClickedButton(ShopButtonProperty buttonProperty)
@@ -76,6 +86,28 @@ namespace GXPEngine.Coolgrath
                         myGame.objectLayer.AddChild(questionShopObject.interactableObject);
                         RemoveCoins(10);
                         KillShop();
+                        break;
+                    }
+                case ShopButtonProperty.Play:
+                    {
+                        myGame.LoadLevel();//load the first template, should be on by default.
+                        myGame.currentLevel = 1;
+                        myGame.shopOpen = false;
+                        this.Destroy(); ;
+                        break;
+                    }
+                case ShopButtonProperty.PlayNewGamePlus:
+                    {
+                        myGame.LoadLevel();//load the first template, should be on by default.
+                        myGame.currentLevel = 1;
+                        myGame.newGamePlus = true;
+                        myGame.shopOpen = false;
+                        this.Destroy();
+                        break;
+                    }
+                case ShopButtonProperty.CloseGame:
+                    {
+                        myGame.Destroy();
                         break;
                     }
 

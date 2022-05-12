@@ -31,7 +31,7 @@ public class MyGame : Game
     public bool newGamePlus = false;
     Canvas lineContainer = null;
     public static MyCollisionManager collisionManager;
-    public int currentLevel = 1;
+    public int currentLevel = 0;
     public CanvasPlayerBall player;
 
     public InteractableEnvironment interactableEnvironmentActive;
@@ -47,7 +47,8 @@ public class MyGame : Game
         backgroundMusic = new Sound("background.wav",true,true).Play();
         backgroundMusic.Volume = 1f;
 
-        LoadLevel();
+         AddChild(new ShopPopUp(null, new Vec2(0, 0), "mainMenu.png", 1, 1));
+        //LoadLevel("NEWLEVEL_5.tmx");
     }
 
 	static void Main()
@@ -68,6 +69,7 @@ public class MyGame : Game
             Console.WriteLine(GetDiagnostics());
         }
         //Console.WriteLine( Time.deltaTime);
+
     }
 
     public Cap GetCap(int index)
@@ -111,6 +113,16 @@ public class MyGame : Game
         objectLayer = level.objectLayer;
 
     }
+    public void MainMenu()
+    {
+        currentLevel = 0;
+        
+        newGamePlus = false;
+        DestroyAll();
+        AddChild(new ShopPopUp(null, new Vec2(0, 0), "mainMenu.png", 1, 1));
+    }
+   
+
     private void DestroyAll()
     {
         geysers = new List<Geyser>();

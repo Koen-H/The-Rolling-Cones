@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="192" height="108" tilewidth="10" tileheight="10" infinite="0" nextlayerid="15" nextobjectid="81">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="192" height="108" tilewidth="10" tileheight="10" infinite="0" nextlayerid="17" nextobjectid="81">
  <tileset firstgid="1" name="testtilesheet" tilewidth="50" tileheight="50" tilecount="300" columns="20">
   <image source="testtilesheet.png" width="1000" height="750"/>
  </tileset>
- <imagelayer id="10" name="Background" visible="0">
-  <image source="test2.png" width="1920" height="1080"/>
+ <imagelayer id="15" name="Frontground">
+  <image source="1_frontground.png" width="1920" height="1080"/>
+ </imagelayer>
+ <imagelayer id="16" name="Frontground">
+  <image source="cage.png" width="1920" height="1080"/>
+ </imagelayer>
+ <imagelayer id="10" name="Background">
+  <image source="background.png" width="1920" height="1080"/>
  </imagelayer>
  <objectgroup id="2" name="Lines">
   <object id="64" x="50" y="50">

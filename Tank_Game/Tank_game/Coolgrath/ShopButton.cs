@@ -18,8 +18,9 @@ namespace GXPEngine.Coolgrath
         public ShopButton(ShopButtonProperty _buttonProperty, ShopPopUp _shopPopUp, Vec2 position, string filename, int columns, int rows, int frames = -1, bool keepInCache = false, bool addCollider = true) : base(position, filename, columns, rows, frames, keepInCache, addCollider)
         {
             buttonProperty = _buttonProperty;
+            //this.SetOrigin(width/2,height/2);
             shopPopUp = _shopPopUp;
-            this.SetScaleXY(1.5f,1.5f);
+            //this.SetScaleXY(1.5f,1.5f);
             myGame = (MyGame)Game.main;
         }
 
